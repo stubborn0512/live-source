@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T13:02:43.062925+00:00",
+  "generated_at": "2026-09-20T13:04:05.084490+00:00",
   "count": 0,
   "channels": [
     {
@@ -7,126 +7,126 @@
       "name": "CCTV-1 综合",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv2",
       "name": "CCTV-2 财经",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv3",
       "name": "CCTV-3 综艺",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv4",
       "name": "CCTV-4 中文国际",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv5",
       "name": "CCTV-5 体育",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv5plus",
       "name": "CCTV-5+ 体育赛事",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv6",
       "name": "CCTV-6 电影",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv7",
       "name": "CCTV-7 国防军事",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv8",
       "name": "CCTV-8 电视剧",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv9",
       "name": "CCTV-9 纪录",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv10",
       "name": "CCTV-10 科教",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv11",
       "name": "CCTV-11 戏曲",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv12",
       "name": "CCTV-12 社会与法",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv13",
       "name": "CCTV-13 新闻",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv14",
       "name": "CCTV-14 少儿",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv15",
       "name": "CCTV-15 音乐",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv16",
       "name": "CCTV-16 奥林匹克",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     },
     {
       "id": "cctv17",
       "name": "CCTV-17 农业农村",
       "ok": false,
       "1080p": false,
-      "error": "'UUID' object has no attribute 'upper'"
+      "error": "server other error!"
     }
   ]
 }
