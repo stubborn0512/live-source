@@ -22,9 +22,9 @@
     ]
   },
   "checker": {
-    "timeout_seconds": 12,
+    "timeout_seconds": 20,
     "min_width": 1920,
     "min_height": 1080,
-    "probe_seconds": 6
+    "probe_seconds": 20
   }
 }
