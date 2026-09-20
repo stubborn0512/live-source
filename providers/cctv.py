@@ -1,36 +1,27 @@
-"""CCTV resolver backed by the current official Yangshipin client flow."""
+"""CCTV URL provider.
+
+The official CCTV web player currently exposes the live HLS manifest through
+its browser network requests. The workflow resolves those URLs with Chrome
+and stores them in data/resolved.json for the probe/generator stage.
+"""
 
 from __future__ import annotations
 
-import os
-import subprocess
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RESOLVER = ROOT / "providers" / "ysp" / "resolve.mjs"
+RESOLVED = ROOT / "data" / "resolved.json"
 
 
 def resolve(channel_id: str, timeout: int = 20) -> str | None:
-    """Return a fresh official HLS manifest URL for a public CCTV channel."""
-    env = os.environ.copy()
+    if not RESOLVED.exists():
+        raise RuntimeError("official browser resolver did not produce data/resolved.json")
     try:
-        result = subprocess.run(
-            ["node", str(RESOLVER), channel_id],
-            cwd=str(ROOT),
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-            check=False,
-            env=env,
-        )
-    except FileNotFoundError as exc:
-        raise RuntimeError("Node.js is required for the official CCTV resolver") from exc
-    except subprocess.TimeoutExpired as exc:
-        raise TimeoutError("official CCTV resolver timed out") from exc
-
-    if result.returncode != 0:
-        message = (result.stderr or result.stdout).strip()
-        raise RuntimeError(message or f"official resolver exited {result.returncode}")
-
-    url = result.stdout.strip().splitlines()[-1] if result.stdout.strip() else ""
-    return url if url.startswith(("http://", "https://")) else None
+        data = json.loads(RESOLVED.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise RuntimeError("data/resolved.json is invalid") from exc
+    url = data.get(channel_id)
+    if isinstance(url, str) and url.startswith(("http://", "https://")):
+        return url
+    return None
