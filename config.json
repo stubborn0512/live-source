@@ -1,24 +1,78 @@
 {
   "cctv": {
     "channels": [
-      {"id": "cctv1", "name": "CCTV-1 综合"},
-      {"id": "cctv2", "name": "CCTV-2 财经"},
-      {"id": "cctv3", "name": "CCTV-3 综艺"},
-      {"id": "cctv4", "name": "CCTV-4 中文国际"},
-      {"id": "cctv5", "name": "CCTV-5 体育"},
-      {"id": "cctv5plus", "name": "CCTV-5+ 体育赛事"},
-      {"id": "cctv6", "name": "CCTV-6 电影"},
-      {"id": "cctv7", "name": "CCTV-7 国防军事"},
-      {"id": "cctv8", "name": "CCTV-8 电视剧"},
-      {"id": "cctv9", "name": "CCTV-9 纪录"},
-      {"id": "cctv10", "name": "CCTV-10 科教"},
-      {"id": "cctv11", "name": "CCTV-11 戏曲"},
-      {"id": "cctv12", "name": "CCTV-12 社会与法"},
-      {"id": "cctv13", "name": "CCTV-13 新闻"},
-      {"id": "cctv14", "name": "CCTV-14 少儿"},
-      {"id": "cctv15", "name": "CCTV-15 音乐"},
-      {"id": "cctv16", "name": "CCTV-16 奥林匹克"},
-      {"id": "cctv17", "name": "CCTV-17 农业农村"}
+      {
+        "id": "cctv1",
+        "name": "CCTV-1 综合"
+      },
+      {
+        "id": "cctv2",
+        "name": "CCTV-2 财经"
+      },
+      {
+        "id": "cctv3",
+        "name": "CCTV-3 综艺"
+      },
+      {
+        "id": "cctv4",
+        "name": "CCTV-4 中文国际"
+      },
+      {
+        "id": "cctv5",
+        "name": "CCTV-5 体育"
+      },
+      {
+        "id": "cctv5plus",
+        "name": "CCTV-5+ 体育赛事"
+      },
+      {
+        "id": "cctv6",
+        "name": "CCTV-6 电影"
+      },
+      {
+        "id": "cctv7",
+        "name": "CCTV-7 国防军事"
+      },
+      {
+        "id": "cctv8",
+        "name": "CCTV-8 电视剧"
+      },
+      {
+        "id": "cctv9",
+        "name": "CCTV-9 纪录"
+      },
+      {
+        "id": "cctv10",
+        "name": "CCTV-10 科教"
+      },
+      {
+        "id": "cctv11",
+        "name": "CCTV-11 戏曲"
+      },
+      {
+        "id": "cctv12",
+        "name": "CCTV-12 社会与法"
+      },
+      {
+        "id": "cctv13",
+        "name": "CCTV-13 新闻"
+      },
+      {
+        "id": "cctv14",
+        "name": "CCTV-14 少儿"
+      },
+      {
+        "id": "cctv15",
+        "name": "CCTV-15 音乐"
+      },
+      {
+        "id": "cctv16",
+        "name": "CCTV-16 奥林匹克"
+      },
+      {
+        "id": "cctv17",
+        "name": "CCTV-17 农业农村"
+      }
     ]
   },
   "checker": {
@@ -26,5 +80,137 @@
     "min_width": 1920,
     "min_height": 1080,
     "probe_seconds": 20
+  },
+  "weishi": {
+    "channels": [
+      {
+        "id": "beijing",
+        "name": "北京卫视"
+      },
+      {
+        "id": "dongfang",
+        "name": "东方卫视"
+      },
+      {
+        "id": "hunan",
+        "name": "湖南卫视"
+      },
+      {
+        "id": "zhejiang",
+        "name": "浙江卫视"
+      },
+      {
+        "id": "jiangsu",
+        "name": "江苏卫视"
+      },
+      {
+        "id": "anhui",
+        "name": "安徽卫视"
+      },
+      {
+        "id": "shandong",
+        "name": "山东卫视"
+      },
+      {
+        "id": "liaoning",
+        "name": "辽宁卫视"
+      },
+      {
+        "id": "heilongjiang",
+        "name": "黑龙江卫视"
+      },
+      {
+        "id": "jilin",
+        "name": "吉林卫视"
+      },
+      {
+        "id": "tianjin",
+        "name": "天津卫视"
+      },
+      {
+        "id": "hebei",
+        "name": "河北卫视"
+      },
+      {
+        "id": "shanxi",
+        "name": "山西卫视"
+      },
+      {
+        "id": "henan",
+        "name": "河南卫视"
+      },
+      {
+        "id": "hubei",
+        "name": "湖北卫视"
+      },
+      {
+        "id": "jiangxi",
+        "name": "江西卫视"
+      },
+      {
+        "id": "fujian",
+        "name": "东南卫视"
+      },
+      {
+        "id": "guangdong",
+        "name": "广东卫视"
+      },
+      {
+        "id": "shenzhen",
+        "name": "深圳卫视"
+      },
+      {
+        "id": "guangxi",
+        "name": "广西卫视"
+      },
+      {
+        "id": "hainan",
+        "name": "海南卫视"
+      },
+      {
+        "id": "sichuan",
+        "name": "四川卫视"
+      },
+      {
+        "id": "chongqing",
+        "name": "重庆卫视"
+      },
+      {
+        "id": "yunnan",
+        "name": "云南卫视"
+      },
+      {
+        "id": "guizhou",
+        "name": "贵州卫视"
+      },
+      {
+        "id": "xizang",
+        "name": "西藏卫视"
+      },
+      {
+        "id": "shaanxi",
+        "name": "陕西卫视"
+      },
+      {
+        "id": "gansu",
+        "name": "甘肃卫视"
+      },
+      {
+        "id": "qinghai",
+        "name": "青海卫视"
+      },
+      {
+        "id": "ningxia",
+        "name": "宁夏卫视"
+      },
+      {
+        "id": "xinjiang",
+        "name": "新疆卫视"
+      },
+      {
+        "id": "neimenggu",
+        "name": "内蒙古卫视"
+      }
+    ]
   }
 }
