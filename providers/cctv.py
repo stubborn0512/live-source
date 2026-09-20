@@ -1,6 +1,7 @@
-"""Resolve CCTV streams from public providers, then let ffprobe decide quality."""
+"""Discover public CCTV HLS candidates and verify them with ffprobe."""
 from __future__ import annotations
 import json
+import re
 from pathlib import Path
 import requests
 
@@ -28,9 +29,11 @@ GOODIPTV = {
     "cctv17": "https://live.goodiptv.club/api/bestv.php?id=cctv17hd8m/8000000",
 }
 
-V1 = {
-    k: v.replace("live.goodiptv.club", "live.v1.mk") for k, v in GOODIPTV.items()
-}
+V1 = {k: v.replace("live.goodiptv.club", "live.v1.mk") for k, v in GOODIPTV.items()}
+PUBLIC_LISTS = [
+    "https://raw.githubusercontent.com/CCSH/IPTV/main/live.txt",
+    "https://raw.githubusercontent.com/jura00/vms/main/hd.m3u8",
+]
 
 def _read_browser(channel_id: str) -> str | None:
     if not RESOLVED.exists():
@@ -42,33 +45,45 @@ def _read_browser(channel_id: str) -> str | None:
     url = data.get(channel_id)
     return url if isinstance(url, str) and url.startswith(("http://", "https://")) else None
 
-def _resolve_api(api_url: str, timeout: int) -> str | None:
-    try:
-        r = requests.get(
-            api_url,
-            timeout=min(timeout, 5),
-            allow_redirects=True,
-            headers={"User-Agent": "Mozilla/5.0"},
-        )
-        r.raise_for_status()
-        text = r.text.strip()
-        if text.startswith(("http://", "https://")):
-            return text.splitlines()[0].strip()
-        if "#EXTM3U" in text:
-            return r.url
-        return r.url if ".m3u8" in r.url else None
-    except Exception:
-        return None
+def _discover_public_lists(channel_id: str, timeout: int) -> list[str]:
+    num = channel_id.replace("cctv", "")
+    labels = {f"cctv{num}", f"cctv-{num}", f"CCTV-{num}", f"CCTV{num}"}
+    if channel_id == "cctv5plus":
+        labels |= {"cctv5+", "cctv-5+", "CCTV5+", "CCTV-5+"}
+    found = []
+    for source in PUBLIC_LISTS:
+        try:
+            text = requests.get(
+                source, timeout=min(timeout, 8),
+                headers={"User-Agent": "Mozilla/5.0"},
+            ).text
+        except Exception:
+            continue
+        lines = text.splitlines()
+        for i, line in enumerate(lines):
+            if "," in line:
+                name, url = line.split(",", 1)
+                if name.strip() in labels and url.strip().startswith(("http://", "https://")):
+                    found.append(url.strip())
+            if line.startswith("#EXTINF") and i + 1 < len(lines):
+                low = line.lower()
+                if any(label.lower() in low for label in labels):
+                    url = lines[i + 1].strip()
+                    if url.startswith(("http://", "https://")):
+                        found.append(url)
+    return found
 
-def resolve_candidates(channel_id: str, timeout: int = 20) -> list[str]:
+def resolve_candidates(channel_id: str, timeout: int = 10) -> list[str]:
     candidates = []
     for table in (GOODIPTV, V1):
-        api = table.get(channel_id)
-        if api:
-            # Keep the resolver endpoint itself as a probe candidate; ffprobe/curl
-            # can follow redirects, and this avoids a slow discovery request.
-            candidates.append(api)
+        if channel_id in table:
+            candidates.append(table[channel_id])
+    candidates.extend(_discover_public_lists(channel_id, timeout))
+    browser = _read_browser(channel_id)
+    if browser:
+        candidates.append(browser)
     return list(dict.fromkeys(candidates))
 
-def resolve(channel_id: str, timeout: int = 20) -> str | None:
-    return next(iter(resolve_candidates(channel_id, timeout)), None)
+def resolve(channel_id: str, timeout: int = 10) -> str | None:
+    candidates = resolve_candidates(channel_id, timeout)
+    return candidates[0] if candidates else None
