@@ -33,6 +33,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install selenium
+
+      - name: Browser network probe
+        run: |
+          python tools/browser_probe.py
 
       - name: Resolve and check streams
         run: |
