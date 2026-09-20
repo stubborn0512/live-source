@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from checker.health import check
@@ -26,6 +27,7 @@ def main() -> None:
             candidates = resolve_candidates(
                 channel_id, timeout=checker["timeout_seconds"]
             )
+            candidates = list(reversed(candidates))
         except Exception as exc:
             statuses.append({
                 "id": channel_id,
@@ -48,27 +50,40 @@ def main() -> None:
             print("  no HLS URL")
             continue
 
-        chosen = None
-        last_result = None
-        for candidate_url in candidates:
-            print(f"  probe: {candidate_url}")
-            probe_result = check(
+        def probe_one(candidate_url):
+            return candidate_url, check(
                 candidate_url,
                 timeout=checker["probe_seconds"],
                 min_width=checker["min_width"],
                 min_height=checker["min_height"],
             )
-            last_result = probe_result
-            if probe_result["ok"] and probe_result["1080p"]:
-                chosen = candidate_url
-                break
 
-        result = last_result or {
-            "ok": False,
-            "1080p": False,
-            "error": "all candidates failed",
-        }
-        url = chosen or candidates[0]
+        results = []
+        with ThreadPoolExecutor(max_workers=len(candidates)) as pool:
+            futures = [pool.submit(probe_one, u) for u in candidates]
+            for future in as_completed(futures):
+                candidate_url, probe_result = future.result()
+                print(
+                    f"  probe: {candidate_url} -> "
+                    f"{probe_result.get('width')}x{probe_result.get('height')} "
+                    f"ok={probe_result.get('ok')}"
+                )
+                results.append((candidate_url, probe_result))
+
+        chosen = next(
+            ((u, r) for u, r in results if r.get("ok") and r.get("1080p")),
+            None,
+        )
+        if chosen:
+            url, result = chosen
+        else:
+            url, result = max(
+                results,
+                key=lambda item: (
+                    int(item[1].get("ok", False)),
+                    int(item[1].get("width") or 0) * int(item[1].get("height") or 0),
+                ),
+            )
 
         status = {
             "id": channel_id,
