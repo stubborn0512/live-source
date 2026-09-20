@@ -43,19 +43,22 @@ def _read_browser(channel_id: str) -> str | None:
     return url if isinstance(url, str) and url.startswith(("http://", "https://")) else None
 
 def _resolve_api(api_url: str, timeout: int) -> str | None:
-    r = requests.get(
-        api_url,
-        timeout=timeout,
-        allow_redirects=True,
-        headers={"User-Agent": "Mozilla/5.0"},
-    )
-    r.raise_for_status()
-    text = r.text.strip()
-    if text.startswith(("http://", "https://")):
-        return text.splitlines()[0].strip()
-    if "#EXTM3U" in text:
-        return r.url
-    return r.url if ".m3u8" in r.url else None
+    try:
+        r = requests.get(
+            api_url,
+            timeout=min(timeout, 5),
+            allow_redirects=True,
+            headers={"User-Agent": "Mozilla/5.0"},
+        )
+        r.raise_for_status()
+        text = r.text.strip()
+        if text.startswith(("http://", "https://")):
+            return text.splitlines()[0].strip()
+        if "#EXTM3U" in text:
+            return r.url
+        return r.url if ".m3u8" in r.url else None
+    except Exception:
+        return None
 
 def resolve_candidates(channel_id: str, timeout: int = 20) -> list[str]:
     candidates = []
@@ -65,12 +68,9 @@ def resolve_candidates(channel_id: str, timeout: int = 20) -> list[str]:
     for table in (GOODIPTV, V1):
         api = table.get(channel_id)
         if api:
-            try:
-                url = _resolve_api(api, timeout)
-                if url:
-                    candidates.append(url)
-            except Exception:
-                pass
+            # Keep the resolver endpoint itself as a probe candidate; ffprobe/curl
+            # can follow redirects, and this avoids a slow discovery request.
+            candidates.append(api)
     return list(dict.fromkeys(candidates))
 
 def resolve(channel_id: str, timeout: int = 20) -> str | None:
