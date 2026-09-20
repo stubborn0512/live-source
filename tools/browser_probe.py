@@ -23,11 +23,16 @@ driver = webdriver.Chrome(options=options)
 resolved = {}
 try:
     for channel in CHANNELS:
+        # Discard requests from the previous channel before navigation.
+        try:
+            driver.get_log("performance")
+        except Exception:
+            pass
         page = f"https://tv.cctv.com/live/{channel}/index.shtml"
         print(f"[browser] {channel} -> {page}", flush=True)
         try:
             driver.get(page)
-            time.sleep(7)
+            time.sleep(10)
             logs = driver.get_log("performance")
             candidates = []
             for item in logs:
@@ -41,11 +46,10 @@ try:
                 low = url.lower()
                 if ".m3u8" not in low:
                     continue
-                if "kcdnvip.com" not in low and "cntv" not in low:
-                    continue
                 candidates.append(url)
             # Prefer the player manifest with the normal bandwidth range.
             candidates = list(dict.fromkeys(candidates))
+            candidates = [u for u in candidates if "kcdnvip.com" in u.lower() or "cntv" in u.lower()]
             candidates.sort(key=lambda u: ("b=200-2100" not in u, "BR=td" in u, len(u)))
             if candidates:
                 resolved[channel] = candidates[0]
