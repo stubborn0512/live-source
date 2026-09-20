@@ -1,14 +1,13 @@
 """Resolve CCTV live HLS URLs from the public CNTV live API.
 
-This provider deliberately uses a public endpoint rather than storing
-time-sensitive CDN URLs in the repository.
+The API response used by existing open-source clients is JavaScript that
+contains a JSON object, rather than a bare JSON document.
 """
 
 from __future__ import annotations
 
 import json
 import re
-import socket
 from typing import Any
 
 import requests
@@ -16,57 +15,60 @@ import requests
 API_URL = "https://vdn.live.cntv.cn/api2/liveHtml5.do"
 
 
-def _local_ip() -> str:
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    try:
-        sock.connect(("10.255.255.255", 1))
-        return sock.getsockname()[0]
-    except OSError:
-        return "127.0.0.1"
-    finally:
-        sock.close()
-
-
-def _parse_json(text: str) -> dict[str, Any]:
-    # The endpoint may wrap JSON in a callback/prefix/suffix.
-    match = re.search(r"\{.*\}", text, flags=re.S)
+def _extract_payload(text: str) -> dict[str, Any]:
+    # Typical response contains something like:
+    # var vdata = '{...}';
+    # Extract the JSON object first, then decode it.
+    match = re.search(r"(\{.*\})", text, flags=re.S)
     if not match:
-        raise ValueError("API response did not contain a JSON object")
-    return json.loads(match.group(0))
+        raise ValueError("CNTV API response did not contain JSON")
+
+    raw = match.group(1)
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        # Some versions escape the JSON inside a JS string.
+        unescaped = bytes(raw, "utf-8").decode("unicode_escape")
+        return json.loads(unescaped)
 
 
 def resolve(channel_id: str, timeout: int = 12) -> str | None:
-    # Keep the channel identifier configurable. The public API uses the
-    # cctv_p2p_hd* naming convention used by existing open-source clients.
+    # Existing clients use pc:// and also provide channel_id.
+    # The channel suffix is kept configurable by config.json.
     live_id = f"cctv_p2p_hd{channel_id}"
 
     params = {
-        "channel": f"pa://{live_id}",
-        "client": "html5",
-        "ip": _local_ip(),
+        "channel": f"pc://{live_id}",
+        "channel_id": channel_id,
     }
 
     response = requests.get(
         API_URL,
         params=params,
         headers={
-            "User-Agent": "Mozilla/5.0 live-source",
-            "Cache-Control": "max-age=-1, public",
+            "User-Agent": (
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) "
+                "AppleWebKit/601.1.46 (KHTML, like Gecko) "
+                "Version/9.0 Mobile/13B143 Safari/601.1"
+            ),
+            "Referer": "https://tv.cctv.com/",
         },
         timeout=timeout,
     )
     response.raise_for_status()
 
-    data = _parse_json(response.text)
-
+    data = _extract_payload(response.text)
     hls = data.get("hls_url")
+
     if isinstance(hls, dict):
-        # Prefer the higher-quality HLS variant exposed by the API.
-        for key in ("hls2", "hls1", "hls"):
+        # hls1 is the convention used by existing clients; fall back to
+        # other variants if the service changes its response.
+        for key in ("hls1", "hls2", "hls"):
             url = hls.get(key)
             if isinstance(url, str) and url.startswith(("http://", "https://")):
                 return url
-    elif isinstance(hls, str) and hls.startswith(("http://", "https://")):
+
+    if isinstance(hls, str) and hls.startswith(("http://", "https://")):
         return hls
 
     return None
