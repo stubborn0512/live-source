@@ -12,111 +12,116 @@ ROOT = Path(__file__).resolve().parent
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
 
 
-def main() -> None:
-    cctv = CONFIG["cctv"]["channels"]
-    checker = CONFIG["checker"]
+def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
+    channel_id = channel["id"]
+    name = channel["name"]
+    try:
+        candidates = resolve_candidates(
+            channel_id, timeout=checker["timeout_seconds"]
+        )
+    except Exception as exc:
+        return {
+            "id": channel_id, "name": name, "ok": False, "1080p": False,
+            "error": str(exc),
+        }, None
 
-    playlist_items = []
-    statuses = []
+    if not candidates:
+        return {
+            "id": channel_id, "name": name, "ok": False, "1080p": False,
+            "error": "no HLS candidate returned",
+        }, None
 
-    for channel in cctv:
-        channel_id = channel["id"]
-        print(f"[resolve] {channel_id}")
-
-        try:
-            candidates = resolve_candidates(
-                channel_id, timeout=checker["timeout_seconds"]
-            )
-            candidates = list(reversed(candidates))
-        except Exception as exc:
-            statuses.append({
-                "id": channel_id,
-                "name": channel["name"],
-                "ok": False,
-                "1080p": False,
-                "error": str(exc),
-            })
-            print(f"  resolve failed: {exc}")
-            continue
-
-        if not candidates:
-            statuses.append({
-                "id": channel_id,
-                "name": channel["name"],
-                "ok": False,
-                "1080p": False,
-                "error": "no HLS URL returned",
-            })
-            print("  no HLS URL")
-            continue
-
-        def probe_one(candidate_url):
-            return candidate_url, check(
-                candidate_url,
+    results = []
+    with ThreadPoolExecutor(max_workers=len(candidates)) as pool:
+        futures = {
+            pool.submit(
+                check,
+                url,
                 timeout=checker["probe_seconds"],
                 min_width=checker["min_width"],
                 min_height=checker["min_height"],
-            )
-
-        results = []
-        with ThreadPoolExecutor(max_workers=len(candidates)) as pool:
-            futures = [pool.submit(probe_one, u) for u in candidates]
-            for future in as_completed(futures):
-                candidate_url, probe_result = future.result()
-                print(
-                    f"  probe: {candidate_url} -> "
-                    f"{probe_result.get('width')}x{probe_result.get('height')} "
-                    f"ok={probe_result.get('ok')}"
-                )
-                results.append((candidate_url, probe_result))
-
-        chosen = next(
-            ((u, r) for u, r in results if r.get("ok") and r.get("1080p")),
-            None,
-        )
-        if chosen:
-            url, result = chosen
-        else:
-            url, result = max(
-                results,
-                key=lambda item: (
-                    int(item[1].get("ok", False)),
-                    int(item[1].get("width") or 0) * int(item[1].get("height") or 0),
-                ),
-            )
-
-        status = {
-            "id": channel_id,
-            "name": channel["name"],
-            "url": url,
-            **result,
+            ): url
+            for url in candidates
         }
-        statuses.append(status)
+        for future in as_completed(futures):
+            url = futures[future]
+            try:
+                result = future.result()
+            except Exception as exc:
+                result = {"ok": False, "1080p": False, "error": str(exc)}
+            results.append((url, result))
 
-        if result["ok"] and result["1080p"]:
-            playlist_items.append({
-                "id": channel_id,
-                "name": channel["name"],
-                "url": url,
-            })
-            print(
-                f'  OK {result.get("width")}x{result.get("height")} '
-                f'{result.get("fps", "")}'
-            )
-        else:
-            print(
-                f'  rejected: ok={result["ok"]}, '
-                f'resolution={result.get("width")}x{result.get("height")}'
-            )
+    verified = next(
+        ((url, result) for url, result in results
+         if result.get("ok") and result.get("1080p")),
+        None,
+    )
+
+    if verified:
+        url, result = verified
+        status = {"id": channel_id, "name": name, "url": url, **result}
+        return status, {"id": channel_id, "name": name, "url": url}
+
+    url, result = max(
+        results,
+        key=lambda item: (
+            int(item[1].get("ok", False)),
+            int(item[1].get("width") or 0) * int(item[1].get("height") or 0),
+        ),
+    )
+    return {"id": channel_id, "name": name, "url": url, **result}, None
+
+
+def main() -> None:
+    channels = CONFIG["cctv"]["channels"]
+    checker = CONFIG["checker"]
+
+    statuses_by_id = {}
+    playlist_items = []
+
+    with ThreadPoolExecutor(max_workers=len(channels)) as pool:
+        futures = {
+            pool.submit(process_channel, channel, checker): channel
+            for channel in channels
+        }
+        for future in as_completed(futures):
+            channel = futures[future]
+            try:
+                status, item = future.result()
+            except Exception as exc:
+                status = {
+                    "id": channel["id"], "name": channel["name"],
+                    "ok": False, "1080p": False, "error": str(exc),
+                }
+                item = None
+
+            statuses_by_id[channel["id"]] = status
+            if item:
+                playlist_items.append(item)
+                print(
+                    f'[OK] {channel["id"]}: '
+                    f'{status.get("width")}x{status.get("height")}',
+                    flush=True,
+                )
+            else:
+                print(
+                    f'[NO] {channel["id"]}: '
+                    f'{status.get("width")}x{status.get("height")} '
+                    f'{status.get("error", "")}',
+                    flush=True,
+                )
+
+    ordered_statuses = [
+        statuses_by_id[channel["id"]]
+        for channel in channels
+    ]
+    playlist_items.sort(key=lambda x: x["id"])
 
     output = ROOT / "output"
     output.mkdir(exist_ok=True)
-
     (output / "1080p.m3u").write_text(
-        generate(playlist_items),
-        encoding="utf-8",
+        generate(playlist_items), encoding="utf-8"
     )
-
     (output / "status.json").write_text(
         json.dumps(
             {
@@ -124,15 +129,17 @@ def main() -> None:
                     __import__("datetime").timezone.utc
                 ).isoformat(),
                 "count": len(playlist_items),
-                "channels": statuses,
+                "channels": ordered_statuses,
             },
             ensure_ascii=False,
             indent=2,
         ),
         encoding="utf-8",
     )
-
-    print(f"Generated {len(playlist_items)} verified 1080p channels.")
+    print(
+        f"Generated {len(playlist_items)} verified 1080p channels.",
+        flush=True,
+    )
 
 
 if __name__ == "__main__":
