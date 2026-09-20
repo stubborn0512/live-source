@@ -16,9 +16,7 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
     channel_id = channel["id"]
     name = channel["name"]
     try:
-        candidates = resolve_candidates(
-            channel_id, timeout=checker["timeout_seconds"]
-        )
+        candidates = resolve_candidates(\n            channel_id, timeout=checker["timeout_seconds"], channel_name=name\n        )
     except Exception as exc:
         return {
             "id": channel_id, "name": name, "ok": False, "1080p": False,
@@ -73,7 +71,7 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
 
 
 def main() -> None:
-    channels = CONFIG["cctv"]["channels"]
+    channels = CONFIG["cctv"]["channels"] + CONFIG.get("weishi", {}).get("channels", [])
     checker = CONFIG["checker"]
 
     statuses_by_id = {}
