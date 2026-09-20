@@ -33,6 +33,9 @@ V1 = {k: v.replace("live.goodiptv.club", "live.v1.mk") for k, v in GOODIPTV.item
 PUBLIC_LISTS = [
     "https://raw.githubusercontent.com/CCSH/IPTV/main/live.txt",
     "https://raw.githubusercontent.com/jura00/vms/main/hd.m3u8",
+    "https://raw.githubusercontent.com/kaige-cai/live/main/live.m3u",
+    "https://raw.githubusercontent.com/T00700/TVBoxSE/master/live.txt",
+    "https://raw.githubusercontent.com/TCatCloud/IPTV/Files/CCTV.m3u",
 ]
 
 def _read_browser(channel_id: str) -> str | None:
@@ -82,13 +85,21 @@ def resolve_candidates(channel_id: str, timeout: int = 10) -> list[str]:
     if browser:
         candidates.append(browser)
     candidates = list(dict.fromkeys(candidates))
-    def score(url: str) -> tuple[int, int]:
+    def score(url: str) -> tuple[int, int, int, int]:
         low = url.lower()
-        quality = int(any(k in low for k in ("1080", "4k", "hd", "4000", "6000", "8000000")))
-        officialish = int("cctv" in low or "chinamobile" in low or "cmvideo" in low)
-        return (quality, officialish)
+        quality = (
+            5 if any(k in low for k in ("4k", "2160", "15000000", "8000000"))
+            else 4 if any(k in low for k in ("1080", "1080p"))
+            else 3 if any(k in low for k in ("8m", "6000", "4000"))
+            else 2 if "hd" in low
+            else 1
+        )
+        officialish = int("chinamobile" in low or "cmvideo" in low)
+        direct = int(low.endswith(".m3u8") or ".m3u8?" in low)
+        return (quality, officialish, direct, -len(url))
+
     candidates.sort(key=score, reverse=True)
-    return candidates[:8]
+    return candidates[:24]
 
 def resolve(channel_id: str, timeout: int = 10) -> str | None:
     candidates = resolve_candidates(channel_id, timeout)
