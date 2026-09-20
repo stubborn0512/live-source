@@ -16,7 +16,9 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
     channel_id = channel["id"]
     name = channel["name"]
     try:
-        candidates = resolve_candidates(\n            channel_id, timeout=checker["timeout_seconds"], channel_name=name\n        )
+        candidates = resolve_candidates(
+            channel_id, timeout=checker["timeout_seconds"], channel_name=name
+        )
     except Exception as exc:
         return {
             "id": channel_id, "name": name, "ok": False, "1080p": False,
