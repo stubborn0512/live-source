@@ -1,27 +1,77 @@
-"""CCTV URL provider.
-
-The official CCTV web player currently exposes the live HLS manifest through
-its browser network requests. The workflow resolves those URLs with Chrome
-and stores them in data/resolved.json for the probe/generator stage.
-"""
-
+"""Resolve CCTV streams from public providers, then let ffprobe decide quality."""
 from __future__ import annotations
-
 import json
 from pathlib import Path
+import requests
 
 ROOT = Path(__file__).resolve().parent.parent
 RESOLVED = ROOT / "data" / "resolved.json"
 
+GOODIPTV = {
+    "cctv1": "https://live.goodiptv.club/api/bestv.php?id=cctv1hd8m/8000000",
+    "cctv2": "https://live.goodiptv.club/api/bestv.php?id=cctv2hd8m/8000000",
+    "cctv3": "https://live.goodiptv.club/api/bestv.php?id=cctv38m/8000000",
+    "cctv4": "https://live.goodiptv.club/api/bestv.php?id=cctv4hd8m/8000000",
+    "cctv5": "https://live.goodiptv.club/api/bestv.php?id=cctv58m/8000000",
+    "cctv5plus": "https://live.goodiptv.club/api/bestv.php?id=cctv5phd8m/8000000",
+    "cctv6": "https://live.goodiptv.club/api/bestv.php?id=cctv6hd8m/8000000",
+    "cctv7": "https://live.goodiptv.club/api/bestv.php?id=cctv7hd8m/8000000",
+    "cctv8": "https://live.goodiptv.club/api/bestv.php?id=cctv8hd8m/8000000",
+    "cctv9": "https://live.goodiptv.club/api/bestv.php?id=cctv9hd8m/8000000",
+    "cctv10": "https://live.goodiptv.club/api/bestv.php?id=cctv10hd8m/8000000",
+    "cctv11": "https://live.goodiptv.club/api/bestv.php?id=cctv11hd8m/8000000",
+    "cctv12": "https://live.goodiptv.club/api/bestv.php?id=cctv12hd8m/8000000",
+    "cctv13": "https://live.goodiptv.club/api/bestv.php?id=cctv13xwhd8m/8000000",
+    "cctv14": "https://live.goodiptv.club/api/bestv.php?id=cctvsehd8m/8000000",
+    "cctv15": "https://live.goodiptv.club/api/bestv.php?id=cctv15hd8m/8000000",
+    "cctv16": "https://live.goodiptv.club/api/bestv.php?id=cctv16hd8m/8000000",
+    "cctv17": "https://live.goodiptv.club/api/bestv.php?id=cctv17hd8m/8000000",
+}
 
-def resolve(channel_id: str, timeout: int = 20) -> str | None:
+V1 = {
+    k: v.replace("live.goodiptv.club", "live.v1.mk") for k, v in GOODIPTV.items()
+}
+
+def _read_browser(channel_id: str) -> str | None:
     if not RESOLVED.exists():
-        raise RuntimeError("official browser resolver did not produce data/resolved.json")
+        return None
     try:
         data = json.loads(RESOLVED.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        raise RuntimeError("data/resolved.json is invalid") from exc
+    except Exception:
+        return None
     url = data.get(channel_id)
-    if isinstance(url, str) and url.startswith(("http://", "https://")):
-        return url
-    return None
+    return url if isinstance(url, str) and url.startswith(("http://", "https://")) else None
+
+def _resolve_api(api_url: str, timeout: int) -> str | None:
+    r = requests.get(
+        api_url,
+        timeout=timeout,
+        allow_redirects=True,
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    r.raise_for_status()
+    text = r.text.strip()
+    if text.startswith(("http://", "https://")):
+        return text.splitlines()[0].strip()
+    if "#EXTM3U" in text:
+        return r.url
+    return r.url if ".m3u8" in r.url else None
+
+def resolve_candidates(channel_id: str, timeout: int = 20) -> list[str]:
+    candidates = []
+    browser = _read_browser(channel_id)
+    if browser:
+        candidates.append(browser)
+    for table in (GOODIPTV, V1):
+        api = table.get(channel_id)
+        if api:
+            try:
+                url = _resolve_api(api, timeout)
+                if url:
+                    candidates.append(url)
+            except Exception:
+                pass
+    return list(dict.fromkeys(candidates))
+
+def resolve(channel_id: str, timeout: int = 20) -> str | None:
+    return next(iter(resolve_candidates(channel_id, timeout)), None)
