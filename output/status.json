@@ -1,42 +1,40 @@
 {
-  "generated_at": "2026-09-20T13:26:40.990135+00:00",
+  "generated_at": "2026-09-20T13:34:10.406917+00:00",
   "count": 0,
   "channels": [
     {
       "id": "cctv1",
       "name": "CCTV-1 综合",
-      "url": "https://ldncctvwbcdkshw.v.kcdnvip.com/ldncctvwbcd/cdrmldcctv1_1/index.m3u8?b=200-2100",
-      "ok": false,
-      "1080p": false,
-      "response_seconds": 11.01
-    },
-    {
-      "id": "cctv2",
-      "name": "CCTV-2 财经",
-      "url": "https://ldncctvwbcdkshw.v.kcdnvip.com/ldncctvwbcd/cdrmldcctv1_1/index.m3u8?BR=td&region=shanghai",
-      "ok": true,
-      "1080p": false,
-      "response_seconds": 5.13,
-      "width": 1280,
-      "height": 720,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
-    },
-    {
-      "id": "cctv3",
-      "name": "CCTV-3 综艺",
       "ok": false,
       "1080p": false,
       "error": "no HLS URL returned"
     },
     {
-      "id": "cctv4",
-      "name": "CCTV-4 中文国际",
-      "url": "https://ldocctvwbcdkshw.v.kcdnvip.com/ldocctvwbcd/cdrmldcctv4_1/index.m3u8?b=200-2100",
+      "id": "cctv2",
+      "name": "CCTV-2 财经",
       "ok": false,
       "1080p": false,
-      "response_seconds": 11.01
+      "error": "no HLS URL returned"
+    },
+    {
+      "id": "cctv3",
+      "name": "CCTV-3 综艺",
+      "url": "https://ldocctvwbcdkshw.v.kcdnvip.com/ldocctvwbcd/cdrmldcctv3_1/index.m3u8?b=200-1200",
+      "ok": true,
+      "1080p": false,
+      "response_seconds": 9.19,
+      "width": 960,
+      "height": 540,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1"
+    },
+    {
+      "id": "cctv4",
+      "name": "CCTV-4 中文国际",
+      "ok": false,
+      "1080p": false,
+      "error": "no HLS URL returned"
     },
     {
       "id": "cctv5",
@@ -48,10 +46,9 @@
     {
       "id": "cctv5plus",
       "name": "CCTV-5+ 体育赛事",
-      "url": "https://hlslive1-txy-w4.live.cntv.cn/live/hls_cdrm/enc1/av1/cctv5plus/main.m3u8?b=200-2100",
       "ok": false,
       "1080p": false,
-      "response_seconds": 1.64
+      "error": "no HLS URL returned"
     },
     {
       "id": "cctv6",
@@ -70,15 +67,9 @@
     {
       "id": "cctv8",
       "name": "CCTV-8 电视剧",
-      "url": "https://ldocctvwbcdkshw.v.kcdnvip.com/ldocctvwbcd/cdrmldcctv8_1/index.m3u8?b=200-1200",
-      "ok": true,
+      "ok": false,
       "1080p": false,
-      "response_seconds": 8.0,
-      "width": 960,
-      "height": 540,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "error": "no HLS URL returned"
     },
     {
       "id": "cctv9",
@@ -90,9 +81,10 @@
     {
       "id": "cctv10",
       "name": "CCTV-10 科教",
+      "url": "https://ldocctvwbcdkshw.v.kcdnvip.com/ldocctvwbcd/cdrmldcctv10_1/index.m3u8?b=200-2100",
       "ok": false,
       "1080p": false,
-      "error": "no HLS URL returned"
+      "response_seconds": 25.02
     },
     {
       "id": "cctv11",
@@ -105,25 +97,29 @@
       "id": "cctv12",
       "name": "CCTV-12 社会与法",
       "url": "https://ldocctvwbcdkshw.v.kcdnvip.com/ldocctvwbcd/cdrmldcctv12_1/index.m3u8?b=200-2100",
-      "ok": false,
+      "ok": true,
       "1080p": false,
-      "response_seconds": 11.02
+      "response_seconds": 23.85,
+      "width": 1280,
+      "height": 720,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1"
     },
     {
       "id": "cctv13",
       "name": "CCTV-13 新闻",
-      "url": "https://ldncctvwbcdkshw.v.kcdnvip.com/ldncctvwbcd/cdrmldcctv13_1/index.m3u8?b=200-2100",
       "ok": false,
       "1080p": false,
-      "response_seconds": 11.02
+      "error": "no HLS URL returned"
     },
     {
       "id": "cctv14",
       "name": "CCTV-14 少儿",
-      "url": "https://ldncctvwbcdkshw.v.kcdnvip.com/ldncctvwbcd/cdrmldcctv13_1/index.m3u8?BR=td&region=shanghai",
+      "url": "https://ldocctvwbcdkshw.v.kcdnvip.com/ldocctvwbcd/cdrmldcctv4_1/index.m3u8?b=200-2100",
       "ok": true,
       "1080p": false,
-      "response_seconds": 4.64,
+      "response_seconds": 20.49,
       "width": 1280,
       "height": 720,
       "codec": "h264",
@@ -140,9 +136,10 @@
     {
       "id": "cctv16",
       "name": "CCTV-16 奥林匹克",
+      "url": "https://hlslive1-txy-w4.live.cntv.cn/live/hls_cdrm/enc1/av1/cctv16/main.m3u8?b=200-2100",
       "ok": false,
       "1080p": false,
-      "error": "no HLS URL returned"
+      "response_seconds": 1.25
     },
     {
       "id": "cctv17",
@@ -150,7 +147,7 @@
       "url": "https://ldocctvwbcdkshw.v.kcdnvip.com/ldocctvwbcd/cdrmldcctv17_1/index.m3u8?b=200-2100",
       "ok": false,
       "1080p": false,
-      "response_seconds": 11.01
+      "response_seconds": 25.01
     }
   ]
 }
