@@ -148,7 +148,7 @@ def _make_ckey(channel_id: str) -> tuple[str, str, int, str]:
     struct.pack_into(">I", packet, 18, _checksum(packet))
     encrypted = _tea_packet(bytes(packet), CKEY_TEA_KEY) + struct.pack(">I", _checksum(bytes(packet)))
     encrypted = bytes(v ^ CKEY_XOR[i % 16] for i, v in enumerate(encrypted))
-    return f"--01{_custom_b64(encrypted)}", guid, timestamp, f"{uuid.uuid4().upper()}_{PLATFORM}"
+    return f"--01{_custom_b64(encrypted)}", guid, timestamp, f"{str(uuid.uuid4()).upper()}_{PLATFORM}"
 
 
 def _extract_urls(payload: dict[str, Any]) -> list[str]:
