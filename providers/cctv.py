@@ -90,7 +90,8 @@ def _discover_public_lists(channel_id: str, timeout: int, channel_name: str | No
         for i, line in enumerate(lines):
             if "," in line:
                 name, url = line.split(",", 1)
-                if any(label.lower() in name.strip().lower() for label in labels) and url.strip().startswith(("http://", "https://")):\n                    found.append(url.strip())
+                if any(label.lower() in name.strip().lower() for label in labels) and url.strip().startswith(("http://", "https://")):
+                    found.append(url.strip())
             if line.startswith("#EXTINF") and i + 1 < len(lines):
                 low = line.lower()
                 if any(label.lower() in low for label in labels):
