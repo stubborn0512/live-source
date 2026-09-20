@@ -74,15 +74,21 @@ def _discover_public_lists(channel_id: str, timeout: int) -> list[str]:
     return found
 
 def resolve_candidates(channel_id: str, timeout: int = 10) -> list[str]:
-    candidates = []
-    for table in (GOODIPTV, V1):
-        if channel_id in table:
-            candidates.append(table[channel_id])
-    candidates.extend(_discover_public_lists(channel_id, timeout))
+    discovered = _discover_public_lists(channel_id, timeout)
+    candidates = discovered + [
+        table[channel_id] for table in (GOODIPTV, V1) if channel_id in table
+    ]
     browser = _read_browser(channel_id)
     if browser:
         candidates.append(browser)
-    return list(dict.fromkeys(candidates))
+    candidates = list(dict.fromkeys(candidates))
+    def score(url: str) -> tuple[int, int]:
+        low = url.lower()
+        quality = int(any(k in low for k in ("1080", "4k", "hd", "4000", "6000", "8000000")))
+        officialish = int("cctv" in low or "chinamobile" in low or "cmvideo" in low)
+        return (quality, officialish)
+    candidates.sort(key=score, reverse=True)
+    return candidates[:8]
 
 def resolve(channel_id: str, timeout: int = 10) -> str | None:
     candidates = resolve_candidates(channel_id, timeout)
