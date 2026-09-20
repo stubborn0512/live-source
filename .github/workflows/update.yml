@@ -2,6 +2,9 @@ name: Update live sources
 
 on:
   workflow_dispatch:
+  push:
+    paths-ignore:
+      - "output/**"
   schedule:
     - cron: "17 */2 * * *"
 
