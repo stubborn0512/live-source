@@ -5,7 +5,7 @@ from pathlib import Path
 
 from checker.health import check
 from generator.m3u import generate
-from providers.cctv import resolve
+from providers.cctv import resolve_candidates
 
 ROOT = Path(__file__).resolve().parent
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
@@ -23,7 +23,9 @@ def main() -> None:
         print(f"[resolve] {channel_id}")
 
         try:
-            url = resolve(channel_id, timeout=checker["timeout_seconds"])
+            candidates = resolve_candidates(
+                channel_id, timeout=checker["timeout_seconds"]
+            )
         except Exception as exc:
             statuses.append({
                 "id": channel_id,
@@ -35,7 +37,7 @@ def main() -> None:
             print(f"  resolve failed: {exc}")
             continue
 
-        if not url:
+        if not candidates:
             statuses.append({
                 "id": channel_id,
                 "name": channel["name"],
@@ -46,12 +48,27 @@ def main() -> None:
             print("  no HLS URL")
             continue
 
-        result = check(
-            url,
-            timeout=checker["probe_seconds"],
-            min_width=checker["min_width"],
-            min_height=checker["min_height"],
-        )
+        chosen = None
+        last_result = None
+        for candidate_url in candidates:
+            print(f"  probe: {candidate_url}")
+            probe_result = check(
+                candidate_url,
+                timeout=checker["probe_seconds"],
+                min_width=checker["min_width"],
+                min_height=checker["min_height"],
+            )
+            last_result = probe_result
+            if probe_result["ok"] and probe_result["1080p"]:
+                chosen = candidate_url
+                break
+
+        result = last_result or {
+            "ok": False,
+            "1080p": False,
+            "error": "all candidates failed",
+        }
+        url = chosen or candidates[0]
 
         status = {
             "id": channel_id,
