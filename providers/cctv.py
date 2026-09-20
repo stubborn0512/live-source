@@ -48,11 +48,35 @@ def _read_browser(channel_id: str) -> str | None:
     url = data.get(channel_id)
     return url if isinstance(url, str) and url.startswith(("http://", "https://")) else None
 
-def _discover_public_lists(channel_id: str, timeout: int) -> list[str]:
-    num = channel_id.replace("cctv", "")
-    labels = {f"cctv{num}", f"cctv-{num}", f"CCTV-{num}", f"CCTV{num}"}
-    if channel_id == "cctv5plus":
-        labels |= {"cctv5+", "cctv-5+", "CCTV5+", "CCTV-5+"}
+WEISHI_LABELS = {
+    "beijing": {"北京卫视", "北京台"}, "dongfang": {"东方卫视", "东方台"},
+    "hunan": {"湖南卫视", "湖南台"}, "zhejiang": {"浙江卫视", "浙江台"},
+    "jiangsu": {"江苏卫视", "江苏台"}, "anhui": {"安徽卫视", "安徽台"},
+    "shandong": {"山东卫视", "山东台"}, "liaoning": {"辽宁卫视", "辽宁台"},
+    "heilongjiang": {"黑龙江卫视", "黑龙江台"}, "jilin": {"吉林卫视", "吉林台"},
+    "tianjin": {"天津卫视", "天津台"}, "hebei": {"河北卫视", "河北台"},
+    "shanxi": {"山西卫视", "山西台"}, "henan": {"河南卫视", "河南台"},
+    "hubei": {"湖北卫视", "湖北台"}, "jiangxi": {"江西卫视", "江西台"},
+    "fujian": {"东南卫视", "东南台"}, "guangdong": {"广东卫视", "广东台"},
+    "shenzhen": {"深圳卫视", "深圳台"}, "guangxi": {"广西卫视", "广西台"},
+    "hainan": {"海南卫视", "海南台"}, "sichuan": {"四川卫视", "四川台"},
+    "chongqing": {"重庆卫视", "重庆台"}, "yunnan": {"云南卫视", "云南台"},
+    "guizhou": {"贵州卫视", "贵州台"}, "xizang": {"西藏卫视", "西藏台"},
+    "shaanxi": {"陕西卫视", "陕西台"}, "gansu": {"甘肃卫视", "甘肃台"},
+    "qinghai": {"青海卫视", "青海台"}, "ningxia": {"宁夏卫视", "宁夏台"},
+    "xinjiang": {"新疆卫视", "新疆台"}, "neimenggu": {"内蒙古卫视", "内蒙古台"},
+}
+
+def _discover_public_lists(channel_id: str, timeout: int, channel_name: str | None = None) -> list[str]:
+    if channel_id.startswith("cctv"):
+        num = channel_id.replace("cctv", "")
+        labels = {f"cctv{num}", f"cctv-{num}", f"CCTV-{num}", f"CCTV{num}"}
+        if channel_id == "cctv5plus":
+            labels |= {"cctv5+", "cctv-5+", "CCTV5+", "CCTV-5+"}
+    else:
+        labels = set(WEISHI_LABELS.get(channel_id, set()))
+        if channel_name:
+            labels.add(channel_name)
     found = []
     for source in PUBLIC_LISTS:
         try:
@@ -66,8 +90,7 @@ def _discover_public_lists(channel_id: str, timeout: int) -> list[str]:
         for i, line in enumerate(lines):
             if "," in line:
                 name, url = line.split(",", 1)
-                if name.strip() in labels and url.strip().startswith(("http://", "https://")):
-                    found.append(url.strip())
+                if any(label.lower() in name.strip().lower() for label in labels) and url.strip().startswith(("http://", "https://")):\n                    found.append(url.strip())
             if line.startswith("#EXTINF") and i + 1 < len(lines):
                 low = line.lower()
                 if any(label.lower() in low for label in labels):
@@ -76,8 +99,8 @@ def _discover_public_lists(channel_id: str, timeout: int) -> list[str]:
                         found.append(url)
     return found
 
-def resolve_candidates(channel_id: str, timeout: int = 10) -> list[str]:
-    discovered = _discover_public_lists(channel_id, timeout)
+def resolve_candidates(channel_id: str, timeout: int = 10, channel_name: str | None = None) -> list[str]:
+    discovered = _discover_public_lists(channel_id, timeout, channel_name)
     candidates = discovered + [
         table[channel_id] for table in (GOODIPTV, V1) if channel_id in table
     ]
