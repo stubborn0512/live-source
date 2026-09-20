@@ -62,9 +62,6 @@ def _resolve_api(api_url: str, timeout: int) -> str | None:
 
 def resolve_candidates(channel_id: str, timeout: int = 20) -> list[str]:
     candidates = []
-    browser = _read_browser(channel_id)
-    if browser:
-        candidates.append(browser)
     for table in (GOODIPTV, V1):
         api = table.get(channel_id)
         if api:
