@@ -6,10 +6,15 @@ on:
     paths-ignore:
       - "output/**"
   schedule:
-    - cron: "17 */2 * * *"
+    # GitHub Actions cron is UTC; 18:00 UTC = 02:00 China Standard Time (UTC+8).
+    - cron: "0 18 * * *"
 
 permissions:
   contents: write
+
+concurrency:
+  group: live-source-update
+  cancel-in-progress: false
 
 jobs:
   update:
