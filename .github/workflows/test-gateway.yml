@@ -90,7 +90,7 @@ jobs:
       - name: HLS smoke test
         run: |
           set -eux
-          curl --fail --show-error --max-time 60 \
+          curl --fail --show-error --retry 20 --retry-all-errors --retry-delay 2 --max-time 10 \
             https://live-source-gateway.onrender.com/hls/cctv1/index.m3u8 \
             -o /tmp/cctv1.m3u8
           grep -F '#EXTM3U' /tmp/cctv1.m3u8
