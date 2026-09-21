@@ -1,101 +1,201 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="cctv1" group-title="CCTV",CCTV-1 综合
-http://107.150.60.122/live/cctv4hd.m3u8
-#EXTINF:-1 tvg-id="cctv2" group-title="CCTV",CCTV-2 财经
-http://107.150.60.122/live/cctv2hd.m3u8
-#EXTINF:-1 tvg-id="cctv3" group-title="CCTV",CCTV-3 综艺
+#EXTINF:-1 tvg-id="cctv1" tvg-name="CCTV-1 综合" group-title="CCTV",CCTV-1 综合 [线路1]
 http://173.208.212.130:8181/1080p/cctv4.m3u8
-#EXTINF:-1 tvg-id="cctv4" group-title="CCTV",CCTV-4 中文国际
+#EXTINF:-1 tvg-id="cctv1" tvg-name="CCTV-1 综合" group-title="CCTV",CCTV-1 综合 [线路2]
+http://107.150.60.122/live/cctv4hd.m3u8
+#EXTINF:-1 tvg-id="cctv2" tvg-name="CCTV-2 财经" group-title="CCTV",CCTV-2 财经 [线路1]
+http://107.150.60.122/live/cctv2hd.m3u8
+#EXTINF:-1 tvg-id="cctv2" tvg-name="CCTV-2 财经" group-title="CCTV",CCTV-2 财经 [线路2]
+http://69.30.245.50/live/cctv3.m3u8
+#EXTINF:-1 tvg-id="cctv3" tvg-name="CCTV-3 综艺" group-title="CCTV",CCTV-3 综艺 [线路1]
+http://173.208.212.130:8181/1080p/cctv4.m3u8
+#EXTINF:-1 tvg-id="cctv3" tvg-name="CCTV-3 综艺" group-title="CCTV",CCTV-3 综艺 [线路2]
+http://69.30.245.50/live/cctv3.m3u8
+#EXTINF:-1 tvg-id="cctv4" tvg-name="CCTV-4 中文国际" group-title="CCTV",CCTV-4 中文国际 [线路1]
+http://38.75.136.137:98/gslb/dsdqpub/cctv4k.m3u8?auth=testpub
+#EXTINF:-1 tvg-id="cctv4" tvg-name="CCTV-4 中文国际" group-title="CCTV",CCTV-4 中文国际 [线路2]
 https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1789992000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-ee148ff04b0794fd7b3fa4fb191c9b22&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
-#EXTINF:-1 tvg-id="cctv5" group-title="CCTV",CCTV-5 体育
-http://173.208.212.130:8181/720p/cctv5.m3u8
-#EXTINF:-1 tvg-id="cctv5plus" group-title="CCTV",CCTV-5+ 体育赛事
+#EXTINF:-1 tvg-id="cctv5" tvg-name="CCTV-5 体育" group-title="CCTV",CCTV-5 体育 [线路1]
+http://107.150.60.122/live/cctv5hd.m3u8
+#EXTINF:-1 tvg-id="cctv5" tvg-name="CCTV-5 体育" group-title="CCTV",CCTV-5 体育 [线路2]
+http://gmxw.7766.org:808/hls/93/index.m3u8
+#EXTINF:-1 tvg-id="cctv5plus" tvg-name="CCTV-5+ 体育赛事" group-title="CCTV",CCTV-5+ 体育赛事 [线路1]
+http://183.129.255.66:8480/hls/6/index.m3u8
+#EXTINF:-1 tvg-id="cctv5plus" tvg-name="CCTV-5+ 体育赛事" group-title="CCTV",CCTV-5+ 体育赛事 [线路2]
 http://120.238.94.82:9901/tsfile/live/1030_1.m3u8
-#EXTINF:-1 tvg-id="cctv6" group-title="CCTV",CCTV-6 电影
+#EXTINF:-1 tvg-id="cctv6" tvg-name="CCTV-6 电影" group-title="CCTV",CCTV-6 电影 [线路1]
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd
+#EXTINF:-1 tvg-id="cctv6" tvg-name="CCTV-6 电影" group-title="CCTV",CCTV-6 电影 [线路2]
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd
+#EXTINF:-1 tvg-id="cctv7" tvg-name="CCTV-7 国防军事" group-title="CCTV",CCTV-7 国防军事 [线路1]
+http://107.150.60.122/live/cctv7hd.m3u8
+#EXTINF:-1 tvg-id="cctv7" tvg-name="CCTV-7 国防军事" group-title="CCTV",CCTV-7 国防军事 [线路2]
 http://69.30.245.50/live/cctv7.m3u8
-#EXTINF:-1 tvg-id="cctv7" group-title="CCTV",CCTV-7 国防军事
-http://118.122.144.115:8888/newlive/live/hls/9/live.m3u8
-#EXTINF:-1 tvg-id="cctv8" group-title="CCTV",CCTV-8 电视剧
-http://221.226.51.220:50081/newlive/live/hls/9/live.m3u8
-#EXTINF:-1 tvg-id="cctv9" group-title="CCTV",CCTV-9 纪录
+#EXTINF:-1 tvg-id="cctv8" tvg-name="CCTV-8 电视剧" group-title="CCTV",CCTV-8 电视剧 [线路1]
+https://0472.org/hls/cgtna.m3u8
+#EXTINF:-1 tvg-id="cctv8" tvg-name="CCTV-8 电视剧" group-title="CCTV",CCTV-8 电视剧 [线路2]
+http://183.129.255.66:8480/hls/9/index.m3u8
+#EXTINF:-1 tvg-id="cctv9" tvg-name="CCTV-9 纪录" group-title="CCTV",CCTV-9 纪录 [线路1]
+http://107.150.60.122/live/cctv9hd.m3u8
+#EXTINF:-1 tvg-id="cctv9" tvg-name="CCTV-9 纪录" group-title="CCTV",CCTV-9 纪录 [线路2]
 http://198.204.228.26/live/cctv9hd.m3u8
-#EXTINF:-1 tvg-id="cctv10" group-title="CCTV",CCTV-10 科教
+#EXTINF:-1 tvg-id="cctv10" tvg-name="CCTV-10 科教" group-title="CCTV",CCTV-10 科教 [线路1]
 http://204.12.221.218:8181/3m1080p/cctv10.m3u8
-#EXTINF:-1 tvg-id="cctv11" group-title="CCTV",CCTV-11 戏曲
+#EXTINF:-1 tvg-id="cctv10" tvg-name="CCTV-10 科教" group-title="CCTV",CCTV-10 科教 [线路2]
+http://69.30.245.50/live/cctv10.m3u8
+#EXTINF:-1 tvg-id="cctv11" tvg-name="CCTV-11 戏曲" group-title="CCTV",CCTV-11 戏曲 [线路1]
+http://204.12.221.218:8181/3m1080p/cctv11.m3u8
+#EXTINF:-1 tvg-id="cctv11" tvg-name="CCTV-11 戏曲" group-title="CCTV",CCTV-11 戏曲 [线路2]
 http://198.204.228.26/live/cctv11hd.m3u8
-#EXTINF:-1 tvg-id="cctv12" group-title="CCTV",CCTV-12 社会与法
+#EXTINF:-1 tvg-id="cctv12" tvg-name="CCTV-12 社会与法" group-title="CCTV",CCTV-12 社会与法 [线路1]
+http://204.12.221.218:8181/3m1080p/cctv12.m3u8
+#EXTINF:-1 tvg-id="cctv12" tvg-name="CCTV-12 社会与法" group-title="CCTV",CCTV-12 社会与法 [线路2]
 http://74.91.26.218:82/live/cctv17hd.m3u8
-#EXTINF:-1 tvg-id="cctv13" group-title="CCTV",CCTV-13 新闻
-http://183.129.255.66:8480/hls/14/index.m3u8
-#EXTINF:-1 tvg-id="cctv14" group-title="CCTV",CCTV-14 少儿
+#EXTINF:-1 tvg-id="cctv13" tvg-name="CCTV-13 新闻" group-title="CCTV",CCTV-13 新闻 [线路1]
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv13hd
+#EXTINF:-1 tvg-id="cctv13" tvg-name="CCTV-13 新闻" group-title="CCTV",CCTV-13 新闻 [线路2]
+https://event.pull.hebtv.com/jishi/cp1.m3u8
+#EXTINF:-1 tvg-id="cctv14" tvg-name="CCTV-14 少儿" group-title="CCTV",CCTV-14 少儿 [线路1]
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv14hd
+#EXTINF:-1 tvg-id="cctv14" tvg-name="CCTV-14 少儿" group-title="CCTV",CCTV-14 少儿 [线路2]
 http://173.208.234.146/live/cctv16.m3u8
-#EXTINF:-1 tvg-id="cctv15" group-title="CCTV",CCTV-15 音乐
+#EXTINF:-1 tvg-id="cctv15" tvg-name="CCTV-15 音乐" group-title="CCTV",CCTV-15 音乐 [线路1]
 http://gmxw.7766.org:808/hls/102/index.m3u8
-#EXTINF:-1 tvg-id="cctv16" group-title="CCTV",CCTV-16 奥林匹克
+#EXTINF:-1 tvg-id="cctv15" tvg-name="CCTV-15 音乐" group-title="CCTV",CCTV-15 音乐 [线路2]
+http://183.129.255.66:8480/hls/16/index.m3u8
+#EXTINF:-1 tvg-id="cctv16" tvg-name="CCTV-16 奥林匹克" group-title="CCTV",CCTV-16 奥林匹克 [线路1]
 http://74.91.26.218:82/live/cctv17hd.m3u8
-#EXTINF:-1 tvg-id="cctv17" group-title="CCTV",CCTV-17 农业农村
-http://173.208.212.130:8181/720p/fyjc.m3u8
-#EXTINF:-1 tvg-id="beijing" group-title="CCTV",北京卫视
+#EXTINF:-1 tvg-id="cctv16" tvg-name="CCTV-16 奥林匹克" group-title="CCTV",CCTV-16 奥林匹克 [线路2]
+http://38.75.136.137:98/gslb/dsdqpub/cctv16hd.m3u8?auth=testpub
+#EXTINF:-1 tvg-id="cctv17" tvg-name="CCTV-17 农业农村" group-title="CCTV",CCTV-17 农业农村 [线路1]
+http://74.91.26.218:82/live/cctv17hd.m3u8
+#EXTINF:-1 tvg-id="cctv17" tvg-name="CCTV-17 农业农村" group-title="CCTV",CCTV-17 农业农村 [线路2]
+http://38.75.136.137:98/gslb/dsdqpub/cctv17hd.m3u8?auth=testpub
+#EXTINF:-1 tvg-id="beijing" tvg-name="北京卫视" group-title="CCTV",北京卫视 [线路1]
 http://107.150.60.122/live/bjwshd.m3u8
-#EXTINF:-1 tvg-id="dongfang" group-title="CCTV",东方卫视
+#EXTINF:-1 tvg-id="beijing" tvg-name="北京卫视" group-title="CCTV",北京卫视 [线路2]
+https://srs.iyb983.cn/video/CYS/index.m3u8
+#EXTINF:-1 tvg-id="dongfang" tvg-name="东方卫视" group-title="CCTV",东方卫视 [线路1]
 http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8
-#EXTINF:-1 tvg-id="hunan" group-title="CCTV",湖南卫视
-http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gzwshd
-#EXTINF:-1 tvg-id="zhejiang" group-title="CCTV",浙江卫视
-http://107.150.60.122/live/dfwshd.m3u8
-#EXTINF:-1 tvg-id="jiangsu" group-title="CCTV",江苏卫视
+#EXTINF:-1 tvg-id="dongfang" tvg-name="东方卫视" group-title="CCTV",东方卫视 [线路2]
 http://107.150.60.122/live/jswshd.m3u8
-#EXTINF:-1 tvg-id="anhui" group-title="CCTV",安徽卫视
+#EXTINF:-1 tvg-id="hunan" tvg-name="湖南卫视" group-title="CCTV",湖南卫视 [线路1]
+http://107.150.60.122/live/hnwshd.m3u8
+#EXTINF:-1 tvg-id="hunan" tvg-name="湖南卫视" group-title="CCTV",湖南卫视 [线路2]
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=hnwshd
+#EXTINF:-1 tvg-id="zhejiang" tvg-name="浙江卫视" group-title="CCTV",浙江卫视 [线路1]
+http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8
+#EXTINF:-1 tvg-id="zhejiang" tvg-name="浙江卫视" group-title="CCTV",浙江卫视 [线路2]
+http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8
+#EXTINF:-1 tvg-id="jiangsu" tvg-name="江苏卫视" group-title="CCTV",江苏卫视 [线路1]
+http://107.150.60.122/live/jswshd.m3u8
+#EXTINF:-1 tvg-id="jiangsu" tvg-name="江苏卫视" group-title="CCTV",江苏卫视 [线路2]
 http://107.150.60.122/live/ahwshd.m3u8
-#EXTINF:-1 tvg-id="shandong" group-title="CCTV",山东卫视
+#EXTINF:-1 tvg-id="anhui" tvg-name="安徽卫视" group-title="CCTV",安徽卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/ahws.m3u8
+#EXTINF:-1 tvg-id="anhui" tvg-name="安徽卫视" group-title="CCTV",安徽卫视 [线路2]
+http://107.150.60.122/live/ahwshd.m3u8
+#EXTINF:-1 tvg-id="shandong" tvg-name="山东卫视" group-title="CCTV",山东卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/sxws.m3u8
+#EXTINF:-1 tvg-id="shandong" tvg-name="山东卫视" group-title="CCTV",山东卫视 [线路2]
 http://107.150.60.122/live/sdwshd.m3u8
-#EXTINF:-1 tvg-id="liaoning" group-title="CCTV",辽宁卫视
+#EXTINF:-1 tvg-id="liaoning" tvg-name="辽宁卫视" group-title="CCTV",辽宁卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/lnws.m3u8
+#EXTINF:-1 tvg-id="liaoning" tvg-name="辽宁卫视" group-title="CCTV",辽宁卫视 [线路2]
 http://198.204.228.26/live/lnwshd.m3u8
-#EXTINF:-1 tvg-id="heilongjiang" group-title="CCTV",黑龙江卫视
+#EXTINF:-1 tvg-id="heilongjiang" tvg-name="黑龙江卫视" group-title="CCTV",黑龙江卫视 [线路1]
+http://107.150.60.122/live/hljwshd.m3u8
+#EXTINF:-1 tvg-id="heilongjiang" tvg-name="黑龙江卫视" group-title="CCTV",黑龙江卫视 [线路2]
 http://198.204.228.26/live/hljwshd.m3u8
-#EXTINF:-1 tvg-id="jilin" group-title="CCTV",吉林卫视
+#EXTINF:-1 tvg-id="jilin" tvg-name="吉林卫视" group-title="CCTV",吉林卫视 [线路1]
 http://204.12.221.218:8181/3m1080p/scws.m3u8
-#EXTINF:-1 tvg-id="tianjin" group-title="CCTV",天津卫视
-http://198.204.228.26/live/tjwshd.m3u8
-#EXTINF:-1 tvg-id="hebei" group-title="CCTV",河北卫视
-http://107.150.60.122/live/hawshd.m3u8
-#EXTINF:-1 tvg-id="shanxi" group-title="CCTV",山西卫视
-http://107.150.60.122/live/gdwshd.m3u8
-#EXTINF:-1 tvg-id="henan" group-title="CCTV",河南卫视
-http://107.150.60.122/live/hawshd.m3u8
-#EXTINF:-1 tvg-id="hubei" group-title="CCTV",湖北卫视
-http://107.150.60.122/live/hbwshd.m3u8
-#EXTINF:-1 tvg-id="jiangxi" group-title="CCTV",江西卫视
-http://107.150.60.122/live/jxwshd.m3u8
-#EXTINF:-1 tvg-id="fujian" group-title="CCTV",东南卫视
-http://107.150.60.122/live/dnwshd.m3u8
-#EXTINF:-1 tvg-id="guangdong" group-title="CCTV",广东卫视
-http://107.150.60.122/live/gxwshd.m3u8
-#EXTINF:-1 tvg-id="shenzhen" group-title="CCTV",深圳卫视
-http://107.150.60.122/live/szwshd.m3u8
-#EXTINF:-1 tvg-id="guangxi" group-title="CCTV",广西卫视
-http://107.150.60.122/live/gxwshd.m3u8
-#EXTINF:-1 tvg-id="hainan" group-title="CCTV",海南卫视
-http://173.208.212.130:8181/720p/szws.m3u8
-#EXTINF:-1 tvg-id="sichuan" group-title="CCTV",四川卫视
+#EXTINF:-1 tvg-id="jilin" tvg-name="吉林卫视" group-title="CCTV",吉林卫视 [线路2]
+http://107.150.60.122/live/jlwshd.m3u8
+#EXTINF:-1 tvg-id="tianjin" tvg-name="天津卫视" group-title="CCTV",天津卫视 [线路1]
 http://107.150.60.122/live/tjwshd.m3u8
-#EXTINF:-1 tvg-id="chongqing" group-title="CCTV",重庆卫视
-http://112.123.243.37:50085/tsfile/live/0142_1.m3u8?key=txiptv&playlive=0&authid=0
-#EXTINF:-1 tvg-id="yunnan" group-title="CCTV",云南卫视
-http://63.141.230.178:82/gslb/zbdq5.m3u8?id=ynwshd
-#EXTINF:-1 tvg-id="guizhou" group-title="CCTV",贵州卫视
-http://204.12.221.218:8181/3m1080p/gzws.m3u8
-#EXTINF:-1 tvg-id="xizang" group-title="CCTV",西藏卫视
-http://107.150.60.122/live/gzwshd.m3u8
-#EXTINF:-1 tvg-id="shaanxi" group-title="CCTV",陕西卫视
+#EXTINF:-1 tvg-id="tianjin" tvg-name="天津卫视" group-title="CCTV",天津卫视 [线路2]
+http://198.204.228.26/live/tjwshd.m3u8
+#EXTINF:-1 tvg-id="hebei" tvg-name="河北卫视" group-title="CCTV",河北卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/hews.m3u8
+#EXTINF:-1 tvg-id="hebei" tvg-name="河北卫视" group-title="CCTV",河北卫视 [线路2]
+http://107.150.60.122/live/hawshd.m3u8
+#EXTINF:-1 tvg-id="shanxi" tvg-name="山西卫视" group-title="CCTV",山西卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/sxws.m3u8
+#EXTINF:-1 tvg-id="shanxi" tvg-name="山西卫视" group-title="CCTV",山西卫视 [线路2]
+http://107.150.60.122/live/gdwshd.m3u8
+#EXTINF:-1 tvg-id="henan" tvg-name="河南卫视" group-title="CCTV",河南卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/hbws.m3u8
+#EXTINF:-1 tvg-id="henan" tvg-name="河南卫视" group-title="CCTV",河南卫视 [线路2]
+http://107.150.60.122/live/hawshd.m3u8
+#EXTINF:-1 tvg-id="hubei" tvg-name="湖北卫视" group-title="CCTV",湖北卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/hbws.m3u8
+#EXTINF:-1 tvg-id="hubei" tvg-name="湖北卫视" group-title="CCTV",湖北卫视 [线路2]
+http://107.150.60.122/live/hbwshd.m3u8
+#EXTINF:-1 tvg-id="jiangxi" tvg-name="江西卫视" group-title="CCTV",江西卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/jxws.m3u8
+#EXTINF:-1 tvg-id="jiangxi" tvg-name="江西卫视" group-title="CCTV",江西卫视 [线路2]
+http://107.150.60.122/live/jxwshd.m3u8
+#EXTINF:-1 tvg-id="fujian" tvg-name="东南卫视" group-title="CCTV",东南卫视 [线路1]
+http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8
+#EXTINF:-1 tvg-id="fujian" tvg-name="东南卫视" group-title="CCTV",东南卫视 [线路2]
+http://107.150.60.122/live/dnwshd.m3u8
+#EXTINF:-1 tvg-id="guangdong" tvg-name="广东卫视" group-title="CCTV",广东卫视 [线路1]
+http://107.150.60.122/live/gdwshd.m3u8
+#EXTINF:-1 tvg-id="guangdong" tvg-name="广东卫视" group-title="CCTV",广东卫视 [线路2]
+http://107.150.60.122/live/gxwshd.m3u8
+#EXTINF:-1 tvg-id="shenzhen" tvg-name="深圳卫视" group-title="CCTV",深圳卫视 [线路1]
+http://107.150.60.122/live/szwshd.m3u8
+#EXTINF:-1 tvg-id="shenzhen" tvg-name="深圳卫视" group-title="CCTV",深圳卫视 [线路2]
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=szwshd
+#EXTINF:-1 tvg-id="guangxi" tvg-name="广西卫视" group-title="CCTV",广西卫视 [线路1]
+http://107.150.60.122/live/gxwshd.m3u8
+#EXTINF:-1 tvg-id="guangxi" tvg-name="广西卫视" group-title="CCTV",广西卫视 [线路2]
+http://198.204.228.26/live/gxwshd.m3u8
+#EXTINF:-1 tvg-id="hainan" tvg-name="海南卫视" group-title="CCTV",海南卫视 [线路1]
+http://173.208.212.130:8181/720p/szws.m3u8
+#EXTINF:-1 tvg-id="hainan" tvg-name="海南卫视" group-title="CCTV",海南卫视 [线路2]
+http://183.11.239.36:808/hls/124/index.m3u8
+#EXTINF:-1 tvg-id="sichuan" tvg-name="四川卫视" group-title="CCTV",四川卫视 [线路1]
+https://live.264788.xyz/channel/sichuanweishi4k?streamid=21be5901ee81559c827dc84e46f26452&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
+#EXTINF:-1 tvg-id="sichuan" tvg-name="四川卫视" group-title="CCTV",四川卫视 [线路2]
+https://live.264788.xyz/channel/sichuanweishi4k?streamid=401bf692a1a8b91298f26077d53316d6&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
+#EXTINF:-1 tvg-id="chongqing" tvg-name="重庆卫视" group-title="CCTV",重庆卫视 [线路1]
+http://107.150.60.122/live/cqwshd.m3u8
+#EXTINF:-1 tvg-id="chongqing" tvg-name="重庆卫视" group-title="CCTV",重庆卫视 [线路2]
 http://107.150.60.122/live/snwshd.m3u8
-#EXTINF:-1 tvg-id="gansu" group-title="CCTV",甘肃卫视
+#EXTINF:-1 tvg-id="yunnan" tvg-name="云南卫视" group-title="CCTV",云南卫视 [线路1]
+http://107.150.60.122/live/ynwshd.m3u8
+#EXTINF:-1 tvg-id="yunnan" tvg-name="云南卫视" group-title="CCTV",云南卫视 [线路2]
+http://107.150.60.122/live/jxwshd.m3u8
+#EXTINF:-1 tvg-id="guizhou" tvg-name="贵州卫视" group-title="CCTV",贵州卫视 [线路1]
+http://204.12.221.218:8181/3m1080p/gzws.m3u8
+#EXTINF:-1 tvg-id="guizhou" tvg-name="贵州卫视" group-title="CCTV",贵州卫视 [线路2]
+http://107.150.60.122/live/gzwshd.m3u8
+#EXTINF:-1 tvg-id="xizang" tvg-name="西藏卫视" group-title="CCTV",西藏卫视 [线路1]
+http://107.150.60.122/live/gzwshd.m3u8
+#EXTINF:-1 tvg-id="xizang" tvg-name="西藏卫视" group-title="CCTV",西藏卫视 [线路2]
+http://107.150.60.122/live/xzws.m3u8
+#EXTINF:-1 tvg-id="shaanxi" tvg-name="陕西卫视" group-title="CCTV",陕西卫视 [线路1]
+http://107.150.60.122/live/snwshd.m3u8
+#EXTINF:-1 tvg-id="shaanxi" tvg-name="陕西卫视" group-title="CCTV",陕西卫视 [线路2]
+http://198.204.228.26/live/snwshd.m3u8
+#EXTINF:-1 tvg-id="gansu" tvg-name="甘肃卫视" group-title="CCTV",甘肃卫视 [线路1]
+http://63.141.230.178:82/gslb/zbdq5.m3u8?id=scwshd
+#EXTINF:-1 tvg-id="gansu" tvg-name="甘肃卫视" group-title="CCTV",甘肃卫视 [线路2]
 http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gswshd
-#EXTINF:-1 tvg-id="qinghai" group-title="CCTV",青海卫视
+#EXTINF:-1 tvg-id="qinghai" tvg-name="青海卫视" group-title="CCTV",青海卫视 [线路1]
+https://hls-qhmh.lanzhousobey.cn/qhmh/mhds.m3u8
+#EXTINF:-1 tvg-id="qinghai" tvg-name="青海卫视" group-title="CCTV",青海卫视 [线路2]
 http://107.150.60.122/live/qhws.m3u8
-#EXTINF:-1 tvg-id="ningxia" group-title="CCTV",宁夏卫视
-http://107.150.60.122/live/nxws.m3u8
-#EXTINF:-1 tvg-id="xinjiang" group-title="CCTV",新疆卫视
+#EXTINF:-1 tvg-id="ningxia" tvg-name="宁夏卫视" group-title="CCTV",宁夏卫视 [线路1]
+http://107.150.60.122/live/sdwshd.m3u8
+#EXTINF:-1 tvg-id="ningxia" tvg-name="宁夏卫视" group-title="CCTV",宁夏卫视 [线路2]
+http://198.204.228.26/live/nxws.m3u8
+#EXTINF:-1 tvg-id="xinjiang" tvg-name="新疆卫视" group-title="CCTV",新疆卫视 [线路1]
+http://107.150.60.122/live/ynwshd.m3u8
+#EXTINF:-1 tvg-id="xinjiang" tvg-name="新疆卫视" group-title="CCTV",新疆卫视 [线路2]
 http://107.150.60.122/live/xjws.m3u8
-#EXTINF:-1 tvg-id="neimenggu" group-title="CCTV",内蒙古卫视
-http://play1-qk.nmtv.cn/live/1769652018126032.m3u8
+#EXTINF:-1 tvg-id="neimenggu" tvg-name="内蒙古卫视" group-title="CCTV",内蒙古卫视 [线路1]
+http://107.150.60.122/live/nfws.m3u8
+#EXTINF:-1 tvg-id="neimenggu" tvg-name="内蒙古卫视" group-title="CCTV",内蒙古卫视 [线路2]
+http://198.204.228.26/live/nfws.m3u8
