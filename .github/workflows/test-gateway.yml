@@ -17,7 +17,7 @@ jobs:
 
       - name: Wait for exact Render commit
         env:
-          EXPECTED_SHA: 48eb7220a269960f27d56a3cfae9ac6d0d47cbfa
+          EXPECTED_SHA: 43b115241a3cea77294743454d417404169bfd69
         run: |
           set -eux
           for i in $(seq 1 36); do
