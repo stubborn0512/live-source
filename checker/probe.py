@@ -10,6 +10,7 @@ from typing import Any
 def probe(url: str, timeout: int = 20) -> dict[str, Any] | None:
     cmd = [
         "ffprobe",
+        "-4",
         "-v", "error",
         "-rw_timeout", str(timeout * 1_000_000),
         "-select_streams", "v:0",
