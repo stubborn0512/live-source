@@ -93,6 +93,7 @@ SOURCE_CACHE: dict[str, str] = {}
 SOURCE_ORDER_CACHE: list[str] | None = None
 SOURCE_INDEX_CACHE: dict[str, list[str]] | None = None
 SOURCE_LOCK = Lock()
+SOURCE_BUILD_LOCK = Lock()
 URL_RE = re.compile(r'''https?://[^\s<>"]+''')
 SOURCE_FETCH_WORKERS = 10
 
