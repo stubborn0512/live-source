@@ -126,8 +126,8 @@ def _state(cid):
 
 
 def _remember_url(cid: str, token: str, url: str):
+    state = _state(cid)
     with _hls_lock:
-        state = _state(cid)
         now = time.time()
         state["maps"][token] = (url, now)
         cutoff = now - HLS_MAP_TTL
