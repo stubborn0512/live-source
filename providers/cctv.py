@@ -211,6 +211,34 @@ def _extract_urls(text: str) -> list[str]:
     return urls
 
 
+def _url_channel_conflict(url: str, channel_id: str) -> bool:
+    """Reject URLs that explicitly identify a different CCTV channel.
+
+    Resolution alone cannot prove channel identity: some public relay servers
+    return a different channel than the requested path. If a URL itself names
+    a CCTV channel, that identifier is a strong negative signal.
+    """
+    low = url.lower()
+    target = channel_id.lower().replace("cctv", "")
+    target_num = "5" if target == "5plus" else target
+    target_plus = target == "5plus"
+
+    tokens = re.findall(r"cctv[-_]?(5(?:plus|p|\+)?|(?:[0-9]{1,2}))", low)
+    for token in tokens:
+        normalized = token.replace("+", "").replace("-", "")
+        if normalized in {"5p", "5plus"}:
+            found_plus = True
+            found_num = "5"
+        else:
+            found_plus = False
+            found_num = normalized
+        if found_num != target_num:
+            return True
+        if found_num == "5" and found_plus != target_plus:
+            return True
+    return False
+
+
 def _label_matches(line: str, labels: set[str], cctv: bool) -> bool:
     low = re.sub(r"\s+", "", line.lower())
     for label in labels:
@@ -274,14 +302,28 @@ def _build_source_index(timeout: int) -> dict[str, list[str]]:
                 if not matched_ids:
                     continue
 
-                nearby = "\n".join(lines[i:min(i + 4, len(lines))])
-                urls = _extract_urls(nearby)
+                # Prefer URLs on the matching entry itself. Only scan
+                # subsequent lines when the label is separated from its URL;
+                # stop at the next channel label so CCTV1 cannot inherit CCTV17.
+                urls = _extract_urls(line)
                 if not urls:
-                    urls = _extract_urls(line)
+                    for j in range(i + 1, min(i + 4, len(lines))):
+                        if any(
+                            _label_matches(lines[j], labels, is_cctv)
+                            for labels, is_cctv in label_map.values()
+                        ):
+                            break
+                        urls.extend(_extract_urls(lines[j]))
+                        if urls:
+                            break
                 if not urls:
                     continue
                 for channel_id in matched_ids:
-                    index[channel_id].extend(urls)
+                    valid_urls = [
+                        url for url in urls
+                        if not _url_channel_conflict(url, channel_id)
+                    ]
+                    index[channel_id].extend(valid_urls)
 
         index = {key: list(dict.fromkeys(value)) for key, value in index.items()}
         with SOURCE_LOCK:
