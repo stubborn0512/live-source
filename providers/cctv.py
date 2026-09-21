@@ -31,6 +31,10 @@ GOODIPTV = {
 
 V1 = {k: v.replace("live.goodiptv.club", "live.v1.mk") for k, v in GOODIPTV.items()}
 PUBLIC_LISTS = [
+    # Gitee public IPTV lists
+    "https://gitee.com/ZJHT0/tv-source/raw/master/iptv/iptv.m3u8",
+    "https://gitee.com/myitgit/iptv-sources/raw/gh-pages/txt/ycl_iptv.txt",
+    "https://gitee.com/user_0628/iptv/raw/master/CCTV.m3u8",
     "https://raw.githubusercontent.com/CCSH/IPTV/main/live.txt",
     "https://raw.githubusercontent.com/jura00/vms/main/hd.m3u8",
     "https://raw.githubusercontent.com/kaige-cai/live/main/live.m3u",
