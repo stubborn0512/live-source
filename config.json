@@ -79,7 +79,13 @@
     "timeout_seconds": 20,
     "min_width": 1920,
     "min_height": 1080,
-    "probe_seconds": 20
+    "probe_seconds": 20,
+    "static_check": {
+      "enabled": true,
+      "duration_seconds": 6,
+      "freeze_seconds": 4
+    },
+    "max_probe_workers": 10
   },
   "weishi": {
     "channels": [
