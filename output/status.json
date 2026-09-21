@@ -1,1906 +1,356 @@
 {
-  "generated_at": "2026-09-21T03:23:12.291790+00:00",
-  "count": 50,
+  "generated_at": "2026-09-21T05:19:43.243557+00:00",
+  "count": 0,
   "channels": [
     {
       "id": "cctv1",
       "name": "CCTV-1 综合",
-      "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
-      "sources": [
-        {
-          "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.03,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/cctv4hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.64,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.03,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv2",
       "name": "CCTV-2 财经",
-      "url": "http://107.150.60.122/live/cctv2hd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/cctv2hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.79,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://69.30.245.50/live/cctv3.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.42,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 4.79,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv3",
       "name": "CCTV-3 综艺",
-      "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
-      "sources": [
-        {
-          "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.85,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://69.30.245.50/live/cctv3.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.63,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.85,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv4",
       "name": "CCTV-4 中文国际",
-      "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv4k.m3u8?auth=testpub",
-      "sources": [
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv4k.m3u8?auth=testpub",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 8.39,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1789992000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-ee148ff04b0794fd7b3fa4fb191c9b22&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.12,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 8.39,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv5",
       "name": "CCTV-5 体育",
-      "url": "http://107.150.60.122/live/cctv5hd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/cctv5hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.85,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://gmxw.7766.org:808/hls/93/index.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 16.02,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "50/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.85,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv5plus",
       "name": "CCTV-5+ 体育赛事",
-      "url": "http://183.129.255.66:8480/hls/6/index.m3u8",
-      "sources": [
-        {
-          "url": "http://183.129.255.66:8480/hls/6/index.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 18.01,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://120.238.94.82:9901/tsfile/live/1030_1.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 15.85,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 18.01,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv6",
       "name": "CCTV-6 电影",
-      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd",
-      "sources": [
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.21,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.18,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.21,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv7",
       "name": "CCTV-7 国防军事",
-      "url": "http://107.150.60.122/live/cctv7hd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/cctv7hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.23,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://69.30.245.50/live/cctv7.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.37,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.23,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv8",
       "name": "CCTV-8 电视剧",
-      "url": "https://0472.org/hls/cgtna.m3u8",
-      "sources": [
-        {
-          "url": "https://0472.org/hls/cgtna.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 8.11,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://183.129.255.66:8480/hls/9/index.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 20.78,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 8.11,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv9",
       "name": "CCTV-9 纪录",
-      "url": "http://107.150.60.122/live/cctv9hd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/cctv9hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.46,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/cctv9hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 7.67,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.46,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv10",
       "name": "CCTV-10 科教",
-      "url": "http://204.12.221.218:8181/3m1080p/cctv10.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/cctv10.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.57,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://69.30.245.50/live/cctv10.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.85,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.57,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv11",
       "name": "CCTV-11 戏曲",
-      "url": "http://204.12.221.218:8181/3m1080p/cctv11.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/cctv11.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.59,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/cctv11hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.71,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.59,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv12",
       "name": "CCTV-12 社会与法",
-      "url": "http://204.12.221.218:8181/3m1080p/cctv12.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/cctv12.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.84,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://74.91.26.218:82/live/cctv17hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.81,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 4.84,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv13",
       "name": "CCTV-13 新闻",
-      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv13hd",
-      "sources": [
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv13hd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.16,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "https://event.pull.hebtv.com/jishi/cp1.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.35,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 1.16,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv14",
       "name": "CCTV-14 少儿",
-      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv14hd",
-      "sources": [
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv14hd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.87,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://173.208.234.146/live/cctv16.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.17,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.87,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv15",
       "name": "CCTV-15 音乐",
-      "url": "http://gmxw.7766.org:808/hls/102/index.m3u8",
-      "sources": [
-        {
-          "url": "http://gmxw.7766.org:808/hls/102/index.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 24.84,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "50/1"
-        },
-        {
-          "url": "http://183.129.255.66:8480/hls/16/index.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 18.47,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "50/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 24.84,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "50/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv16",
       "name": "CCTV-16 奥林匹克",
-      "url": "http://74.91.26.218:82/live/cctv17hd.m3u8",
-      "sources": [
-        {
-          "url": "http://74.91.26.218:82/live/cctv17hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.95,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv16hd.m3u8?auth=testpub",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.11,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 1.95,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "cctv17",
       "name": "CCTV-17 农业农村",
-      "url": "http://74.91.26.218:82/live/cctv17hd.m3u8",
-      "sources": [
-        {
-          "url": "http://74.91.26.218:82/live/cctv17hd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.6,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv17hd.m3u8?auth=testpub",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.98,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.6,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "beijing",
       "name": "北京卫视",
-      "url": "http://107.150.60.122/live/bjwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/bjwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.06,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "https://srs.iyb983.cn/video/CYS/index.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 7.04,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 4.06,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "dongfang",
       "name": "东方卫视",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8",
-      "sources": [
-        {
-          "url": "http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.13,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/jswshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.09,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.13,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "hunan",
       "name": "湖南卫视",
-      "url": "http://107.150.60.122/live/hnwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/hnwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.4,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=hnwshd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.64,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.4,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "zhejiang",
       "name": "浙江卫视",
-      "url": "http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8",
-      "sources": [
-        {
-          "url": "http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.91,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.16,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.91,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "jiangsu",
       "name": "江苏卫视",
-      "url": "http://107.150.60.122/live/jswshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/jswshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.58,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/ahwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.46,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 2.58,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "anhui",
       "name": "安徽卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/ahws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/ahws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.2,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/ahwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.89,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.2,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "shandong",
       "name": "山东卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/sxws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/sxws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.35,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/sdwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.49,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 6.35,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "liaoning",
       "name": "辽宁卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/lnws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/lnws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.19,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/lnwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.37,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 2.19,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "heilongjiang",
       "name": "黑龙江卫视",
-      "url": "http://107.150.60.122/live/hljwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/hljwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.81,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/hljwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 8.55,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 4.81,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "jilin",
       "name": "吉林卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/scws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/scws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.48,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/jlwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.22,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 2.48,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "tianjin",
       "name": "天津卫视",
-      "url": "http://107.150.60.122/live/tjwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/tjwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.82,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/tjwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.01,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.82,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "hebei",
       "name": "河北卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/hews.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/hews.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.42,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/hawshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.87,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 2.42,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "shanxi",
       "name": "山西卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/sxws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/sxws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.17,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/gdwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.78,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 6.17,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "henan",
       "name": "河南卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/hbws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/hbws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.56,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/hawshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.9,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 1.56,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "hubei",
       "name": "湖北卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/hbws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/hbws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.83,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/hbwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.56,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "50/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.83,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "jiangxi",
       "name": "江西卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/jxws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/jxws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.42,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/jxwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.99,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 2.42,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "fujian",
       "name": "东南卫视",
-      "url": "http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8",
-      "sources": [
-        {
-          "url": "http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.9,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/dnwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.38,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 4.9,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "guangdong",
       "name": "广东卫视",
-      "url": "http://107.150.60.122/live/gdwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/gdwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.87,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/gxwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.23,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.87,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "shenzhen",
       "name": "深圳卫视",
-      "url": "http://107.150.60.122/live/szwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/szwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.93,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=szwshd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.89,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 2.93,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "guangxi",
       "name": "广西卫视",
-      "url": "http://107.150.60.122/live/gxwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/gxwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.13,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/gxwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.69,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 1.13,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "hainan",
       "name": "海南卫视",
-      "url": "http://173.208.212.130:8181/720p/szws.m3u8",
-      "sources": [
-        {
-          "url": "http://173.208.212.130:8181/720p/szws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.95,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://183.11.239.36:808/hls/124/index.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 12.51,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "50/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.95,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "sichuan",
       "name": "四川卫视",
-      "url": "https://live.264788.xyz/channel/sichuanweishi4k?streamid=21be5901ee81559c827dc84e46f26452&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk",
-      "sources": [
-        {
-          "url": "https://live.264788.xyz/channel/sichuanweishi4k?streamid=21be5901ee81559c827dc84e46f26452&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.83,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": "8324009",
-          "fps": "30/1"
-        },
-        {
-          "url": "https://live.264788.xyz/channel/sichuanweishi4k?streamid=401bf692a1a8b91298f26077d53316d6&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.9,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": "8324009",
-          "fps": "30/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 6.83,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": "8324009",
-      "fps": "30/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "chongqing",
       "name": "重庆卫视",
-      "url": "http://107.150.60.122/live/cqwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/cqwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.42,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/snwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.35,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 6.42,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "yunnan",
       "name": "云南卫视",
-      "url": "http://107.150.60.122/live/ynwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/ynwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.68,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/jxwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.7,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.68,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "guizhou",
       "name": "贵州卫视",
-      "url": "http://204.12.221.218:8181/3m1080p/gzws.m3u8",
-      "sources": [
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/gzws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.61,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/gzwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.2,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.61,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "xizang",
       "name": "西藏卫视",
-      "url": "http://107.150.60.122/live/gzwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/gzwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.39,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/xzws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.33,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.39,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "shaanxi",
       "name": "陕西卫视",
-      "url": "http://107.150.60.122/live/snwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/snwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.85,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/snwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.24,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.85,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "gansu",
       "name": "甘肃卫视",
-      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=scwshd",
-      "sources": [
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=scwshd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.95,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gswshd",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.52,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 4.95,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "qinghai",
       "name": "青海卫视",
-      "url": "https://hls-qhmh.lanzhousobey.cn/qhmh/mhds.m3u8",
-      "sources": [
-        {
-          "url": "https://hls-qhmh.lanzhousobey.cn/qhmh/mhds.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 9.74,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "30/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/qhws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.01,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 9.74,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "30/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "ningxia",
       "name": "宁夏卫视",
-      "url": "http://107.150.60.122/live/sdwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/sdwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.32,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/nxws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.92,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 5.32,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "xinjiang",
       "name": "新疆卫视",
-      "url": "http://107.150.60.122/live/ynwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/ynwshd.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.97,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://107.150.60.122/live/xjws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 4.27,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 3.97,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     },
     {
       "id": "neimenggu",
       "name": "内蒙古卫视",
-      "url": "http://107.150.60.122/live/nfws.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/nfws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 6.3,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        },
-        {
-          "url": "http://198.204.228.26/live/nfws.m3u8",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 7.04,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1"
-        }
-      ],
-      "source_count": 2,
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 6.3,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1"
+      "ok": false,
+      "1080p": false,
+      "error": "cannot access local variable 'source' where it is not associated with a value"
     }
   ]
 }
