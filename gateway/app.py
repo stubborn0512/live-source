@@ -226,7 +226,7 @@ def _fetch_playlist(cid: str, channel):
             r = requests.get(
                 source,
                 timeout=HLS_TIMEOUT,
-                headers={"User-Agent": "live-source-gateway/1.0"},
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153.0 Safari/537.36"},
             )
             r.raise_for_status()
             text = r.text
@@ -257,7 +257,7 @@ def _proxy_bytes(cid: str, token: str, suffix: str):
             upstream,
             stream=True,
             timeout=(HLS_TIMEOUT, 15),
-            headers={"User-Agent": "live-source-gateway/1.0"},
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153.0 Safari/537.36"},
         )
         r.raise_for_status()
     except Exception as exc:
@@ -363,7 +363,7 @@ def hls_nested_playlist(channel_id: str, token: str):
         r = requests.get(
             upstream,
             timeout=HLS_TIMEOUT,
-            headers={"User-Agent": "live-source-gateway/1.0"},
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153.0 Safari/537.36"},
         )
         r.raise_for_status()
         text = _rewrite_playlist(channel_id, upstream, r.text)
