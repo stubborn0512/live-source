@@ -234,7 +234,7 @@ def _fetch_playlist(cid: str, channel):
                 raise ValueError("upstream is not an HLS playlist")
             if "#EXTINF:" not in text and "#EXT-X-STREAM-INF" not in text:
                 raise ValueError("HLS playlist has no media entries")
-            rewritten = _rewrite_playlist(cid, source, text)
+            rewritten = _rewrite_playlist(cid, r.url, text)
             with _hls_lock:
                 state["source_index"] = index
                 state["updated_at"] = time.time()
@@ -366,7 +366,7 @@ def hls_nested_playlist(channel_id: str, token: str):
             headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153.0 Safari/537.36"},
         )
         r.raise_for_status()
-        text = _rewrite_playlist(channel_id, upstream, r.text)
+        text = _rewrite_playlist(channel_id, r.url, r.text)
     except Exception as exc:
         raise HTTPException(502, f"upstream playlist failed: {exc}")
     return PlainTextResponse(
