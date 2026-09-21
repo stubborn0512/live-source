@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import re
+import ipaddress
 from pathlib import Path
 from threading import Lock
 from concurrent.futures import ThreadPoolExecutor
@@ -188,11 +189,24 @@ def _read_browser(channel_id: str) -> str | None:
     return url if isinstance(url, str) and url.startswith(("http://", "https://")) else None
 
 
+def _is_ipv4_url(url: str) -> bool:
+    """Allow domains and literal IPv4 endpoints; reject literal IPv6 URLs."""
+    try:
+        host = urlparse(url).hostname
+        if not host:
+            return False
+        ip = ipaddress.ip_address(host)
+        return ip.version == 4
+    except ValueError:
+        # Hostname/domain: ffprobe will be forced to IPv4.
+        return True
+
+
 def _extract_urls(text: str) -> list[str]:
     urls = []
     for match in URL_RE.findall(text):
-        url = match.rstrip("'\"),;]")
-        if url.startswith(("http://", "https://")):
+        url = match.rstrip("'\\\"),;]")
+        if url.startswith(("http://", "https://")) and _is_ipv4_url(url):
             urls.append(url)
     return urls
 
