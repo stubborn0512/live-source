@@ -115,7 +115,6 @@ def main() -> None:
         statuses_by_id[channel["id"]]
         for channel in channels
     ]
-    playlist_items.sort(key=lambda x: x["id"])
 
     output = ROOT / "output"
     output.mkdir(exist_ok=True)
