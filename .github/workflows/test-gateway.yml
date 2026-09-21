@@ -12,19 +12,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg jq
+
+      - name: Wait for exact Render commit
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -eux
+          for i in $(seq 1 36); do
+            body="$(curl --fail --show-error --max-time 20 https://live-source-gateway.onrender.com/health)"
+            echo "$body"
+            deployed="$(printf '%s' "$body" | jq -r '.git_commit // empty')"
+            if [ "$deployed" = "$EXPECTED_SHA" ]; then
+              echo "Render is running $EXPECTED_SHA"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Render did not deploy expected commit: $EXPECTED_SHA" >&2
+          exit 1
 
       - name: Health check
         run: |
           set -eux
-          curl --fail --show-error --retry 3 --retry-delay 5 --max-time 180 \
-            https://live-source-gateway.onrender.com/health
+          curl --fail --show-error --max-time 30             https://live-source-gateway.onrender.com/health | tee /tmp/health.json
+          test "$(jq -r '.ok' /tmp/health.json)" = "true"
+          test "$(jq -r '.channels' /tmp/health.json)" -ge 1
 
       - name: Playlist check
         run: |
           set -eux
-          curl --fail --show-error --retry 3 --retry-delay 5 --max-time 180 \
-            https://live-source-gateway.onrender.com/playlist.m3u -o /tmp/playlist.m3u
+          curl --fail --show-error --max-time 60             https://live-source-gateway.onrender.com/playlist.m3u -o /tmp/playlist.m3u
           grep -F 'tvg-id="cctv1"' /tmp/playlist.m3u
           test "$(grep -Fc 'tvg-id="cctv1"' /tmp/playlist.m3u)" -eq 1
           grep -F 'CCTV-1 综合' /tmp/playlist.m3u
@@ -33,7 +51,4 @@ jobs:
       - name: Stream smoke test
         run: |
           set -eux
-          timeout 45s ffmpeg -hide_banner -loglevel warning \
-            -rw_timeout 15000000 \
-            -i https://live-source-gateway.onrender.com/stream/cctv1 \
-            -t 15 -map 0:v:0 -f null -
+          timeout 60s ffmpeg -hide_banner -loglevel warning             -rw_timeout 15000000             -i https://live-source-gateway.onrender.com/stream/cctv1             -t 15 -map 0:v:0 -f null -
