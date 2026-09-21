@@ -77,6 +77,13 @@ jobs:
             -o /tmp/cctv1.m3u8
           grep -F '#EXTM3U' /tmp/cctv1.m3u8
           grep -F '#EXTINF:' /tmp/cctv1.m3u8
+          segment_url="$(grep -v '^#' /tmp/cctv1.m3u8 | head -n 1)"
+          echo "Testing first proxied segment"
+          curl --fail-with-body --show-error --max-time 20 "$segment_url" -o /tmp/first-segment.ts || {
+            echo "First segment proxy failed; response above is diagnostic." >&2
+            exit 1
+          }
+          test -s /tmp/first-segment.ts
           timeout 75s ffmpeg -hide_banner -loglevel warning \
             -rw_timeout 15000000 \
             -i https://live-source-gateway.onrender.com/hls/cctv1/index.m3u8 \
