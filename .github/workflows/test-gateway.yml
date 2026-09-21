@@ -2,6 +2,10 @@ name: Test failover gateway
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "gateway/**"
+      - ".github/workflows/test-gateway.yml"
 
 jobs:
   smoke-test:
