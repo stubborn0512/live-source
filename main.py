@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.parse import urlparse
 
-from checker.health import check
+from checker.health import check, check_static
 from generator.m3u import generate
 from providers.cctv import resolve_candidates
 
@@ -35,7 +35,7 @@ def _pick_two_sources(
     verified = []
     for index, url in enumerate(candidates):
         result = result_by_url.get(url)
-        if result and result.get("ok") and result.get("1080p"):
+        if result and result.get("ok") and result.get("1080p") and result.get("static") is not True:
             verified.append((url, result, index))
 
     verified.sort(key=_verified_sort_key)
@@ -43,8 +43,7 @@ def _pick_two_sources(
         return []
 
     # Prefer source diversity: the backup should live on a different host
-    # when the public pool provides one. If not, keep the best two on the same
-    # host rather than dropping the second verified source.
+    # when the public pool provides one.
     first = verified[0]
     selected = [first]
     first_host = _host(first[0])
@@ -83,10 +82,13 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
         }, None
 
     static_cfg = checker.get("static_check", {})
+    max_workers = min(len(candidates), checker.get("max_probe_workers", 10))
+
+    # Phase 1: cheap, authoritative media probe across the candidate pool.
+    # Static-frame detection is intentionally deferred to only the best HD
+    # candidates so a large public source pool does not multiply runtime.
     results = []
-    with ThreadPoolExecutor(max_workers=min(
-        len(candidates), checker.get("max_probe_workers", 12)
-    )) as pool:
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = {
             pool.submit(
                 check,
@@ -94,9 +96,7 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
                 timeout=checker["probe_seconds"],
                 min_width=checker["min_width"],
                 min_height=checker["min_height"],
-                static_check=bool(static_cfg.get("enabled", False)),
-                static_duration=int(static_cfg.get("duration_seconds", 6)),
-                freeze_seconds=int(static_cfg.get("freeze_seconds", 4)),
+                static_check=False,
             ): url
             for url in candidates
         }
@@ -114,6 +114,45 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             results.append((url, result))
 
     result_by_url = {url: result for url, result in results}
+
+    # Phase 2: static-image filtering only on the best four verified 1080p
+    # candidates. A timeout/error in this secondary test is non-fatal.
+    if static_cfg.get("enabled", False):
+        top_hd = [
+            (url, result)
+            for url, result, _ in sorted(
+                [
+                    (url, result, index)
+                    for index, url in enumerate(candidates)
+                    if (result := result_by_url.get(url))
+                    and result.get("ok")
+                    and result.get("1080p")
+                ],
+                key=_verified_sort_key,
+            )[:4]
+        ]
+        if top_hd:
+            with ThreadPoolExecutor(max_workers=min(len(top_hd), 4)) as pool:
+                futures = {
+                    pool.submit(
+                        check_static,
+                        url,
+                        duration_seconds=int(static_cfg.get("duration_seconds", 6)),
+                        freeze_seconds=int(static_cfg.get("freeze_seconds", 4)),
+                    ): url
+                    for url, _ in top_hd
+                }
+                for future in as_completed(futures):
+                    url = futures[future]
+                    try:
+                        static = future.result()
+                    except Exception:
+                        static = None
+                    result_by_url[url]["static"] = static
+                    if static is True:
+                        result_by_url[url]["ok"] = False
+                        result_by_url[url]["1080p"] = False
+
     verified = _pick_two_sources(candidates, result_by_url)
 
     if verified:
@@ -141,7 +180,6 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             "sources": sources,
         }
 
-    # Keep the best observed diagnostic even when no source reaches 1080p.
     url, result = max(
         results,
         key=lambda item: (
