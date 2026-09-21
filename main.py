@@ -118,19 +118,13 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
     # Phase 2: static-image filtering only on the best four verified 1080p
     # candidates. A timeout/error in this secondary test is non-fatal.
     if static_cfg.get("enabled", False):
-        top_hd = [
-            (url, result)
-            for url, result, _ in sorted(
-                [
-                    (url, result, index)
-                    for index, url in enumerate(candidates)
-                    if (result := result_by_url.get(url))
-                    and result.get("ok")
-                    and result.get("1080p")
-                ],
-                key=_verified_sort_key,
-            )[:4]
-        ]
+        hd_candidates = []
+        for index, url in enumerate(candidates):
+            result = result_by_url.get(url)
+            if result and result.get("ok") and result.get("1080p"):
+                hd_candidates.append((url, result, index))
+        hd_candidates.sort(key=_verified_sort_key)
+        top_hd = [(url, result) for url, result, _ in hd_candidates[:4]]
         if top_hd:
             with ThreadPoolExecutor(max_workers=min(len(top_hd), 4)) as pool:
                 futures = {
