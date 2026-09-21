@@ -3,8 +3,14 @@ name: Update live sources
 on:
   workflow_dispatch:
   push:
-    paths-ignore:
-      - "output/**"
+    paths:
+      - "config.json"
+      - "main.py"
+      - "requirements.txt"
+      - "providers/**"
+      - "checker/**"
+      - "generator/**"
+      - ".github/workflows/update.yml"
   schedule:
     # GitHub Actions cron is UTC; 18:00 UTC = 02:00 China Standard Time (UTC+8).
     - cron: "0 18 * * *"
