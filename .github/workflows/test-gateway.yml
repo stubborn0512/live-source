@@ -80,10 +80,12 @@ jobs:
           segment_url="$(grep -v '^#' /tmp/cctv1.m3u8 | head -n 1)"
           segment_url="https://live-source-gateway.onrender.com${segment_url}"
           echo "Testing first proxied segment"
-          curl --fail-with-body --show-error --max-time 20 "$segment_url" -o /tmp/first-segment.ts || {
-            echo "First segment proxy failed; response above is diagnostic." >&2
-            exit 1
-          }
+          http_code="$(curl --show-error --max-time 20 "$segment_url" -o /tmp/first-segment.ts -w '%{http_code}')"
+          echo "segment HTTP status: $http_code"
+          echo "segment response preview:"
+          head -c 1000 /tmp/first-segment.ts || true
+          echo
+          test "$http_code" = "200"
           test -s /tmp/first-segment.ts
           timeout 75s ffmpeg -hide_banner -loglevel warning \
             -rw_timeout 15000000 \
