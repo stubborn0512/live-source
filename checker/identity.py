@@ -64,6 +64,10 @@ def identify_cctv(url: str, channel_id: str, timeout: int = 15) -> dict:
 
     expected_num, expected_plus = _expected(channel_id)
     detected = _detected(ocr)
+    # A single OCR frame can hallucinate digits from on-screen text.
+    # Only reject a candidate when the same wrong CCTV number is seen twice
+    # would be safer, but this function currently captures one frame; use a
+    # strict CCTV-token rule so ordinary text cannot trigger a rejection.
     wrong = [
         (num, plus) for num, plus in detected
         if num != expected_num or plus != expected_plus
