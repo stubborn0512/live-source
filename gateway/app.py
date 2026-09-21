@@ -63,33 +63,13 @@ def _sources(channel):
 def _ffmpeg(url):
     return subprocess.Popen(
         [
-            "ffmpeg",
-            "-hide_banner",
-            "-loglevel",
-            "error",
-            "-rw_timeout",
-            "15000000",
-            "-reconnect",
-            "1",
-            "-reconnect_streamed",
-            "1",
-            "-reconnect_delay_max",
-            "5",
-            "-i",
-            url,
-            "-map",
-            "0:v:0?",
-            "-map",
-            "0:a:0?",
-            "-c",
-            "copy",
-            "-f",
-            "mpegts",
-            "pipe:1",
+            "ffmpeg", "-hide_banner", "-loglevel", "error",
+            "-rw_timeout", "15000000",
+            "-reconnect", "1", "-reconnect_streamed", "1", "-reconnect_delay_max", "5",
+            "-i", url, "-map", "0:v:0?", "-map", "0:a:0?",
+            "-c", "copy", "-f", "mpegts", "pipe:1",
         ],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.DEVNULL,
-        bufsize=0,
+        stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, bufsize=0,
     )
 
 
@@ -116,110 +96,88 @@ def _stream(channel):
                     process.kill()
 
 
-def _stop_hls(cid):
-    state = _hls.pop(cid, None)
-    if not state:
-        return
-    process = state.get("process")
+def _kill_process(process):
     if process and process.poll() is None:
         process.terminate()
         try:
             process.wait(timeout=3)
         except Exception:
             process.kill()
-    shutil.rmtree(state["dir"], ignore_errors=True)
 
 
-def _hls_process_alive(state):
-    process = state.get("process")
-    return bool(process and process.poll() is None)
+def _remove_hls_dir(directory):
+    shutil.rmtree(directory, ignore_errors=True)
 
 
-def _start_hls(cid, channel, start_index=0):
+def _prepare_hls(cid, channel, start_index):
     urls = _sources(channel)
     if not urls:
-        raise HTTPException(503, "no verified source")
+        with _hls_lock:
+            _hls.pop(cid, None)
+        return
 
-    _stop_hls(cid)
     channel_dir = HLS_ROOT / cid
     channel_dir.mkdir(parents=True, exist_ok=True)
 
     for offset in range(len(urls)):
         index = (start_index + offset) % len(urls)
         url = urls[index]
-        shutil.rmtree(channel_dir, ignore_errors=True)
+        _remove_hls_dir(channel_dir)
         channel_dir.mkdir(parents=True, exist_ok=True)
-
         playlist = channel_dir / "index.m3u8"
         segment_pattern = str(channel_dir / "seg_%06d.ts")
+
         process = subprocess.Popen(
             [
-                "ffmpeg",
-                "-hide_banner",
-                "-loglevel",
-                "error",
-                "-rw_timeout",
-                "15000000",
-                "-reconnect",
-                "1",
-                "-reconnect_streamed",
-                "1",
-                "-reconnect_delay_max",
-                "5",
-                "-i",
-                url,
-                "-map",
-                "0:v:0?",
-                "-map",
-                "0:a:0?",
-                "-c",
-                "copy",
-                "-f",
-                "hls",
-                "-hls_time",
-                "2",
-                "-hls_list_size",
-                "6",
-                "-hls_flags",
-                "delete_segments+append_list+omit_endlist",
-                "-hls_segment_filename",
-                segment_pattern,
+                "ffmpeg", "-hide_banner", "-loglevel", "error",
+                "-rw_timeout", "15000000",
+                "-reconnect", "1", "-reconnect_streamed", "1", "-reconnect_delay_max", "5",
+                "-i", url,
+                "-map", "0:v:0?", "-map", "0:a:0?", "-c", "copy",
+                "-f", "hls", "-hls_time", "2", "-hls_list_size", "6",
+                "-hls_flags", "delete_segments+append_list+omit_endlist",
+                "-hls_segment_filename", segment_pattern,
                 str(playlist),
             ],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
 
-        deadline = time.time() + 15
+        with _hls_lock:
+            _hls[cid] = {
+                "process": process,
+                "dir": channel_dir,
+                "source_index": index,
+                "source_url": url,
+                "started_at": time.time(),
+                "starting": True,
+            }
+
+        deadline = time.time() + 20
         while time.time() < deadline:
             if playlist.exists():
                 try:
                     text = playlist.read_text(encoding="utf-8")
                     if "#EXTM3U" in text and "#EXTINF:" in text:
                         with _hls_lock:
-                            _hls[cid] = {
-                                "process": process,
-                                "dir": channel_dir,
-                                "source_index": index,
-                                "source_url": url,
-                                "started_at": time.time(),
-                            }
+                            state = _hls.get(cid)
+                            if state and state.get("process") is process:
+                                state["starting"] = False
                         return
                 except OSError:
                     pass
+
             if process.poll() is not None:
                 break
             time.sleep(0.25)
 
-        if process.poll() is None:
-            process.terminate()
-            try:
-                process.wait(timeout=2)
-            except Exception:
-                process.kill()
+        _kill_process(process)
+        with _hls_lock:
+            state = _hls.get(cid)
+            if state and state.get("process") is process:
+                _hls.pop(cid, None)
 
-    shutil.rmtree(channel_dir, ignore_errors=True)
-    raise HTTPException(503, "all verified sources failed to start")
+    _remove_hls_dir(channel_dir)
 
 
 def _ensure_hls(cid):
@@ -227,20 +185,33 @@ def _ensure_hls(cid):
     with _hls_lock:
         state = _hls.get(cid)
 
-    if state and _hls_process_alive(state):
-        playlist = Path(state["dir"]) / "index.m3u8"
-        if playlist.exists():
-            return state
+        if state:
+            process = state.get("process")
+            playlist = Path(state["dir"]) / "index.m3u8"
+            if process and process.poll() is None and playlist.exists() and not state.get("starting"):
+                return state
 
-    next_index = 0
-    if state:
-        next_index = int(state.get("source_index", 0)) + 1
+            if state.get("starting"):
+                raise HTTPException(503, "stream warming up")
 
-    with _hls_lock:
-        state = _hls.get(cid)
-        if state and _hls_process_alive(state):
-            return state
-        return _start_hls(cid, channel, next_index)
+            old_index = int(state.get("source_index", 0))
+            _hls.pop(cid, None)
+        else:
+            old_index = -1
+
+        # Reserve the channel immediately so concurrent clients do not start
+        # several ffmpeg processes for the same channel.
+        _hls[cid] = {"starting": True, "source_index": old_index}
+
+    start_index = (old_index + 1) if old_index >= 0 else 0
+    thread = threading.Thread(
+        target=_prepare_hls,
+        args=(cid, channel, start_index),
+        daemon=True,
+        name=f"hls-{cid}",
+    )
+    thread.start()
+    raise HTTPException(503, "stream warming up")
 
 
 @APP.get("/health")
@@ -249,7 +220,10 @@ def health():
         "ok": True,
         "channels": int(_load_status().get("count", 0)),
         "git_commit": os.getenv("RENDER_GIT_COMMIT", "local"),
-        "hls_sessions": sum(1 for state in _hls.values() if _hls_process_alive(state)),
+        "hls_sessions": sum(
+            1 for state in _hls.values()
+            if state.get("process") and state["process"].poll() is None
+        ),
     }
 
 
