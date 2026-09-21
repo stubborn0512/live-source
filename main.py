@@ -77,7 +77,7 @@ def main() -> None:
     checker = CONFIG["checker"]
 
     statuses_by_id = {}
-    playlist_items = []
+    playlist_items_by_id = {}
 
     with ThreadPoolExecutor(max_workers=len(channels)) as pool:
         futures = {
@@ -97,7 +97,7 @@ def main() -> None:
 
             statuses_by_id[channel["id"]] = status
             if item:
-                playlist_items.append(item)
+                playlist_items_by_id[item["id"]] = item
                 print(
                     f'[OK] {channel["id"]}: '
                     f'{status.get("width")}x{status.get("height")}',
@@ -114,6 +114,11 @@ def main() -> None:
     ordered_statuses = [
         statuses_by_id[channel["id"]]
         for channel in channels
+    ]
+    playlist_items = [
+        playlist_items_by_id[channel["id"]]
+        for channel in channels
+        if channel["id"] in playlist_items_by_id
     ]
 
     output = ROOT / "output"
