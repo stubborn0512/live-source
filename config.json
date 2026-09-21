@@ -85,7 +85,8 @@
       "duration_seconds": 6,
       "freeze_seconds": 4
     },
-    "max_probe_workers": 10
+    "max_probe_workers": 8,
+    "channel_workers": 8
   },
   "weishi": {
     "channels": [
