@@ -38,3 +38,17 @@ jobs:
         run: |
           set -eux
           timeout 60s ffmpeg -hide_banner -loglevel warning             -rw_timeout 15000000             -i https://live-source-gateway.onrender.com/stream/cctv1             -t 15 -map 0:v:0 -f null -
+
+
+      - name: HLS smoke test
+        run: |
+          set -eux
+          curl --fail --show-error --max-time 60 \
+            https://live-source-gateway.onrender.com/hls/cctv1/index.m3u8 \
+            -o /tmp/cctv1.m3u8
+          grep -F '#EXTM3U' /tmp/cctv1.m3u8
+          grep -F '#EXTINF:' /tmp/cctv1.m3u8
+          timeout 75s ffmpeg -hide_banner -loglevel warning \
+            -rw_timeout 15000000 \
+            -i https://live-source-gateway.onrender.com/hls/cctv1/index.m3u8 \
+            -t 15 -map 0:v:0 -f null -
