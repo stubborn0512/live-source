@@ -76,10 +76,10 @@
     ]
   },
   "checker": {
-    "timeout_seconds": 20,
+    "timeout_seconds": 12,
     "min_width": 1920,
     "min_height": 1080,
-    "probe_seconds": 20,
+    "probe_seconds": 12,
     "static_check": {
       "enabled": true,
       "duration_seconds": 6,
