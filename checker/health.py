@@ -49,6 +49,20 @@ def _is_static_stream(
     return "freeze_start" in result.stderr
 
 
+def check_static(
+    url: str,
+    duration_seconds: int = 6,
+    freeze_seconds: int = 4,
+) -> bool | None:
+    """Run only the secondary freeze/static-frame test."""
+    return _is_static_stream(
+        url,
+        duration_seconds=duration_seconds,
+        freeze_seconds=freeze_seconds,
+        timeout=max(15, duration_seconds + 8),
+    )
+
+
 def check(
     url: str,
     timeout: int,
