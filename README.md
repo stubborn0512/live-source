@@ -24,13 +24,21 @@ ffprobe 实际探测
 
 ### 当前订阅地址
 
-GitHub Raw：
+**推荐：故障自动切换版（一个频道只显示一次）**
+
+```
+https://live-source-gateway.onrender.com/playlist.m3u
+```
+
+播放器通过网关访问频道；同一频道的多个已验证 1080P 源由网关按顺序自动故障切换，不再把同一频道显示成“线路1/线路2”两个频道。
+
+**静态备用版**
 
 ```
 https://raw.githubusercontent.com/stubborn0512/live-source/main/output/1080p.m3u
 ```
 
-> 当前仓库处于第一版开发阶段，输出文件会在第一次 GitHub Actions 成功运行后生成。
+静态版保留多线路条目，适合网关不可用时直接使用。
 
 ## 项目结构
 
@@ -38,8 +46,9 @@ https://raw.githubusercontent.com/stubborn0512/live-source/main/output/1080p.m3u
 - `checker/`：连通性和媒体质量检测
 - `generator/`：M3U 生成
 - `data/`：频道配置
-- `output/`：播放器订阅文件
-- `.github/workflows/`：自动更新任务
+- `output/`：静态播放器订阅文件
+- `gateway/`：单频道故障切换网关
+- `.github/workflows/`：自动更新与网关冒烟测试
 
 ## 设计原则
 
