@@ -8,8 +8,9 @@ import time
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
+import requests
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, PlainTextResponse, StreamingResponse
+from fastapi.responses import PlainTextResponse, StreamingResponse
 
 APP = FastAPI(title="live-source failover gateway")
 # Mini-program HLS relay deployment marker: 2026-09-21-2.
@@ -33,8 +34,6 @@ def _load_status():
     with _cache_lock:
         if _cache["data"] is not None and now - _cache["at"] < CACHE_TTL:
             return _cache["data"]
-
-    import requests
 
     r = requests.get(STATUS_URL, timeout=15)
     r.raise_for_status()
