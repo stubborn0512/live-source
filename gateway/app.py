@@ -57,7 +57,11 @@ def _stream(x):
 
 @APP.get("/health")
 def health():
-    return {"ok": True, "channels": int(_load_status().get("count", 0))}
+    return {
+        "ok": True,
+        "channels": int(_load_status().get("count", 0)),
+        "git_commit": os.getenv("RENDER_GIT_COMMIT", "local"),
+    }
 
 @APP.get("/playlist.m3u", response_class=PlainTextResponse)
 def playlist(request: Request):
