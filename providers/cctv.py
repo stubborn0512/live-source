@@ -232,44 +232,46 @@ def _build_source_index(timeout: int) -> dict[str, list[str]]:
                 return {key: value[:] for key, value in SOURCE_INDEX_CACHE.items()}
 
         index = {channel_id: [] for channel_id in _channel_labels()}
-    label_map = _channel_labels()
-    sources = _ordered_sources(timeout)
+        label_map = _channel_labels()
+        sources = _ordered_sources(timeout)
 
-    # Fetch source lists concurrently once, then index them once. This avoids
-    # rescanning every giant M3U file separately for every channel.
-    with ThreadPoolExecutor(max_workers=SOURCE_FETCH_WORKERS) as pool:
-        futures = {pool.submit(_load_source, source, timeout): source for source in sources}
-        loaded = [(futures[future], future.result()) for future in futures]
+        # Fetch source lists concurrently once, then index them once. This
+        # avoids rescanning every giant M3U file separately for every channel.
+        with ThreadPoolExecutor(max_workers=SOURCE_FETCH_WORKERS) as pool:
+            futures = {
+                pool.submit(_load_source, source, timeout): source
+                for source in sources
+            }
+            loaded = [(futures[future], future.result()) for future in futures]
 
-    for source, text in loaded:
-        if not text:
-            continue
-        lines = text.splitlines()
-        for i, line in enumerate(lines):
-            if not line.strip():
+        for source, text in loaded:
+            if not text:
                 continue
-            matched_ids = [
-                channel_id
-                for channel_id, (labels, is_cctv) in label_map.items()
-                if _label_matches(line, labels, is_cctv)
-            ]
-            if not matched_ids:
-                continue
+            lines = text.splitlines()
+            for i, line in enumerate(lines):
+                if not line.strip():
+                    continue
+                matched_ids = [
+                    channel_id
+                    for channel_id, (labels, is_cctv) in label_map.items()
+                    if _label_matches(line, labels, is_cctv)
+                ]
+                if not matched_ids:
+                    continue
 
-            nearby = "\n".join(lines[i:min(i + 4, len(lines))])
-            urls = _extract_urls(nearby)
-            if not urls:
-                # Also support a bare "channel,url" or "channel url" line.
-                urls = _extract_urls(line)
-            if not urls:
-                continue
-            for channel_id in matched_ids:
-                index[channel_id].extend(urls)
+                nearby = "\n".join(lines[i:min(i + 4, len(lines))])
+                urls = _extract_urls(nearby)
+                if not urls:
+                    urls = _extract_urls(line)
+                if not urls:
+                    continue
+                for channel_id in matched_ids:
+                    index[channel_id].extend(urls)
 
-    index = {key: list(dict.fromkeys(value)) for key, value in index.items()}
-    with SOURCE_LOCK:
-        SOURCE_INDEX_CACHE = index
-    return {key: value[:] for key, value in index.items()}
+        index = {key: list(dict.fromkeys(value)) for key, value in index.items()}
+        with SOURCE_LOCK:
+            SOURCE_INDEX_CACHE = index
+        return {key: value[:] for key, value in index.items()}
 
 
 def _discover_public_lists(
