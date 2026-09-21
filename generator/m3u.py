@@ -10,12 +10,13 @@ def generate(items: Iterable[dict]) -> str:
 
     for item in items:
         sources = item.get("sources") or [{"url": item["url"]}]
+        group = "CCTV" if item.get("id", "").startswith("cctv") else "卫视"
         for index, source in enumerate(sources, start=1):
             label = item["name"] if len(sources) == 1 else f'{item["name"]} [线路{index}]'
             lines.append(
                 f'#EXTINF:-1 tvg-id="{item["id"]}" '
                 f'tvg-name="{item["name"]}" '
-                f'group-title="CCTV",{label}'
+                f'group-title="{group}",{label}'
             )
             lines.append(source["url"])
 
