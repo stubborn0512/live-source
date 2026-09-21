@@ -235,7 +235,7 @@ def _build_source_index(timeout: int) -> dict[str, list[str]]:
     # rescanning every giant M3U file separately for every channel.
     with ThreadPoolExecutor(max_workers=SOURCE_FETCH_WORKERS) as pool:
         futures = {pool.submit(_load_source, source, timeout): source for source in sources}
-        loaded = [(futures[future], futures[future].result()) for future in futures]
+        loaded = [(futures[future], future.result()) for future in futures]
 
     for source, text in loaded:
         if not text:
