@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 import os
-import shutil
 import subprocess
 import threading
 import time
 from pathlib import Path
+from urllib.parse import urljoin, urlparse
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, PlainTextResponse, StreamingResponse
@@ -18,8 +19,8 @@ STATUS_URL = os.getenv(
     "https://raw.githubusercontent.com/stubborn0512/live-source/main/output/status.json",
 )
 CACHE_TTL = int(os.getenv("STATUS_CACHE_TTL", "300"))
-HLS_ROOT = Path(os.getenv("HLS_ROOT", "/tmp/live-source-hls"))
-HLS_ROOT.mkdir(parents=True, exist_ok=True)
+HLS_TIMEOUT = float(os.getenv("HLS_TIMEOUT", "8"))
+HLS_MAP_TTL = int(os.getenv("HLS_MAP_TTL", "30"))
 
 _cache = {"at": 0.0, "data": None}
 _cache_lock = threading.Lock()
@@ -105,113 +106,185 @@ def _kill_process(process):
             process.kill()
 
 
-def _remove_hls_dir(directory):
-    shutil.rmtree(directory, ignore_errors=True)
+
+def _valid_upstream_url(url: str) -> bool:
+    parsed = urlparse(url)
+    return parsed.scheme in {"http", "https"} and bool(parsed.hostname)
 
 
-def _prepare_hls(cid, channel, start_index):
-    urls = _sources(channel)
-    if not urls:
-        with _hls_lock:
-            _hls.pop(cid, None)
-        return
+def _token_for(kind: str, url: str) -> str:
+    digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:20]
+    return f"{kind}_{digest}"
 
-    channel_dir = HLS_ROOT / cid
-    channel_dir.mkdir(parents=True, exist_ok=True)
 
-    for offset in range(len(urls)):
-        index = (start_index + offset) % len(urls)
-        url = urls[index]
-        _remove_hls_dir(channel_dir)
-        channel_dir.mkdir(parents=True, exist_ok=True)
-        playlist = channel_dir / "index.m3u8"
-        segment_pattern = str(channel_dir / "seg_%06d.ts")
-
-        process = subprocess.Popen(
-            [
-                "ffmpeg", "-hide_banner", "-loglevel", "error",
-                "-rw_timeout", "15000000",
-                "-reconnect", "1", "-reconnect_streamed", "1", "-reconnect_delay_max", "5",
-                "-i", url,
-                "-map", "0:v:0?", "-map", "0:a:0?", "-c", "copy",
-                "-f", "hls", "-hls_time", "2", "-hls_list_size", "6",
-                "-hls_flags", "delete_segments+append_list+omit_endlist",
-                "-hls_segment_filename", segment_pattern,
-                str(playlist),
-            ],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+def _state(cid):
+    with _hls_lock:
+        return _hls.setdefault(
+            cid,
+            {"source_index": 0, "maps": {}, "updated_at": 0.0},
         )
 
-        with _hls_lock:
-            _hls[cid] = {
-                "process": process,
-                "dir": channel_dir,
-                "source_index": index,
-                "source_url": url,
-                "started_at": time.time(),
-                "starting": True,
-            }
 
-        deadline = time.time() + 20
-        while time.time() < deadline:
-            if playlist.exists():
-                try:
-                    text = playlist.read_text(encoding="utf-8")
-                    if "#EXTM3U" in text and "#EXTINF:" in text:
-                        with _hls_lock:
-                            state = _hls.get(cid)
-                            if state and state.get("process") is process:
-                                state["starting"] = False
-                        return
-                except OSError:
-                    pass
-
-            if process.poll() is not None:
-                break
-            time.sleep(0.25)
-
-        _kill_process(process)
-        with _hls_lock:
-            state = _hls.get(cid)
-            if state and state.get("process") is process:
-                _hls.pop(cid, None)
-
-    _remove_hls_dir(channel_dir)
+def _remember_url(cid: str, token: str, url: str):
+    with _hls_lock:
+        state = _state(cid)
+        now = time.time()
+        state["maps"][token] = (url, now)
+        cutoff = now - HLS_MAP_TTL
+        state["maps"] = {
+            k: v for k, v in state["maps"].items() if v[1] >= cutoff
+        }
 
 
-def _ensure_hls(cid):
-    channel = _channel(cid)
+def _lookup_url(cid: str, token: str) -> str | None:
     with _hls_lock:
         state = _hls.get(cid)
+        if not state:
+            return None
+        item = state.get("maps", {}).get(token)
+        if not item:
+            return None
+        if time.time() - item[1] > HLS_MAP_TTL:
+            state["maps"].pop(token, None)
+            return None
+        return item[0]
 
-        if state:
-            process = state.get("process")
-            playlist = Path(state["dir"]) / "index.m3u8"
-            if process and process.poll() is None and playlist.exists() and not state.get("starting"):
-                return state
 
-            if state.get("starting"):
-                raise HTTPException(503, "stream warming up")
+def _rewrite_playlist(cid: str, base_url: str, text: str) -> str:
+    lines = text.splitlines()
+    out = []
+    expect_uri_kind = None
 
-            old_index = int(state.get("source_index", 0))
-            _hls.pop(cid, None)
+    for raw in lines:
+        line = raw.strip()
+        if not line:
+            out.append("")
+            continue
+
+        if line.startswith("#EXT-X-KEY:") and 'URI="' in line:
+            prefix, rest = line.split('URI="', 1)
+            uri, suffix = rest.split('"', 1)
+            upstream = urljoin(base_url, uri)
+            if _valid_upstream_url(upstream):
+                token = _token_for("key", upstream)
+                _remember_url(cid, token, upstream)
+                line = prefix + 'URI="/hls/' + cid + '/' + token + '.key"' + suffix
+            out.append(line)
+            continue
+
+        if line.startswith("#EXT-X-MAP:") and 'URI="' in line:
+            prefix, rest = line.split('URI="', 1)
+            uri, suffix = rest.split('"', 1)
+            upstream = urljoin(base_url, uri)
+            if _valid_upstream_url(upstream):
+                token = _token_for("seg", upstream)
+                _remember_url(cid, token, upstream)
+                line = prefix + 'URI="/hls/' + cid + '/' + token + '.bin"' + suffix
+            out.append(line)
+            continue
+
+        if line.startswith("#EXT-X-STREAM-INF:"):
+            expect_uri_kind = "playlist"
+            out.append(line)
+            continue
+
+        if line.startswith("#"):
+            out.append(line)
+            continue
+
+        upstream = urljoin(base_url, line)
+        if not _valid_upstream_url(upstream):
+            raise ValueError("unsupported HLS URI")
+
+        if expect_uri_kind == "playlist" or urlparse(upstream).path.lower().endswith(".m3u8"):
+            token = _token_for("pl", upstream)
+            local = f"/hls/{cid}/{token}.m3u8"
         else:
-            old_index = -1
+            token = _token_for("seg", upstream)
+            local = f"/hls/{cid}/{token}.ts"
 
-        # Reserve the channel immediately so concurrent clients do not start
-        # several ffmpeg processes for the same channel.
-        _hls[cid] = {"starting": True, "source_index": old_index}
+        _remember_url(cid, token, upstream)
+        out.append(local)
+        expect_uri_kind = None
 
-    start_index = (old_index + 1) if old_index >= 0 else 0
-    thread = threading.Thread(
-        target=_prepare_hls,
-        args=(cid, channel, start_index),
-        daemon=True,
-        name=f"hls-{cid}",
+    return "\n".join(out) + "\n"
+
+
+def _fetch_playlist(cid: str, channel):
+    urls = _sources(channel)
+    if not urls:
+        raise HTTPException(502, "no live source")
+
+    state = _state(cid)
+    with _hls_lock:
+        start = int(state.get("source_index", 0)) % len(urls)
+
+    last_error = None
+    for offset in range(len(urls)):
+        index = (start + offset) % len(urls)
+        source = urls[index]
+        try:
+            r = requests.get(
+                source,
+                timeout=HLS_TIMEOUT,
+                headers={"User-Agent": "live-source-gateway/1.0"},
+            )
+            r.raise_for_status()
+            text = r.text
+            if "#EXTM3U" not in text:
+                raise ValueError("upstream is not an HLS playlist")
+            if "#EXTINF:" not in text and "#EXT-X-STREAM-INF" not in text:
+                raise ValueError("HLS playlist has no media entries")
+            rewritten = _rewrite_playlist(cid, source, text)
+            with _hls_lock:
+                state["source_index"] = index
+                state["updated_at"] = time.time()
+                state["source_url"] = source
+            return rewritten
+        except Exception as exc:
+            last_error = exc
+            continue
+
+    raise HTTPException(502, f"all live sources failed: {last_error}")
+
+
+def _proxy_bytes(cid: str, token: str, suffix: str):
+    upstream = _lookup_url(cid, token)
+    if not upstream:
+        raise HTTPException(404, "segment expired")
+
+    try:
+        r = requests.get(
+            upstream,
+            stream=True,
+            timeout=(HLS_TIMEOUT, 15),
+            headers={"User-Agent": "live-source-gateway/1.0"},
+        )
+        r.raise_for_status()
+    except Exception as exc:
+        raise HTTPException(502, f"upstream segment failed: {exc}")
+
+    media_type = (
+        "application/vnd.apple.mpegurl"
+        if suffix == ".m3u8"
+        else "application/octet-stream"
+        if suffix in {".key", ".bin"}
+        else "video/mp2t"
     )
-    thread.start()
-    raise HTTPException(503, "stream warming up")
+
+    def body():
+        try:
+            for chunk in r.iter_content(chunk_size=64 * 1024):
+                if chunk:
+                    yield chunk
+        finally:
+            r.close()
+
+    return StreamingResponse(
+        body(),
+        media_type=media_type,
+        headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
+    )
 
 
 @APP.get("/health")
@@ -220,10 +293,8 @@ def health():
         "ok": True,
         "channels": int(_load_status().get("count", 0)),
         "git_commit": os.getenv("RENDER_GIT_COMMIT", "local"),
-        "hls_sessions": sum(
-            1 for state in _hls.values()
-            if state.get("process") and state["process"].poll() is None
-        ),
+        "hls_sessions": len(_hls),
+        "hls_mode": "playlist-proxy",
     }
 
 
@@ -276,26 +347,46 @@ def stream(channel_id: str):
 
 @APP.get("/hls/{channel_id}/index.m3u8")
 def hls_playlist(channel_id: str):
-    state = _ensure_hls(channel_id)
-    return FileResponse(
-        Path(state["dir"]) / "index.m3u8",
+    text = _fetch_playlist(channel_id, _channel(channel_id))
+    return PlainTextResponse(
+        text,
         media_type="application/vnd.apple.mpegurl",
         headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
     )
 
 
-@APP.get("/hls/{channel_id}/{segment}")
-def hls_segment(channel_id: str, segment: str):
-    if "/" in segment or segment in {".", ".."} or not segment.endswith(".ts"):
-        raise HTTPException(400, "invalid segment")
-
-    state = _ensure_hls(channel_id)
-    path = Path(state["dir"]) / segment
-    if not path.is_file():
-        raise HTTPException(404, "segment not found")
-
-    return FileResponse(
-        path,
-        media_type="video/mp2t",
+@APP.get("/hls/{channel_id}/{token}.m3u8")
+def hls_nested_playlist(channel_id: str, token: str):
+    upstream = _lookup_url(channel_id, token)
+    if not upstream:
+        raise HTTPException(404, "playlist expired")
+    try:
+        r = requests.get(
+            upstream,
+            timeout=HLS_TIMEOUT,
+            headers={"User-Agent": "live-source-gateway/1.0"},
+        )
+        r.raise_for_status()
+        text = _rewrite_playlist(channel_id, upstream, r.text)
+    except Exception as exc:
+        raise HTTPException(502, f"upstream playlist failed: {exc}")
+    return PlainTextResponse(
+        text,
+        media_type="application/vnd.apple.mpegurl",
         headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
     )
+
+
+@APP.get("/hls/{channel_id}/{token}.ts")
+def hls_segment(channel_id: str, token: str):
+    return _proxy_bytes(channel_id, token, ".ts")
+
+
+@APP.get("/hls/{channel_id}/{token}.key")
+def hls_key(channel_id: str, token: str):
+    return _proxy_bytes(channel_id, token, ".key")
+
+
+@APP.get("/hls/{channel_id}/{token}.bin")
+def hls_binary_segment(channel_id: str, token: str):
+    return _proxy_bytes(channel_id, token, ".bin")
