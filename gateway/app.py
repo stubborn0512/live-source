@@ -1,10 +1,9 @@
 from __future__ import annotations
 import os, subprocess, threading, time
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import PlainTextResponse, StreamingResponse
 APP = FastAPI(title="live-source failover gateway")
 STATUS_URL = os.getenv("STATUS_URL", "https://raw.githubusercontent.com/stubborn0512/live-source/main/output/status.json")
-PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "").rstrip("/")
 CACHE_TTL = int(os.getenv("STATUS_CACHE_TTL", "300"))
 _cache = {"at": 0.0, "data": None}; _lock = threading.Lock()
 
@@ -61,15 +60,13 @@ def health():
     return {"ok": True, "channels": int(_load_status().get("count", 0))}
 
 @APP.get("/playlist.m3u", response_class=PlainTextResponse)
-def playlist():
-    if not PUBLIC_BASE_URL:
-        raise HTTPException(500, "PUBLIC_BASE_URL must be configured")
+def playlist(request: Request):
     lines = ["#EXTM3U"]
     for x in _load_status()["channels"]:
         cid = x["id"]
         group = "CCTV" if cid.startswith("cctv") else "卫视"
         lines.append('#EXTINF:-1 tvg-id="' + cid + '" tvg-name="' + x["name"] + '" group-title="' + group + '",' + x["name"])
-        lines.append(PUBLIC_BASE_URL + "/stream/" + cid)
+        lines.append(str(request.base_url).rstrip("/") + "/stream/" + cid)
     return "\n".join(lines) + "\n"
 
 @APP.get("/stream/{channel_id}")
