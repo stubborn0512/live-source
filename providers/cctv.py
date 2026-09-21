@@ -54,7 +54,7 @@ GITEE_FALLBACK_LISTS = [
 SOURCE_CACHE: dict[str, str] = {}
 SOURCE_ORDER_CACHE: list[str] | None = None
 SOURCE_LOCK = Lock()
-URL_RE = re.compile(r"https?://[^\s<>\\"']+")
+URL_RE = re.compile(r'''https?://[^\s<>"]+''')
 
 
 def _github_repo(source: str) -> str | None:
