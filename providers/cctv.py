@@ -35,6 +35,13 @@ GOODIPTV = {
 }
 
 V1 = {k: v.replace("live.goodiptv.club", "live.v1.mk") for k, v in GOODIPTV.items()}
+
+EXTRA_FALLBACKS = {
+    "cctv1": [
+        "http://118.122.144.115:8888/newlive/live/hls/1/live.m3u8",
+        "http://69.30.245.50/live/cctv1.m3u8",
+    ]
+}
 GITHUB_LISTS = [
     # Existing high-value sources.
     "https://raw.githubusercontent.com/best-fan/iptv-sources/main/cn_all.m3u8",
@@ -352,6 +359,7 @@ def resolve_candidates(
     fallbacks = [
         table[channel_id] for table in (GOODIPTV, V1) if channel_id in table
     ]
+    fallbacks.extend(EXTRA_FALLBACKS.get(channel_id, []))
     browser = _read_browser(channel_id)
     if browser:
         fallbacks.append(browser)
