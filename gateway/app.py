@@ -11,6 +11,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, PlainTextResponse, StreamingResponse
 
 APP = FastAPI(title="live-source failover gateway")
+# Mini-program HLS relay deployment marker: 2026-09-21.
 
 STATUS_URL = os.getenv(
     "STATUS_URL",
