@@ -159,10 +159,23 @@ def _extract_urls(text: str) -> list[str]:
     return urls
 
 
+def _label_matches(line: str, labels: set[str], cctv: bool) -> bool:
+    low = re.sub(r"\\s+", "", line.lower())
+    for label in labels:
+        normalized = re.sub(r"\\s+", "", label.lower()).replace("-", "")
+        if cctv:
+            if re.search(rf"(?<![a-z0-9]){re.escape(normalized)}(?![0-9+])", low):
+                return True
+        elif normalized in low:
+            return True
+    return False
+
+
 def _discover_public_lists(
     channel_id: str, timeout: int, channel_name: str | None = None
 ) -> list[str]:
-    if channel_id.startswith("cctv"):
+    is_cctv = channel_id.startswith("cctv")
+    if is_cctv:
         num = channel_id.replace("cctv", "")
         labels = {
             f"cctv{num}",
@@ -185,8 +198,7 @@ def _discover_public_lists(
 
         lines = text.splitlines()
         for i, line in enumerate(lines):
-            low = line.lower()
-            if not any(label.lower() in low for label in labels):
+            if not _label_matches(line, labels, is_cctv):
                 continue
 
             # Inspect the current and following lines. Do not require a
@@ -197,15 +209,25 @@ def _discover_public_lists(
 
     return list(dict.fromkeys(found))
 
-def resolve_candidates(channel_id: str, timeout: int = 10, channel_name: str | None = None) -> list[str]:
+def resolve_candidates(
+    channel_id: str, timeout: int = 10, channel_name: str | None = None
+) -> list[str]:
     discovered = _discover_public_lists(channel_id, timeout, channel_name)
-    candidates = discovered + [
+
+    # Keep the known-good provider/browser fallbacks in every probe batch.
+    # Fresh GitHub sources are still preferred among public-list candidates,
+    # but they cannot crowd all stable fallbacks out of the 24-probe budget.
+    fallbacks = [
         table[channel_id] for table in (GOODIPTV, V1) if channel_id in table
     ]
     browser = _read_browser(channel_id)
     if browser:
-        candidates.append(browser)
-    candidates = list(dict.fromkeys(candidates))
+        fallbacks.append(browser)
+
+    discovered = list(dict.fromkeys(discovered))
+    fallbacks = list(dict.fromkeys(fallbacks))
+    candidates = fallbacks + [url for url in discovered if url not in fallbacks]
+
     def score(url: str) -> tuple[int, int, int, int]:
         low = url.lower()
         quality = (
@@ -219,8 +241,13 @@ def resolve_candidates(channel_id: str, timeout: int = 10, channel_name: str | N
         direct = int(low.endswith(".m3u8") or ".m3u8?" in low)
         return (quality, officialish, direct, -len(url))
 
-    candidates.sort(key=score, reverse=True)
-    return candidates[:24]
+    # Probe fallbacks first, then the best fresh-source candidates.
+    fallback_set = set(fallbacks)
+    discovered.sort(key=score, reverse=True)
+    selected = fallbacks + [
+        url for url in discovered if url not in fallback_set
+    ][: max(0, 24 - len(fallbacks))]
+    return list(dict.fromkeys(selected))[:24]
 
 def resolve(channel_id: str, timeout: int = 10) -> str | None:
     candidates = resolve_candidates(channel_id, timeout)
