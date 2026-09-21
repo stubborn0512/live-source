@@ -192,7 +192,7 @@ def main() -> None:
     statuses_by_id = {}
     playlist_items_by_id = {}
 
-    with ThreadPoolExecutor(max_workers=len(channels)) as pool:
+    with ThreadPoolExecutor(max_workers=checker.get("channel_workers", 8)) as pool:
         futures = {
             pool.submit(process_channel, channel, checker): channel
             for channel in channels
