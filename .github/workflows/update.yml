@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: live-source-update
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update:
@@ -42,6 +42,15 @@ jobs:
       - name: Resolve and check streams
         run: |
           python main.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          status = json.loads(Path("output/status.json").read_text(encoding="utf-8"))
+          count = int(status.get("count", 0))
+          if count < 10:
+              raise SystemExit(f"Refusing to publish an incomplete playlist: {count} verified channels")
+          print(f"Validated {count} channels before publish")
+          PY
 
       - name: Commit updated playlist
         run: |
