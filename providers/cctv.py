@@ -316,8 +316,8 @@ def resolve_candidates(
     # Keep enough candidates for two independent verified sources without
     # exploding the number of ffprobe processes.
     return list(dict.fromkeys(
-        fallbacks + discovered[: max(0, 18 - len(fallbacks))]
-    ))[:18]
+        fallbacks + discovered[: max(0, 12 - len(fallbacks))]
+    ))[:12]
 
 
 def resolve(channel_id: str, timeout: int = 10) -> str | None:
