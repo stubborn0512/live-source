@@ -1,0 +1,35 @@
+name: Test failover gateway
+
+on:
+  workflow_dispatch:
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Health check
+        run: |
+          set -eux
+          curl --fail --show-error --retry 3 --retry-delay 5 --max-time 180 \
+            https://live-source-gateway.onrender.com/health
+
+      - name: Playlist check
+        run: |
+          set -eux
+          curl --fail --show-error --retry 3 --retry-delay 5 --max-time 180 \
+            https://live-source-gateway.onrender.com/playlist.m3u -o /tmp/playlist.m3u
+          grep -F 'tvg-id="cctv1"' /tmp/playlist.m3u
+          test "$(grep -Fc 'tvg-id="cctv1"' /tmp/playlist.m3u)" -eq 1
+          grep -F 'CCTV-1 综合' /tmp/playlist.m3u
+          echo "CCTV-1 appears exactly once"
+
+      - name: Stream smoke test
+        run: |
+          set -eux
+          timeout 45s ffmpeg -hide_banner -loglevel warning \
+            -rw_timeout 15000000 \
+            -i https://live-source-gateway.onrender.com/stream/cctv1 \
+            -t 15 -map 0:v:0 -f null -
