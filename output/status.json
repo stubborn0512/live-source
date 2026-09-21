@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-09-21T10:16:29.688824+00:00",
-  "count": 48,
+  "generated_at": "2026-09-21T21:23:30.896473+00:00",
+  "count": 49,
   "channels": [
     {
       "id": "cctv1",
       "name": "CCTV-1 综合",
-      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv1hd",
+      "url": "http://198.204.228.26/live/cctv1hd.m3u8",
       "sources": [
         {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv1hd",
-          "host": "63.141.230.178",
+          "url": "http://198.204.228.26/live/cctv1hd.m3u8",
+          "host": "198.204.228.26",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.92,
+          "response_seconds": 1.81,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -20,32 +20,32 @@
           "fps": "25/1",
           "static": false,
           "identity": "unknown",
-          "identity_ocr": ""
+          "identity_ocr": "= Sue\n\nre\n\nYE:\n\nNye cage\n\nUe\n\ni\n\nS|\n\n~~\n\n人\n\nERS\n\na\n\nis\n\n—_\n\nTer\n\nSi\n\nHN\n\nly\n\nay\n\nLy\n\n这\n\nabeiy LF\n\nip\n\nx\n\nve;\n\n*\n\n人\n\nni\n\nath\n\n:\n\n名 的\n\n心 ES\n\no\n\nZa\n\nwe\n\nAg\n\n从 央视 记者 侯\n\nYA\n\nARs ie Gees\n\nWY\n\napts\n\nok thie)\n"
         },
         {
-          "url": "http://118.122.144.115:8888/newlive/live/hls/1/live.m3u8",
-          "host": "118.122.144.115",
+          "url": "http://183.129.255.66:8480/hls/1/index.m3u8",
+          "host": "183.129.255.66",
           "ok": true,
           "1080p": true,
-          "response_seconds": 3.9,
+          "response_seconds": 2.29,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
-          "fps": "50/1",
-          "static": false,
+          "fps": "25/1",
+          "static": null,
           "identity": "unknown",
           "identity_ocr": ""
         }
       ],
       "source_count": 2,
       "source_hosts": [
-        "63.141.230.178",
-        "118.122.144.115"
+        "198.204.228.26",
+        "183.129.255.66"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.92,
+      "response_seconds": 1.81,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -53,7 +53,7 @@
       "fps": "25/1",
       "static": false,
       "identity": "unknown",
-      "identity_ocr": ""
+      "identity_ocr": "= Sue\n\nre\n\nYE:\n\nNye cage\n\nUe\n\ni\n\nS|\n\n~~\n\n人\n\nERS\n\na\n\nis\n\n—_\n\nTer\n\nSi\n\nHN\n\nly\n\nay\n\nLy\n\n这\n\nabeiy LF\n\nip\n\nx\n\nve;\n\n*\n\n人\n\nni\n\nath\n\n:\n\n名 的\n\n心 ES\n\no\n\nZa\n\nwe\n\nAg\n\n从 央视 记者 侯\n\nYA\n\nARs ie Gees\n\nWY\n\napts\n\nok thie)\n"
     },
     {
       "id": "cctv2",
@@ -65,7 +65,7 @@
           "host": "107.150.60.122",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.48,
+          "response_seconds": 1.58,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -73,166 +73,7 @@
           "fps": "25/1",
           "static": false,
           "identity": "unknown",
-          "identity_ocr": "ha\n\n=; -\n\nS\n\nCT\n\n+\n\nPA»\n\nperry\n\neT\n\n<>\n\nar *\n\na\n\n—_ 2\n\n‘A\n\n17%\n\nfe:\n\nid\n\ner\n\n© 0\n\n—_\n\nre\n\n~f\n\na\n\n四\n\n-\n\nie,\n\n/ a7\n\n1 a\n\n全\n\ney\n"
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv2hd",
-          "host": "63.141.230.178",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.51,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false,
-          "identity": "unknown",
-          "identity_ocr": "vit\n\n( 4\n\na)\n\nRw\n\nMe\n\nan\n\nhy\n\nie\n\ni\n\nWake 1\n\naos\n\nDe 4a\n\nae |\n\nae\n\nae\n\n|\n\nage\n\ni\n\naf\n\nae\n\n7 ‘m=\n\n-\n\n=\n\n~ v\n\n=\n\n\"\n\nSS\n\n‘=.\n\na\n\nfy\n\n=e\n\nfT\n\n全\n\n=\n\n* Swe\n\nAN\n\na\n\nar wo\n\nOe\n\n=\n\nSP\n\n-1\n"
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "63.141.230.178"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 1.48,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false,
-      "identity": "unknown",
-      "identity_ocr": "ha\n\n=; -\n\nS\n\nCT\n\n+\n\nPA»\n\nperry\n\neT\n\n<>\n\nar *\n\na\n\n—_ 2\n\n‘A\n\n17%\n\nfe:\n\nid\n\ner\n\n© 0\n\n—_\n\nre\n\n~f\n\na\n\n四\n\n-\n\nie,\n\n/ a7\n\n1 a\n\n全\n\ney\n"
-    },
-    {
-      "id": "cctv3",
-      "name": "CCTV-3 综艺",
-      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv3hd",
-      "sources": [
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv3hd",
-          "host": "63.141.230.178",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.65,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false,
-          "identity": "unknown",
-          "identity_ocr": "a mm\n\n+)\n\naa bh,\n\n一 一\n\n出\n\nThi\n\ngto |\n\nATS\n\n+z\n\nAR IAA eR Se\n\nft oy\n\n《一 三\n"
-        },
-        {
-          "url": "http://107.150.60.122/live/cctv3hd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.71,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false,
-          "identity": "unknown",
-          "identity_ocr": ""
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "63.141.230.178",
-        "107.150.60.122"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 1.65,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false,
-      "identity": "unknown",
-      "identity_ocr": "a mm\n\n+)\n\naa bh,\n\n一 一\n\n出\n\nThi\n\ngto |\n\nATS\n\n+z\n\nAR IAA eR Se\n\nft oy\n\n《一 三\n"
-    },
-    {
-      "id": "cctv4",
-      "name": "CCTV-4 中文国际",
-      "url": "http://107.150.60.122/live/cctv4hd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/cctv4hd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.85,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false,
-          "identity": "unknown",
-          "identity_ocr": ""
-        },
-        {
-          "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
-          "host": "173.208.212.130",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.15,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false,
-          "identity": "unknown",
-          "identity_ocr": ""
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "173.208.212.130"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 0.85,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false,
-      "identity": "unknown",
-      "identity_ocr": ""
-    },
-    {
-      "id": "cctv5",
-      "name": "CCTV-5 体育",
-      "url": "http://107.150.60.122/live/cctv5hd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/cctv5hd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.43,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": null,
-          "identity": "unknown",
-          "identity_ocr": ""
+          "identity_ocr": "3 lJ\n\n|\n\nam\n\nra 二\n\n一\n\n一\n\n一 了\n\n= 一\n\nis\n\n=\n\n\\\n\n——\n\n_\n\n—\n\ntan 有\n\nMe at\n\ne\n\nat -\n\nee\n\n—\n\nom,\n\na\n"
         }
       ],
       "source_count": 1,
@@ -241,41 +82,162 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 3.43,
+      "response_seconds": 1.58,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
       "bit_rate": null,
       "fps": "25/1",
-      "static": null,
+      "static": false,
+      "identity": "unknown",
+      "identity_ocr": "3 lJ\n\n|\n\nam\n\nra 二\n\n一\n\n一\n\n一 了\n\n= 一\n\nis\n\n=\n\n\\\n\n——\n\n_\n\n—\n\ntan 有\n\nMe at\n\ne\n\nat -\n\nee\n\n—\n\nom,\n\na\n"
+    },
+    {
+      "id": "cctv3",
+      "name": "CCTV-3 综艺",
+      "url": "http://107.150.60.122/live/cctv3hd.m3u8",
+      "sources": [
+        {
+          "url": "http://107.150.60.122/live/cctv3hd.m3u8",
+          "host": "107.150.60.122",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.68,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": ""
+        },
+        {
+          "url": "http://69.30.245.50/live/cctv3.m3u8",
+          "host": "69.30.245.50",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.79,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": ""
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "107.150.60.122",
+        "69.30.245.50"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.68,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false,
       "identity": "unknown",
       "identity_ocr": ""
     },
     {
-      "id": "cctv5plus",
-      "name": "CCTV-5+ 体育赛事",
-      "url": "https://i.imgur.com/OK8mdJV.png",
+      "id": "cctv4",
+      "name": "CCTV-4 中文国际",
+      "url": "http://69.30.245.50/live/cctv4.m3u8",
+      "sources": [
+        {
+          "url": "http://69.30.245.50/live/cctv4.m3u8",
+          "host": "69.30.245.50",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.0,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": "长\n\niL\n\naS\n\n五\n\ni\n\nwee\n\n\\\"\n\n|\n\n河\n\n国 宗 记忆\n\n人\n"
+        },
+        {
+          "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
+          "host": "173.208.212.130",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.03,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": "长\n\niL\n\naS\n\n五\n\ni\n\nwee\n\n\\\"\n\n|\n\n河\n\n国 宗 记忆\n\n人\n"
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "69.30.245.50",
+        "173.208.212.130"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.0,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false,
+      "identity": "unknown",
+      "identity_ocr": "长\n\niL\n\naS\n\n五\n\ni\n\nwee\n\n\\\"\n\n|\n\n河\n\n国 宗 记忆\n\n人\n"
+    },
+    {
+      "id": "cctv5",
+      "name": "CCTV-5 体育",
+      "url": "http://207.56.13.146:81/cdnlive/cctv5.m3u8",
       "ok": true,
       "1080p": false,
-      "response_seconds": 0.93,
-      "width": 512,
-      "height": 228,
-      "codec": "png",
+      "response_seconds": 1.06,
+      "width": 1280,
+      "height": 720,
+      "codec": "h264",
       "bit_rate": null,
       "fps": "25/1",
       "static": null
     },
     {
-      "id": "cctv6",
-      "name": "CCTV-6 电影",
-      "url": "http://120.76.248.139/live/bfgd/4200000065.m3u8",
+      "id": "cctv5plus",
+      "name": "CCTV-5+ 体育赛事",
+      "url": "http://183.129.255.66:8480/hls/6/index.m3u8",
       "sources": [
         {
-          "url": "http://120.76.248.139/live/bfgd/4200000065.m3u8",
+          "url": "http://183.129.255.66:8480/hls/6/index.m3u8",
+          "host": "183.129.255.66",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 3.87,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": ""
+        },
+        {
+          "url": "http://120.76.248.139/live/bfgd/4200000246.m3u8",
           "host": "120.76.248.139",
           "ok": true,
           "1080p": true,
-          "response_seconds": 4.39,
+          "response_seconds": 6.59,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -286,19 +248,73 @@
           "identity_ocr": ""
         }
       ],
-      "source_count": 1,
+      "source_count": 2,
       "source_hosts": [
+        "183.129.255.66",
         "120.76.248.139"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 4.39,
+      "response_seconds": 3.87,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
       "bit_rate": null,
-      "fps": "50/1",
-      "static": null,
+      "fps": "25/1",
+      "static": false,
+      "identity": "unknown",
+      "identity_ocr": ""
+    },
+    {
+      "id": "cctv6",
+      "name": "CCTV-6 电影",
+      "url": "http://74.91.26.218:82/live/cctv6hd.m3u8",
+      "sources": [
+        {
+          "url": "http://74.91.26.218:82/live/cctv6hd.m3u8",
+          "host": "74.91.26.218",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.61,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": ""
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd",
+          "host": "63.141.230.178",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.7,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": ""
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "74.91.26.218",
+        "63.141.230.178"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.61,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false,
       "identity": "unknown",
       "identity_ocr": ""
     },
@@ -312,7 +328,7 @@
           "host": "69.30.245.50",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.93,
+          "response_seconds": 1.86,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -323,11 +339,11 @@
           "identity_ocr": ""
         },
         {
-          "url": "http://107.150.60.122/live/cctv7hd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://183.129.255.66:8480/hls/8/index.m3u8",
+          "host": "183.129.255.66",
           "ok": true,
           "1080p": true,
-          "response_seconds": 3.27,
+          "response_seconds": 2.13,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -335,17 +351,17 @@
           "fps": "25/1",
           "static": null,
           "identity": "unknown",
-          "identity_ocr": "由\n\nwy\n\n|\n\n用\n\n|\n\nHl\n\ni)\n\n|\n\n|\n\n|\n\n|\n\n|\n\n|\n\n|\n\ni\n\n，\n\n|\n"
+          "identity_ocr": ""
         }
       ],
       "source_count": 2,
       "source_hosts": [
         "69.30.245.50",
-        "107.150.60.122"
+        "183.129.255.66"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.93,
+      "response_seconds": 1.86,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -358,29 +374,14 @@
     {
       "id": "cctv8",
       "name": "CCTV-8 电视剧",
-      "url": "http://192.151.150.154/live/cctv8k.m3u8",
+      "url": "http://120.76.248.139/live/bfgd/4200000066.m3u8",
       "sources": [
-        {
-          "url": "http://192.151.150.154/live/cctv8k.m3u8",
-          "host": "192.151.150.154",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.51,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false,
-          "identity": "unknown",
-          "identity_ocr": "Cen,\n\nBis is\n\nacer\n\nRae\n\n=\n\nel ae\n\nij\n\n«et\n\n=\n\nSS\n\nie\n\nWf\n\n7,\n\nCA\n\n44 Zz\n"
-        },
         {
           "url": "http://120.76.248.139/live/bfgd/4200000066.m3u8",
           "host": "120.76.248.139",
           "ok": true,
           "1080p": true,
-          "response_seconds": 13.16,
+          "response_seconds": 5.87,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -388,37 +389,52 @@
           "fps": "50/1",
           "static": null,
           "identity": "unknown",
+          "identity_ocr": "| J\n\nee\n\nA\n\no*\n\nall\n"
+        },
+        {
+          "url": "http://183.129.255.66:8480/hls/9/index.m3u8",
+          "host": "183.129.255.66",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 12.09,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": null,
+          "identity": "unknown",
           "identity_ocr": ""
         }
       ],
       "source_count": 2,
       "source_hosts": [
-        "192.151.150.154",
-        "120.76.248.139"
+        "120.76.248.139",
+        "183.129.255.66"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.51,
+      "response_seconds": 5.87,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
       "bit_rate": null,
-      "fps": "25/1",
-      "static": false,
+      "fps": "50/1",
+      "static": null,
       "identity": "unknown",
-      "identity_ocr": "Cen,\n\nBis is\n\nacer\n\nRae\n\n=\n\nel ae\n\nij\n\n«et\n\n=\n\nSS\n\nie\n\nWf\n\n7,\n\nCA\n\n44 Zz\n"
+      "identity_ocr": "| J\n\nee\n\nA\n\no*\n\nall\n"
     },
     {
       "id": "cctv9",
       "name": "CCTV-9 纪录",
-      "url": "http://198.204.228.26/live/cctv9hd.m3u8",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv9hd",
       "sources": [
         {
-          "url": "http://198.204.228.26/live/cctv9hd.m3u8",
-          "host": "198.204.228.26",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv9hd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 3.22,
+          "response_seconds": 1.1,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -433,7 +449,7 @@
           "host": "69.30.245.50",
           "ok": true,
           "1080p": true,
-          "response_seconds": 3.46,
+          "response_seconds": 1.52,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -446,12 +462,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "198.204.228.26",
+        "63.141.230.178",
         "69.30.245.50"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 3.22,
+      "response_seconds": 1.1,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -471,7 +487,7 @@
           "host": "69.30.245.50",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.05,
+          "response_seconds": 1.22,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -479,14 +495,14 @@
           "fps": "25/1",
           "static": false,
           "identity": "unknown",
-          "identity_ocr": "RR ZB\n\nGEGIVio\n\n科 3X\n\n一\n\n别\n\n潘\n\n= 2\n\nJu\n\nom 7c 13 入\n\n洁 BI AG aR A\n\nTAL Te\n\n一 着\n\nje 及\n\nNdi\n\n+P)\n"
+          "identity_ocr": ""
         },
         {
           "url": "http://204.12.221.218:8181/3m1080p/cctv10.m3u8",
           "host": "204.12.221.218",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.06,
+          "response_seconds": 1.32,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -494,7 +510,7 @@
           "fps": "25/1",
           "static": false,
           "identity": "unknown",
-          "identity_ocr": "RR ZB\n\nGEGIVio\n\n科 3X\n\n一\n\n别\n\n潘\n\n= 2\n\nJu\n\nom 7c 13 入\n\n洁 BI AG aR A\n\nTAL Te\n\n一 着\n\nje 及\n\nNdi\n\n+P)\n"
+          "identity_ocr": ""
         }
       ],
       "source_count": 2,
@@ -504,7 +520,7 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.05,
+      "response_seconds": 1.22,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -512,7 +528,7 @@
       "fps": "25/1",
       "static": false,
       "identity": "unknown",
-      "identity_ocr": "RR ZB\n\nGEGIVio\n\n科 3X\n\n一\n\n别\n\n潘\n\n= 2\n\nJu\n\nom 7c 13 入\n\n洁 BI AG aR A\n\nTAL Te\n\n一 着\n\nje 及\n\nNdi\n\n+P)\n"
+      "identity_ocr": ""
     },
     {
       "id": "cctv11",
@@ -524,7 +540,7 @@
           "host": "204.12.221.218",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.1,
+          "response_seconds": 1.07,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -535,11 +551,11 @@
           "identity_ocr": ""
         },
         {
-          "url": "http://198.204.228.26/live/cctv11hd.m3u8",
-          "host": "198.204.228.26",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv11hd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.22,
+          "response_seconds": 1.08,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -547,17 +563,17 @@
           "fps": "25/1",
           "static": false,
           "identity": "unknown",
-          "identity_ocr": "€€TV/11)\n\n戏 曲\n\n\\\\\n\nYe\n\nN\n\nan\n\nit\n\n|\n\nt— ®\n\nA =\n\n%\n\nVv .\n\n;\n\n2\n\n4\n\n©\n\n, ©\n\nit\n\nA\n\n同\n\nAFH\n\n三 HE 三 9 引 三\n\nae\n\n= TI\n\nJOAN\n\n过\n"
+          "identity_ocr": ""
         }
       ],
       "source_count": 2,
       "source_hosts": [
         "204.12.221.218",
-        "198.204.228.26"
+        "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.1,
+      "response_seconds": 1.07,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -570,20 +586,20 @@
     {
       "id": "cctv12",
       "name": "CCTV-12 社会与法",
-      "url": "http://107.150.60.122/live/cctv12hd.m3u8",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv12hd.m3u8?auth=testpub",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/cctv12hd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv12hd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 2.0,
+          "response_seconds": 1.58,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
           "fps": "25/1",
-          "static": null,
+          "static": false,
           "identity": "unknown",
           "identity_ocr": ""
         },
@@ -592,7 +608,7 @@
           "host": "204.12.221.218",
           "ok": true,
           "1080p": true,
-          "response_seconds": 2.95,
+          "response_seconds": 1.64,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -605,32 +621,32 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "107.150.60.122",
+        "38.75.136.137",
         "204.12.221.218"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 2.0,
+      "response_seconds": 1.58,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
       "bit_rate": null,
       "fps": "25/1",
-      "static": null,
+      "static": false,
       "identity": "unknown",
       "identity_ocr": ""
     },
     {
       "id": "cctv13",
       "name": "CCTV-13 新闻",
-      "url": "https://event.pull.hebtv.com/jishi/cp1.m3u8",
+      "url": "http://74.91.26.218:82/live/cctv13hd.m3u8",
       "sources": [
         {
-          "url": "https://event.pull.hebtv.com/jishi/cp1.m3u8",
-          "host": "event.pull.hebtv.com",
+          "url": "http://74.91.26.218:82/live/cctv13hd.m3u8",
+          "host": "74.91.26.218",
           "ok": true,
           "1080p": true,
-          "response_seconds": 5.97,
+          "response_seconds": 1.05,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -641,11 +657,11 @@
           "identity_ocr": ""
         },
         {
-          "url": "http://ali-m-l.cztv.com/channels/lantian/channel21/1080p.m3u8",
-          "host": "ali-m-l.cztv.com",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv13hd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 11.09,
+          "response_seconds": 1.13,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -658,12 +674,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "event.pull.hebtv.com",
-        "ali-m-l.cztv.com"
+        "74.91.26.218",
+        "63.141.230.178"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 5.97,
+      "response_seconds": 1.05,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -676,14 +692,29 @@
     {
       "id": "cctv14",
       "name": "CCTV-14 少儿",
-      "url": "https://event.pull.hebtv.com/jishi/cp2.m3u8",
+      "url": "http://183.129.255.66:8480/hls/15/index.m3u8",
       "sources": [
+        {
+          "url": "http://183.129.255.66:8480/hls/15/index.m3u8",
+          "host": "183.129.255.66",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 3.18,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": null,
+          "identity": "unknown",
+          "identity_ocr": ""
+        },
         {
           "url": "https://event.pull.hebtv.com/jishi/cp2.m3u8",
           "host": "event.pull.hebtv.com",
           "ok": true,
           "1080p": true,
-          "response_seconds": 3.86,
+          "response_seconds": 4.08,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -694,13 +725,67 @@
           "identity_ocr": ""
         }
       ],
-      "source_count": 1,
+      "source_count": 2,
       "source_hosts": [
+        "183.129.255.66",
         "event.pull.hebtv.com"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 3.86,
+      "response_seconds": 3.18,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": null,
+      "identity": "unknown",
+      "identity_ocr": ""
+    },
+    {
+      "id": "cctv15",
+      "name": "CCTV-15 音乐",
+      "url": "http://74.91.26.218:82/live/cctv15hd.m3u8",
+      "sources": [
+        {
+          "url": "http://74.91.26.218:82/live/cctv15hd.m3u8",
+          "host": "74.91.26.218",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.13,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false,
+          "identity": "unknown",
+          "identity_ocr": ""
+        },
+        {
+          "url": "http://183.129.255.66:8480/hls/16/index.m3u8",
+          "host": "183.129.255.66",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 2.05,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "50/1",
+          "static": null,
+          "identity": "unknown",
+          "identity_ocr": ""
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "74.91.26.218",
+        "183.129.255.66"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.13,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -711,30 +796,16 @@
       "identity_ocr": ""
     },
     {
-      "id": "cctv15",
-      "name": "CCTV-15 音乐",
-      "url": "http://74.91.26.218:82/live/cctv15hd.m3u8",
-      "ok": true,
-      "1080p": false,
-      "response_seconds": 0.55,
-      "width": 1280,
-      "height": 720,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": null
-    },
-    {
       "id": "cctv16",
       "name": "CCTV-16 奥林匹克",
-      "url": "http://173.208.234.146/live/cctv16.m3u8",
+      "url": "http://207.56.13.146:81/cdnlive/cctv16.m3u8",
       "sources": [
         {
-          "url": "http://173.208.234.146/live/cctv16.m3u8",
-          "host": "173.208.234.146",
+          "url": "http://207.56.13.146:81/cdnlive/cctv16.m3u8",
+          "host": "207.56.13.146",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.3,
+          "response_seconds": 1.28,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -749,7 +820,7 @@
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 2.23,
+          "response_seconds": 1.89,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -762,12 +833,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "173.208.234.146",
+        "207.56.13.146",
         "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.3,
+      "response_seconds": 1.28,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -787,7 +858,7 @@
           "host": "74.91.26.218",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.35,
+          "response_seconds": 1.13,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -802,15 +873,15 @@
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 2.49,
+          "response_seconds": 1.56,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
           "fps": "25/1",
           "static": false,
-          "identity": "match",
-          "identity_ocr": "_\n\nCCTV 17\n\nete |\n\nAR\n\nprrvet\n\nyo\n\n\\-\n\na\n\nvi\n\nMA\n\n|\n\n牧民 AM Siz ne\n\na\n\n54\n\nNU\n\n[是 哈\n"
+          "identity": "unknown",
+          "identity_ocr": ""
         }
       ],
       "source_count": 2,
@@ -820,7 +891,7 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.35,
+      "response_seconds": 1.13,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -833,47 +904,47 @@
     {
       "id": "beijing",
       "name": "北京卫视",
-      "url": "http://107.150.60.122/live/bjwshd.m3u8",
+      "url": "http://120.76.248.139/live/bfgd/4200000083.m3u8",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/bjwshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://120.76.248.139/live/bfgd/4200000083.m3u8",
+          "host": "120.76.248.139",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.99,
+          "response_seconds": 7.44,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
-          "fps": "25/1",
-          "static": false
+          "fps": "50/1",
+          "static": null
         }
       ],
       "source_count": 1,
       "source_hosts": [
-        "107.150.60.122"
+        "120.76.248.139"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.99,
+      "response_seconds": 7.44,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
       "bit_rate": null,
-      "fps": "25/1",
-      "static": false
+      "fps": "50/1",
+      "static": null
     },
     {
       "id": "dongfang",
       "name": "东方卫视",
-      "url": "http://38.75.136.137:98/gslb/dsdqpub/dfwshd.m3u8?auth=testpub",
+      "url": "http://38.75.136.137:98/gslb/dsdqbv/dfwshd.m3u8?auth=test20251009",
       "sources": [
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/dfwshd.m3u8?auth=testpub",
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/dfwshd.m3u8?auth=test20251009",
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.75,
+          "response_seconds": 1.0,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -886,7 +957,7 @@
           "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.88,
+          "response_seconds": 1.24,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -902,7 +973,7 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.75,
+      "response_seconds": 1.0,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -913,14 +984,14 @@
     {
       "id": "hunan",
       "name": "湖南卫视",
-      "url": "http://107.150.60.122/live/hnwshd.m3u8",
+      "url": "http://173.208.212.130:8181/720p/hnws.m3u8",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/hnwshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://173.208.212.130:8181/720p/hnws.m3u8",
+          "host": "173.208.212.130",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.13,
+          "response_seconds": 1.26,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -933,23 +1004,23 @@
           "host": "221.226.51.220",
           "ok": true,
           "1080p": true,
-          "response_seconds": 4.14,
+          "response_seconds": 2.67,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
           "fps": "25/1",
-          "static": false
+          "static": null
         }
       ],
       "source_count": 2,
       "source_hosts": [
-        "107.150.60.122",
+        "173.208.212.130",
         "221.226.51.220"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.13,
+      "response_seconds": 1.26,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -967,7 +1038,7 @@
           "host": "ali-xwl.cztv.com",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.56,
+          "response_seconds": 1.05,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -980,7 +1051,7 @@
           "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.99,
+          "response_seconds": 1.13,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -996,7 +1067,7 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.56,
+      "response_seconds": 1.05,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1014,7 +1085,7 @@
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.25,
+          "response_seconds": 1.27,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1023,8 +1094,8 @@
           "static": false
         },
         {
-          "url": "http://107.150.60.122/live/jswshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://204.12.221.218:8181/3m1080p/jsws.m3u8",
+          "host": "204.12.221.218",
           "ok": true,
           "1080p": true,
           "response_seconds": 1.38,
@@ -1039,11 +1110,11 @@
       "source_count": 2,
       "source_hosts": [
         "38.75.136.137",
-        "107.150.60.122"
+        "204.12.221.218"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.25,
+      "response_seconds": 1.27,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1054,14 +1125,14 @@
     {
       "id": "anhui",
       "name": "安徽卫视",
-      "url": "http://107.150.60.122/live/ahwshd.m3u8",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=ahwshd",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/ahwshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=ahwshd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.17,
+          "response_seconds": 1.32,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1070,11 +1141,11 @@
           "static": false
         },
         {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=ahwshd",
-          "host": "63.141.230.178",
+          "url": "http://204.12.221.218:8181/3m1080p/ahws.m3u8",
+          "host": "204.12.221.218",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.56,
+          "response_seconds": 1.79,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1085,12 +1156,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "107.150.60.122",
-        "63.141.230.178"
+        "63.141.230.178",
+        "204.12.221.218"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.17,
+      "response_seconds": 1.32,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1108,7 +1179,7 @@
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.85,
+          "response_seconds": 1.2,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1121,7 +1192,7 @@
           "host": "198.204.228.26",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.94,
+          "response_seconds": 1.28,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1137,7 +1208,7 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.85,
+      "response_seconds": 1.2,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1148,155 +1219,14 @@
     {
       "id": "liaoning",
       "name": "辽宁卫视",
-      "url": "http://107.150.60.122/live/lnwshd.m3u8",
+      "url": "http://198.204.228.26/live/lnwshd.m3u8",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/lnwshd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.26,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=lnwshd",
-          "host": "63.141.230.178",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.45,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "63.141.230.178"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 1.26,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "heilongjiang",
-      "name": "黑龙江卫视",
-      "url": "http://107.150.60.122/live/hljwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/hljwshd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.94,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=hljwshd",
-          "host": "63.141.230.178",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.09,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "63.141.230.178"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 0.94,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "jilin",
-      "name": "吉林卫视",
-      "url": "http://107.150.60.122/live/jlwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/jlwshd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.8,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/jlwshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 3.22,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "38.75.136.137"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 0.8,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "tianjin",
-      "name": "天津卫视",
-      "url": "http://198.204.228.26/live/tjwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://198.204.228.26/live/tjwshd.m3u8",
+          "url": "http://198.204.228.26/live/lnwshd.m3u8",
           "host": "198.204.228.26",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.99,
+          "response_seconds": 0.9,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1305,11 +1235,11 @@
           "static": false
         },
         {
-          "url": "http://107.150.60.122/live/tjwshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/lnwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 3.24,
+          "response_seconds": 0.94,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1321,11 +1251,152 @@
       "source_count": 2,
       "source_hosts": [
         "198.204.228.26",
-        "107.150.60.122"
+        "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.99,
+      "response_seconds": 0.9,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "heilongjiang",
+      "name": "黑龙江卫视",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=hljwshd",
+      "sources": [
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=hljwshd",
+          "host": "63.141.230.178",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.97,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/hljwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.59,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "63.141.230.178",
+        "38.75.136.137"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 0.97,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "jilin",
+      "name": "吉林卫视",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/jlwshd.m3u8?auth=testpub",
+      "sources": [
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/jlwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.6,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://120.198.86.186:9901/tsfile/live/1076_1.m3u8?key=txiptv&playlive=1&authid=0",
+          "host": "120.198.86.186",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 2.85,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "38.75.136.137",
+        "120.198.86.186"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.6,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "tianjin",
+      "name": "天津卫视",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/tjwshd.m3u8?auth=testpub",
+      "sources": [
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/tjwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.82,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://198.204.228.26/live/tjwshd.m3u8",
+          "host": "198.204.228.26",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.83,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "38.75.136.137",
+        "198.204.228.26"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 0.82,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1343,7 +1414,7 @@
           "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.94,
+          "response_seconds": 1.12,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1352,11 +1423,11 @@
           "static": false
         },
         {
-          "url": "http://204.12.221.218:8181/3m1080p/hews.m3u8",
-          "host": "204.12.221.218",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/hewshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 5.37,
+          "response_seconds": 1.37,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1368,11 +1439,11 @@
       "source_count": 2,
       "source_hosts": [
         "63.141.230.178",
-        "204.12.221.218"
+        "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.94,
+      "response_seconds": 1.12,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1383,14 +1454,14 @@
     {
       "id": "shanxi",
       "name": "山西卫视",
-      "url": "http://38.75.136.137:98/gslb/dsdqpub/sxwshd.m3u8?auth=testpub",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=sxwshd",
       "sources": [
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/sxwshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=sxwshd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.74,
+          "response_seconds": 0.89,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1399,11 +1470,58 @@
           "static": false
         },
         {
-          "url": "http://204.12.221.218:8181/3m1080p/sxws.m3u8",
-          "host": "204.12.221.218",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/sxwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.79,
+          "response_seconds": 1.49,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "63.141.230.178",
+        "38.75.136.137"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 0.89,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "henan",
+      "name": "河南卫视",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/hawshd.m3u8?auth=testpub",
+      "sources": [
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/hawshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.19,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://173.208.212.130:8181/720p/haws.m3u8",
+          "host": "173.208.212.130",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.23,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1415,11 +1533,11 @@
       "source_count": 2,
       "source_hosts": [
         "38.75.136.137",
-        "204.12.221.218"
+        "173.208.212.130"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.74,
+      "response_seconds": 1.19,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1428,16 +1546,16 @@
       "static": false
     },
     {
-      "id": "henan",
-      "name": "河南卫视",
-      "url": "http://107.150.60.122/live/hawshd.m3u8",
+      "id": "hubei",
+      "name": "湖北卫视",
+      "url": "http://107.150.60.122/live/hbwshd.m3u8",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/hawshd.m3u8",
+          "url": "http://107.150.60.122/live/hbwshd.m3u8",
           "host": "107.150.60.122",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.9,
+          "response_seconds": 0.81,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1446,11 +1564,11 @@
           "static": false
         },
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/hawshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=hbwshd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 3.52,
+          "response_seconds": 0.96,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1462,58 +1580,11 @@
       "source_count": 2,
       "source_hosts": [
         "107.150.60.122",
-        "38.75.136.137"
+        "63.141.230.178"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.9,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "hubei",
-      "name": "湖北卫视",
-      "url": "http://38.75.136.137:98/gslb/dsdqpub/hbwshd.m3u8?auth=testpub",
-      "sources": [
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/hbwshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.15,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/hbws.m3u8",
-          "host": "204.12.221.218",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 2.16,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "38.75.136.137",
-        "204.12.221.218"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 2.15,
+      "response_seconds": 0.81,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1524,14 +1595,14 @@
     {
       "id": "jiangxi",
       "name": "江西卫视",
-      "url": "http://38.75.136.137:98/gslb/dsdqpub/jxwshd.m3u8?auth=testpub",
+      "url": "http://204.12.221.218:8181/3m1080p/jxws.m3u8",
       "sources": [
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/jxwshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
+          "url": "http://204.12.221.218:8181/3m1080p/jxws.m3u8",
+          "host": "204.12.221.218",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.64,
+          "response_seconds": 0.96,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1540,11 +1611,11 @@
           "static": false
         },
         {
-          "url": "http://204.12.221.218:8181/3m1080p/jxws.m3u8",
-          "host": "204.12.221.218",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/jxwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.9,
+          "response_seconds": 0.96,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1555,12 +1626,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "38.75.136.137",
-        "204.12.221.218"
+        "204.12.221.218",
+        "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.64,
+      "response_seconds": 0.96,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1578,7 +1649,7 @@
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 2.01,
+          "response_seconds": 1.85,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1587,11 +1658,11 @@
           "static": false
         },
         {
-          "url": "http://live.zohi.tv/video/s10001-fztv-3/index.m3u8",
-          "host": "live.zohi.tv",
+          "url": "http://221.226.51.220:50081/newlive/live/hls/20/live.m3u8",
+          "host": "221.226.51.220",
           "ok": true,
           "1080p": true,
-          "response_seconds": 4.37,
+          "response_seconds": 2.3,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1603,11 +1674,11 @@
       "source_count": 2,
       "source_hosts": [
         "38.75.136.137",
-        "live.zohi.tv"
+        "221.226.51.220"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 2.01,
+      "response_seconds": 1.85,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1618,14 +1689,14 @@
     {
       "id": "guangdong",
       "name": "广东卫视",
-      "url": "http://107.150.60.122/live/gdwshd.m3u8",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/gdwshd.m3u8?auth=testpub",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/gdwshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/gdwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.83,
+          "response_seconds": 0.82,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1634,11 +1705,11 @@
           "static": false
         },
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/gdwshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
+          "url": "http://107.150.60.122/live/gdwshd.m3u8",
+          "host": "107.150.60.122",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.91,
+          "response_seconds": 0.92,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1649,12 +1720,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "107.150.60.122",
-        "38.75.136.137"
+        "38.75.136.137",
+        "107.150.60.122"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.83,
+      "response_seconds": 0.82,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1672,12 +1743,12 @@
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.88,
+          "response_seconds": 0.76,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
-          "fps": "25/1",
+          "fps": "50/1",
           "static": false
         },
         {
@@ -1685,12 +1756,12 @@
           "host": "173.208.212.130",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.96,
+          "response_seconds": 0.79,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
-          "fps": "25/1",
+          "fps": "50/1",
           "static": false
         }
       ],
@@ -1701,25 +1772,25 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.88,
+      "response_seconds": 0.76,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
       "bit_rate": null,
-      "fps": "25/1",
+      "fps": "50/1",
       "static": false
     },
     {
       "id": "guangxi",
       "name": "广西卫视",
-      "url": "http://107.150.60.122/live/gxwshd.m3u8",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gxwshd",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/gxwshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gxwshd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.77,
+          "response_seconds": 0.96,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1728,11 +1799,11 @@
           "static": false
         },
         {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gxwshd",
-          "host": "63.141.230.178",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/gxwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.88,
+          "response_seconds": 1.48,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1743,12 +1814,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "107.150.60.122",
-        "63.141.230.178"
+        "63.141.230.178",
+        "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.77,
+      "response_seconds": 0.96,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1759,27 +1830,14 @@
     {
       "id": "hainan",
       "name": "海南卫视",
-      "url": "http://183.11.239.36:808/hls/124/index.m3u8",
+      "url": "http://120.76.248.139/live/bfgd/4200000473.m3u8",
       "sources": [
-        {
-          "url": "http://183.11.239.36:808/hls/124/index.m3u8",
-          "host": "183.11.239.36",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 5.07,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "50/1",
-          "static": null
-        },
         {
           "url": "http://120.76.248.139/live/bfgd/4200000473.m3u8",
           "host": "120.76.248.139",
           "ok": true,
           "1080p": true,
-          "response_seconds": 8.42,
+          "response_seconds": 4.33,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1788,14 +1846,13 @@
           "static": null
         }
       ],
-      "source_count": 2,
+      "source_count": 1,
       "source_hosts": [
-        "183.11.239.36",
         "120.76.248.139"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 5.07,
+      "response_seconds": 4.33,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1813,7 +1870,7 @@
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.65,
+          "response_seconds": 0.92,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1822,11 +1879,11 @@
           "static": false
         },
         {
-          "url": "http://204.12.221.218:8181/3m1080p/scws.m3u8",
-          "host": "204.12.221.218",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=scwshd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.8,
+          "response_seconds": 0.95,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1838,11 +1895,11 @@
       "source_count": 2,
       "source_hosts": [
         "38.75.136.137",
-        "204.12.221.218"
+        "63.141.230.178"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.65,
+      "response_seconds": 0.92,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1853,14 +1910,14 @@
     {
       "id": "chongqing",
       "name": "重庆卫视",
-      "url": "http://107.150.60.122/live/cqwshd.m3u8",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/cqwshd.m3u8?auth=testpub",
       "sources": [
         {
-          "url": "http://107.150.60.122/live/cqwshd.m3u8",
-          "host": "107.150.60.122",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cqwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.78,
+          "response_seconds": 1.92,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1869,27 +1926,27 @@
           "static": false
         },
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/cqwshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
+          "url": "http://120.76.248.139/live/bfgd/4200000107.m3u8",
+          "host": "120.76.248.139",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.94,
+          "response_seconds": 3.6,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
           "bit_rate": null,
-          "fps": "25/1",
-          "static": false
+          "fps": "50/1",
+          "static": null
         }
       ],
       "source_count": 2,
       "source_hosts": [
-        "107.150.60.122",
-        "38.75.136.137"
+        "38.75.136.137",
+        "120.76.248.139"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.78,
+      "response_seconds": 1.92,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -1900,14 +1957,14 @@
     {
       "id": "yunnan",
       "name": "云南卫视",
-      "url": "http://192.151.150.154/live/ynwshd.m3u8",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=ynwshd",
       "sources": [
         {
-          "url": "http://192.151.150.154/live/ynwshd.m3u8",
-          "host": "192.151.150.154",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=ynwshd",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.75,
+          "response_seconds": 0.99,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -1916,199 +1973,11 @@
           "static": false
         },
         {
-          "url": "http://107.150.60.122/live/ynwshd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.79,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "192.151.150.154",
-        "107.150.60.122"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 0.75,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "guizhou",
-      "name": "贵州卫视",
-      "url": "http://107.150.60.122/live/gzwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/gzwshd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.8,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/gzwshd.m3u8?auth=testpub",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/ynwshd.m3u8?auth=testpub",
           "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.5,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "38.75.136.137"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 0.8,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "xizang",
-      "name": "西藏卫视",
-      "url": "http://107.150.60.122/live/xzws.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/xzws.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.72,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=xzws",
-          "host": "63.141.230.178",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.21,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "63.141.230.178"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 0.72,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "shaanxi",
-      "name": "陕西卫视",
-      "url": "http://107.150.60.122/live/snwshd.m3u8",
-      "sources": [
-        {
-          "url": "http://107.150.60.122/live/snwshd.m3u8",
-          "host": "107.150.60.122",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.79,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=snwshd",
-          "host": "63.141.230.178",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.47,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        }
-      ],
-      "source_count": 2,
-      "source_hosts": [
-        "107.150.60.122",
-        "63.141.230.178"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 0.79,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "25/1",
-      "static": false
-    },
-    {
-      "id": "gansu",
-      "name": "甘肃卫视",
-      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gswshd",
-      "sources": [
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gswshd",
-          "host": "63.141.230.178",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.85,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "25/1",
-          "static": false
-        },
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/gswshd.m3u8?auth=testpub",
-          "host": "38.75.136.137",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 1.43,
+          "response_seconds": 1.74,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -2124,7 +1993,195 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.85,
+      "response_seconds": 0.99,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "guizhou",
+      "name": "贵州卫视",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/gzwshd.m3u8?auth=testpub",
+      "sources": [
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/gzwshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.84,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/gzws.m3u8",
+          "host": "204.12.221.218",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.9,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "38.75.136.137",
+        "204.12.221.218"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 0.84,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "xizang",
+      "name": "西藏卫视",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=xzws",
+      "sources": [
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=xzws",
+          "host": "63.141.230.178",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.06,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://120.198.86.186:9901/tsfile/live/1089_1.m3u8?key=txiptv&playlive=1&authid=0",
+          "host": "120.198.86.186",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.64,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "63.141.230.178",
+        "120.198.86.186"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.06,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "shaanxi",
+      "name": "陕西卫视",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=snwshd",
+      "sources": [
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=snwshd",
+          "host": "63.141.230.178",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.01,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://198.204.228.26/live/snwshd.m3u8",
+          "host": "198.204.228.26",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 1.66,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "63.141.230.178",
+        "198.204.228.26"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.01,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "gansu",
+      "name": "甘肃卫视",
+      "url": "http://38.75.136.137:98/gslb/dsdqpub/gswshd.m3u8?auth=testpub",
+      "sources": [
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/gswshd.m3u8?auth=testpub",
+          "host": "38.75.136.137",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.65,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=gswshd",
+          "host": "63.141.230.178",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.87,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "38.75.136.137",
+        "63.141.230.178"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 0.65,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -2135,47 +2192,14 @@
     {
       "id": "qinghai",
       "name": "青海卫视",
-      "url": "http://120.76.248.139/live/bfgd/4200000111.m3u8",
+      "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=qhws",
       "sources": [
         {
-          "url": "http://120.76.248.139/live/bfgd/4200000111.m3u8",
-          "host": "120.76.248.139",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=qhws",
+          "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 7.65,
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "bit_rate": null,
-          "fps": "50/1",
-          "static": null
-        }
-      ],
-      "source_count": 1,
-      "source_hosts": [
-        "120.76.248.139"
-      ],
-      "ok": true,
-      "1080p": true,
-      "response_seconds": 7.65,
-      "width": 1920,
-      "height": 1080,
-      "codec": "h264",
-      "bit_rate": null,
-      "fps": "50/1",
-      "static": null
-    },
-    {
-      "id": "ningxia",
-      "name": "宁夏卫视",
-      "url": "http://38.75.136.137:98/gslb/dsdqpub/nxws.m3u8?auth=testpub",
-      "sources": [
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/nxws.m3u8?auth=testpub",
-          "host": "38.75.136.137",
-          "ok": true,
-          "1080p": true,
-          "response_seconds": 0.72,
+          "response_seconds": 1.2,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -2184,11 +2208,58 @@
           "static": false
         },
         {
-          "url": "http://198.204.228.26/live/nxws.m3u8",
-          "host": "198.204.228.26",
+          "url": "http://120.76.248.139/live/bfgd/4200000111.m3u8",
+          "host": "120.76.248.139",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.84,
+          "response_seconds": 3.83,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "50/1",
+          "static": false
+        }
+      ],
+      "source_count": 2,
+      "source_hosts": [
+        "63.141.230.178",
+        "120.76.248.139"
+      ],
+      "ok": true,
+      "1080p": true,
+      "response_seconds": 1.2,
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "bit_rate": null,
+      "fps": "25/1",
+      "static": false
+    },
+    {
+      "id": "ningxia",
+      "name": "宁夏卫视",
+      "url": "http://107.150.60.122/live/nxws.m3u8",
+      "sources": [
+        {
+          "url": "http://107.150.60.122/live/nxws.m3u8",
+          "host": "107.150.60.122",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.81,
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "bit_rate": null,
+          "fps": "25/1",
+          "static": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/nxws.m3u8?auth=testpub",
+          "host": "38.75.136.137",
+          "ok": true,
+          "1080p": true,
+          "response_seconds": 0.81,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -2199,12 +2270,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "38.75.136.137",
-        "198.204.228.26"
+        "107.150.60.122",
+        "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.72,
+      "response_seconds": 0.81,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -2215,14 +2286,14 @@
     {
       "id": "xinjiang",
       "name": "新疆卫视",
-      "url": "http://38.75.136.137:98/gslb/dsdqpub/xjws.m3u8?auth=testpub",
+      "url": "http://107.150.60.122/live/xjws.m3u8",
       "sources": [
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/xjws.m3u8?auth=testpub",
-          "host": "38.75.136.137",
+          "url": "http://107.150.60.122/live/xjws.m3u8",
+          "host": "107.150.60.122",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.9,
+          "response_seconds": 0.87,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -2231,11 +2302,11 @@
           "static": false
         },
         {
-          "url": "http://198.204.228.26/live/xjws.m3u8",
-          "host": "198.204.228.26",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/xjws.m3u8?auth=testpub",
+          "host": "38.75.136.137",
           "ok": true,
           "1080p": true,
-          "response_seconds": 0.94,
+          "response_seconds": 0.93,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -2246,12 +2317,12 @@
       ],
       "source_count": 2,
       "source_hosts": [
-        "38.75.136.137",
-        "198.204.228.26"
+        "107.150.60.122",
+        "38.75.136.137"
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 0.9,
+      "response_seconds": 0.87,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
@@ -2269,7 +2340,7 @@
           "host": "107.150.60.122",
           "ok": true,
           "1080p": true,
-          "response_seconds": 1.13,
+          "response_seconds": 0.83,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -2282,7 +2353,7 @@
           "host": "63.141.230.178",
           "ok": true,
           "1080p": true,
-          "response_seconds": 2.34,
+          "response_seconds": 0.91,
           "width": 1920,
           "height": 1080,
           "codec": "h264",
@@ -2298,7 +2369,7 @@
       ],
       "ok": true,
       "1080p": true,
-      "response_seconds": 1.13,
+      "response_seconds": 0.83,
       "width": 1920,
       "height": 1080,
       "codec": "h264",
