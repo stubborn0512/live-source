@@ -223,11 +223,15 @@ def _channel_labels() -> dict[str, tuple[set[str], bool]]:
 
 def _build_source_index(timeout: int) -> dict[str, list[str]]:
     global SOURCE_INDEX_CACHE
-    with SOURCE_LOCK:
-        if SOURCE_INDEX_CACHE is not None:
-            return {key: value[:] for key, value in SOURCE_INDEX_CACHE.items()}
 
-    index = {channel_id: [] for channel_id in _channel_labels()}
+    # Only one channel worker builds the shared index. Other channel workers
+    # wait for the same cache instead of downloading every source list again.
+    with SOURCE_BUILD_LOCK:
+        with SOURCE_LOCK:
+            if SOURCE_INDEX_CACHE is not None:
+                return {key: value[:] for key, value in SOURCE_INDEX_CACHE.items()}
+
+        index = {channel_id: [] for channel_id in _channel_labels()}
     label_map = _channel_labels()
     sources = _ordered_sources(timeout)
 
