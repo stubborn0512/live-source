@@ -6,6 +6,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from checker.health import check, check_static
+from checker.identity import identify_cctv
 from generator.m3u import generate
 from providers.cctv import resolve_candidates
 
@@ -146,6 +147,23 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
                     if static is True:
                         result_by_url[url]["ok"] = False
                         result_by_url[url]["1080p"] = False
+
+    # Phase 3: visual identity check. Resolution alone is not enough:
+    # public relays can serve another CCTV channel behind a misleading URL.
+    if channel_id.startswith("cctv"):
+        hd_for_identity = []
+        for index, url in enumerate(candidates):
+            result = result_by_url.get(url)
+            if result and result.get("ok") and result.get("1080p") and result.get("static") is not True:
+                hd_for_identity.append((url, result, index))
+        hd_for_identity.sort(key=_verified_sort_key)
+        for url, _, _ in hd_for_identity[:4]:
+            identity = identify_cctv(url, channel_id, timeout=checker["probe_seconds"])
+            result_by_url[url]["identity"] = identity.get("identity")
+            result_by_url[url]["identity_ocr"] = identity.get("ocr", "")
+            if identity.get("identity") == "wrong":
+                result_by_url[url]["ok"] = False
+                result_by_url[url]["1080p"] = False
 
     verified = _pick_two_sources(candidates, result_by_url)
 
