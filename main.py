@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from urllib.parse import urlparse
 
 from checker.health import check
 from generator.m3u import generate
@@ -10,6 +11,56 @@ from providers.cctv import resolve_candidates
 
 ROOT = Path(__file__).resolve().parent
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
+
+
+def _host(url: str) -> str:
+    try:
+        return (urlparse(url).hostname or "").lower()
+    except Exception:
+        return ""
+
+
+def _verified_sort_key(item: tuple[str, dict, int]) -> tuple[int, float, int]:
+    url, result, candidate_index = item
+    width = int(result.get("width") or 0)
+    height = int(result.get("height") or 0)
+    area = width * height
+    return (-area, float(result.get("response_seconds") or 9999), candidate_index)
+
+
+def _pick_two_sources(
+    candidates: list[str],
+    result_by_url: dict[str, dict],
+) -> list[tuple[str, dict]]:
+    verified = []
+    for index, url in enumerate(candidates):
+        result = result_by_url.get(url)
+        if result and result.get("ok") and result.get("1080p"):
+            verified.append((url, result, index))
+
+    verified.sort(key=_verified_sort_key)
+    if not verified:
+        return []
+
+    # Prefer source diversity: the backup should live on a different host
+    # when the public pool provides one. If not, keep the best two on the same
+    # host rather than dropping the second verified source.
+    first = verified[0]
+    selected = [first]
+    first_host = _host(first[0])
+
+    for candidate in verified[1:]:
+        if _host(candidate[0]) != first_host:
+            selected.append(candidate)
+            break
+
+    if len(selected) < 2:
+        for candidate in verified[1:]:
+            if candidate[0] != selected[0][0]:
+                selected.append(candidate)
+                break
+
+    return [(url, result) for url, result, _ in selected[:2]]
 
 
 def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
@@ -31,8 +82,11 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             "error": "no HLS candidate returned",
         }, None
 
+    static_cfg = checker.get("static_check", {})
     results = []
-    with ThreadPoolExecutor(max_workers=len(candidates)) as pool:
+    with ThreadPoolExecutor(max_workers=min(
+        len(candidates), checker.get("max_probe_workers", 12)
+    )) as pool:
         futures = {
             pool.submit(
                 check,
@@ -40,6 +94,9 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
                 timeout=checker["probe_seconds"],
                 min_width=checker["min_width"],
                 min_height=checker["min_height"],
+                static_check=bool(static_cfg.get("enabled", False)),
+                static_duration=int(static_cfg.get("duration_seconds", 6)),
+                freeze_seconds=int(static_cfg.get("freeze_seconds", 4)),
             ): url
             for url in candidates
         }
@@ -48,25 +105,24 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             try:
                 result = future.result()
             except Exception as exc:
-                result = {"ok": False, "1080p": False, "error": str(exc)}
+                result = {
+                    "ok": False,
+                    "1080p": False,
+                    "static": None,
+                    "error": str(exc),
+                }
             results.append((url, result))
 
     result_by_url = {url: result for url, result in results}
-
-    # Keep up to two distinct, independently verified 1080p sources for each
-    # channel. The candidate order already reflects provider/fresh-source
-    # priority, so the first two verified URLs become primary + backup.
-    verified = [
-        (url, result_by_url[url])
-        for url in candidates
-        if url in result_by_url
-        and result_by_url[url].get("ok")
-        and result_by_url[url].get("1080p")
-    ][:2]
+    verified = _pick_two_sources(candidates, result_by_url)
 
     if verified:
         sources = [
-            {"url": url, **result}
+            {
+                "url": url,
+                "host": _host(url),
+                **result,
+            }
             for url, result in verified
         ]
         primary_url = verified[0][0]
@@ -76,6 +132,7 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             "url": primary_url,
             "sources": sources,
             "source_count": len(sources),
+            "source_hosts": [source["host"] for source in sources],
             **verified[0][1],
         }
         return status, {
@@ -84,11 +141,13 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             "sources": sources,
         }
 
+    # Keep the best observed diagnostic even when no source reaches 1080p.
     url, result = max(
         results,
         key=lambda item: (
             int(item[1].get("ok", False)),
             int(item[1].get("width") or 0) * int(item[1].get("height") or 0),
+            -float(item[1].get("response_seconds") or 9999),
         ),
     )
     return {"id": channel_id, "name": name, "url": url, **result}, None
