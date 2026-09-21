@@ -80,3 +80,5 @@ def stream(channel_id: str):
     return StreamingResponse(
         _stream(x), media_type="video/mp2t",
         headers={"Cache-Control":"no-store","X-Live-Source-Channel":channel_id})
+
+# Render deployment verification: keep this marker under the gateway root.
