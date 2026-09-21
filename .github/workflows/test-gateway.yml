@@ -1,4 +1,5 @@
 name: Test failover gateway
+# Validation-only branch: exercises the live Render gateway.
 
 on:
   workflow_dispatch:
