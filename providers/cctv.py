@@ -153,7 +153,7 @@ WEISHI_LABELS = {
 def _extract_urls(text: str) -> list[str]:
     urls = []
     for match in URL_RE.findall(text):
-        url = match.rstrip("'\\"),;]")
+        url = match.rstrip("'\\\"),;]")
         if url.startswith(("http://", "https://")):
             urls.append(url)
     return urls
