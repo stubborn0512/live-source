@@ -23,6 +23,7 @@ def _is_static_stream(
     """
     cmd = [
         "ffmpeg",
+        "-4",
         "-hide_banner",
         "-loglevel", "error",
         "-i", url,
