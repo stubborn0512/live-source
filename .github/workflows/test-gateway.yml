@@ -8,6 +8,10 @@ on:
       - "gateway/**"
       - ".github/workflows/test-gateway.yml"
 
+concurrency:
+  group: gateway-smoke
+  cancel-in-progress: true
+
 jobs:
   smoke-test:
     runs-on: ubuntu-latest
