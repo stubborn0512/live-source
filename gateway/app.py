@@ -3,6 +3,7 @@ import os, subprocess, threading, time
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import PlainTextResponse, StreamingResponse
 APP = FastAPI(title="live-source failover gateway")
+# Deployment smoke marker: this file lives under Render root directory `gateway`.
 STATUS_URL = os.getenv("STATUS_URL", "https://raw.githubusercontent.com/stubborn0512/live-source/main/output/status.json")
 CACHE_TTL = int(os.getenv("STATUS_CACHE_TTL", "300"))
 _cache = {"at": 0.0, "data": None}; _lock = threading.Lock()
