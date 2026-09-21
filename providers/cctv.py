@@ -3,6 +3,9 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
+from threading import Lock
+from urllib.parse import urlparse
+
 import requests
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -30,17 +33,93 @@ GOODIPTV = {
 }
 
 V1 = {k: v.replace("live.goodiptv.club", "live.v1.mk") for k, v in GOODIPTV.items()}
-PUBLIC_LISTS = [
-    # Gitee public IPTV lists
-    "https://gitee.com/ZJHT0/tv-source/raw/master/iptv/iptv.m3u8",
-    "https://gitee.com/myitgit/iptv-sources/raw/gh-pages/txt/ycl_iptv.txt",
-    "https://gitee.com/user_0628/iptv/raw/master/CCTV.m3u8",
+GITHUB_LISTS = [
+    "https://raw.githubusercontent.com/best-fan/iptv-sources/main/cn_all.m3u8",
+    "https://raw.githubusercontent.com/Lightconer/TVBox-Sources/main/output/live.m3u",
     "https://raw.githubusercontent.com/CCSH/IPTV/main/live.txt",
     "https://raw.githubusercontent.com/jura00/vms/main/hd.m3u8",
     "https://raw.githubusercontent.com/kaige-cai/live/main/live.m3u",
     "https://raw.githubusercontent.com/T00700/TVBoxSE/master/live.txt",
     "https://raw.githubusercontent.com/TCatCloud/IPTV/Files/CCTV.m3u",
 ]
+
+# Gitee remains a lower-priority fallback because these repositories are less
+# consistently maintained than the actively updated GitHub sources.
+GITEE_FALLBACK_LISTS = [
+    "https://gitee.com/ZJHT0/tv-source/raw/master/iptv/iptv.m3u8",
+    "https://gitee.com/myitgit/iptv-sources/raw/gh-pages/txt/ycl_iptv.txt",
+    "https://gitee.com/user_0628/iptv/raw/master/CCTV.m3u8",
+]
+
+SOURCE_CACHE: dict[str, str] = {}
+SOURCE_ORDER_CACHE: list[str] | None = None
+SOURCE_LOCK = Lock()
+URL_RE = re.compile(r"https?://[^\s<>\\"']+")
+
+
+def _github_repo(source: str) -> str | None:
+    if urlparse(source).netloc.lower() != "raw.githubusercontent.com":
+        return None
+    parts = urlparse(source).path.strip("/").split("/")
+    if len(parts) < 2:
+        return None
+    return f"{parts[0]}/{parts[1]}"
+
+
+def _ordered_sources(timeout: int) -> list[str]:
+    global SOURCE_ORDER_CACHE
+    with SOURCE_LOCK:
+        if SOURCE_ORDER_CACHE is not None:
+            return SOURCE_ORDER_CACHE[:]
+
+    ranked = []
+    for index, source in enumerate(GITHUB_LISTS):
+        repo = _github_repo(source)
+        pushed_at = ""
+        if repo:
+            try:
+                response = requests.get(
+                    f"https://api.github.com/repos/{repo}",
+                    timeout=min(timeout, 5),
+                    headers={
+                        "Accept": "application/vnd.github+json",
+                        "User-Agent": "live-source/1.0",
+                    },
+                )
+                if response.ok:
+                    pushed_at = response.json().get("pushed_at") or ""
+            except Exception:
+                pass
+        ranked.append((pushed_at, index, source))
+
+    ranked.sort(key=lambda item: (bool(item[0]), item[0], -item[1]), reverse=True)
+    ordered = [source for _, _, source in ranked] + GITEE_FALLBACK_LISTS
+
+    with SOURCE_LOCK:
+        SOURCE_ORDER_CACHE = ordered
+    return ordered[:]
+
+
+def _load_source(source: str, timeout: int) -> str:
+    with SOURCE_LOCK:
+        if source in SOURCE_CACHE:
+            return SOURCE_CACHE[source]
+
+    try:
+        response = requests.get(
+            source,
+            timeout=min(timeout, 8),
+            headers={"User-Agent": "Mozilla/5.0"},
+        )
+        response.raise_for_status()
+        text = response.text
+    except Exception:
+        text = ""
+
+    with SOURCE_LOCK:
+        SOURCE_CACHE[source] = text
+    return text
+
 
 def _read_browser(channel_id: str) -> str | None:
     if not RESOLVED.exists():
@@ -71,38 +150,52 @@ WEISHI_LABELS = {
     "xinjiang": {"新疆卫视", "新疆台"}, "neimenggu": {"内蒙古卫视", "内蒙古台"},
 }
 
-def _discover_public_lists(channel_id: str, timeout: int, channel_name: str | None = None) -> list[str]:
+def _extract_urls(text: str) -> list[str]:
+    urls = []
+    for match in URL_RE.findall(text):
+        url = match.rstrip("'\\"),;]")
+        if url.startswith(("http://", "https://")):
+            urls.append(url)
+    return urls
+
+
+def _discover_public_lists(
+    channel_id: str, timeout: int, channel_name: str | None = None
+) -> list[str]:
     if channel_id.startswith("cctv"):
         num = channel_id.replace("cctv", "")
-        labels = {f"cctv{num}", f"cctv-{num}", f"CCTV-{num}", f"CCTV{num}"}
+        labels = {
+            f"cctv{num}",
+            f"cctv-{num}",
+            f"CCTV-{num}",
+            f"CCTV{num}",
+        }
         if channel_id == "cctv5plus":
             labels |= {"cctv5+", "cctv-5+", "CCTV5+", "CCTV-5+"}
     else:
         labels = set(WEISHI_LABELS.get(channel_id, set()))
         if channel_name:
             labels.add(channel_name)
+
     found = []
-    for source in PUBLIC_LISTS:
-        try:
-            text = requests.get(
-                source, timeout=min(timeout, 8),
-                headers={"User-Agent": "Mozilla/5.0"},
-            ).text
-        except Exception:
+    for source in _ordered_sources(timeout):
+        text = _load_source(source, timeout)
+        if not text:
             continue
+
         lines = text.splitlines()
         for i, line in enumerate(lines):
-            if "," in line:
-                name, url = line.split(",", 1)
-                if any(label.lower() in name.strip().lower() for label in labels) and url.strip().startswith(("http://", "https://")):
-                    found.append(url.strip())
-            if line.startswith("#EXTINF") and i + 1 < len(lines):
-                low = line.lower()
-                if any(label.lower() in low for label in labels):
-                    url = lines[i + 1].strip()
-                    if url.startswith(("http://", "https://")):
-                        found.append(url)
-    return found
+            low = line.lower()
+            if not any(label.lower() in low for label in labels):
+                continue
+
+            # Inspect the current and following lines. Do not require a
+            # .m3u8 suffix: some public lists rename/hide it as .txt, .m3u,
+            # or omit the extension entirely.
+            nearby = "\n".join(lines[i : min(i + 4, len(lines))])
+            found.extend(_extract_urls(nearby))
+
+    return list(dict.fromkeys(found))
 
 def resolve_candidates(channel_id: str, timeout: int = 10, channel_name: str | None = None) -> list[str]:
     discovered = _discover_public_lists(channel_id, timeout, channel_name)
