@@ -51,16 +51,38 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
                 result = {"ok": False, "1080p": False, "error": str(exc)}
             results.append((url, result))
 
-    verified = next(
-        ((url, result) for url, result in results
-         if result.get("ok") and result.get("1080p")),
-        None,
-    )
+    result_by_url = {url: result for url, result in results}
+
+    # Keep up to two distinct, independently verified 1080p sources for each
+    # channel. The candidate order already reflects provider/fresh-source
+    # priority, so the first two verified URLs become primary + backup.
+    verified = [
+        (url, result_by_url[url])
+        for url in candidates
+        if url in result_by_url
+        and result_by_url[url].get("ok")
+        and result_by_url[url].get("1080p")
+    ][:2]
 
     if verified:
-        url, result = verified
-        status = {"id": channel_id, "name": name, "url": url, **result}
-        return status, {"id": channel_id, "name": name, "url": url}
+        sources = [
+            {"url": url, **result}
+            for url, result in verified
+        ]
+        primary_url = verified[0][0]
+        status = {
+            "id": channel_id,
+            "name": name,
+            "url": primary_url,
+            "sources": sources,
+            "source_count": len(sources),
+            **verified[0][1],
+        }
+        return status, {
+            "id": channel_id,
+            "name": name,
+            "sources": sources,
+        }
 
     url, result = max(
         results,
@@ -100,7 +122,8 @@ def main() -> None:
                 playlist_items_by_id[item["id"]] = item
                 print(
                     f'[OK] {channel["id"]}: '
-                    f'{status.get("width")}x{status.get("height")}',
+                    f'{status.get("width")}x{status.get("height")} '
+                    f'({status.get("source_count", 1)} sources)',
                     flush=True,
                 )
             else:
