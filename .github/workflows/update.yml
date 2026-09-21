@@ -32,7 +32,7 @@ jobs:
       - name: Install FFmpeg
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          sudo apt-get install -y ffmpeg tesseract-ocr tesseract-ocr-chi-sim
 
       - name: Install Python dependencies
         run: |
