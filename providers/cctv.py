@@ -4,6 +4,7 @@ import json
 import re
 from pathlib import Path
 from threading import Lock
+from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse
 
 import requests
