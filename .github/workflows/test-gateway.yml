@@ -2,7 +2,6 @@ name: Test failover gateway
 
 on:
   workflow_dispatch:
-  pull_request:
   push:
     paths:
       - "gateway/**"
