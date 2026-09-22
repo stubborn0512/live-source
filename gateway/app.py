@@ -316,7 +316,7 @@ def _rewrite_playlist(cid: str, base_url: str, text: str, source_index: int | No
             upstream = urljoin(base_url, uri)
             if _valid_upstream_url(upstream):
                 token = _token_for("seg", upstream)
-                _remember_url(cid, token, upstream)
+                _remember_url(cid, token, upstream, source_index)
                 line = prefix + 'URI="/hls/' + cid + '/' + token + '.bin"' + suffix
             out.append(line)
             continue
@@ -341,7 +341,7 @@ def _rewrite_playlist(cid: str, base_url: str, text: str, source_index: int | No
             token = _token_for("seg", upstream)
             local = f"/hls/{cid}/{token}.ts"
 
-        _remember_url(cid, token, upstream)
+        _remember_url(cid, token, upstream, source_index)
         out.append(local)
         expect_uri_kind = None
 
