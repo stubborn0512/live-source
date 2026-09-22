@@ -263,11 +263,11 @@ def _state(cid):
         )
 
 
-def _remember_url(cid: str, token: str, url: str):
+def _remember_url(cid: str, token: str, url: str, source_index: int | None = None):
     state = _state(cid)
     with _hls_lock:
         now = time.time()
-        state["maps"][token] = (url, now)
+        state["maps"][token] = (url, now, source_index)
         cutoff = now - HLS_MAP_TTL
         state["maps"] = {
             k: v for k, v in state["maps"].items() if v[1] >= cutoff
@@ -288,7 +288,7 @@ def _lookup_url(cid: str, token: str) -> str | None:
         return item[0]
 
 
-def _rewrite_playlist(cid: str, base_url: str, text: str) -> str:
+def _rewrite_playlist(cid: str, base_url: str, text: str, source_index: int | None = None) -> str:
     lines = text.splitlines()
     out = []
     expect_uri_kind = None
@@ -305,7 +305,7 @@ def _rewrite_playlist(cid: str, base_url: str, text: str) -> str:
             upstream = urljoin(base_url, uri)
             if _valid_upstream_url(upstream):
                 token = _token_for("key", upstream)
-                _remember_url(cid, token, upstream)
+                _remember_url(cid, token, upstream, source_index)
                 line = prefix + 'URI="/hls/' + cid + '/' + token + '.key"' + suffix
             out.append(line)
             continue
@@ -373,7 +373,7 @@ def _fetch_playlist(cid: str, channel):
                 raise ValueError("upstream is not an HLS playlist")
             if "#EXTINF:" not in text and "#EXT-X-STREAM-INF" not in text:
                 raise ValueError("HLS playlist has no media entries")
-            rewritten = _rewrite_playlist(cid, r.url, text)
+            rewritten = _rewrite_playlist(cid, r.url, text, index)
             with _hls_lock:
                 state["source_index"] = index
                 state["updated_at"] = time.time()
@@ -400,6 +400,17 @@ def _proxy_bytes(cid: str, token: str, suffix: str):
         )
         r.raise_for_status()
     except Exception as exc:
+        # If an HLS segment fails, advance this channel to the next source.
+        # The next playlist refresh then rebuilds against the fallback source.
+        with _hls_lock:
+            state = _hls.get(cid)
+            item = state.get("maps", {}).get(token) if state else None
+            if state and item and len(item) >= 3 and item[2] is not None:
+                source_index = int(item[2])
+                urls = _sources(_channel(cid))
+                if urls and state.get("source_index") == source_index:
+                    state["source_index"] = (source_index + 1) % len(urls)
+                    state["updated_at"] = time.time()
         raise HTTPException(502, f"upstream segment failed: {exc}")
 
     media_type = (
@@ -517,7 +528,7 @@ def hls_nested_playlist(channel_id: str, token: str):
             headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153.0 Safari/537.36"},
         )
         r.raise_for_status()
-        text = _rewrite_playlist(channel_id, r.url, r.text)
+        text = _rewrite_playlist(channel_id, r.url, r.text, None)
     except Exception as exc:
         raise HTTPException(502, f"upstream playlist failed: {exc}")
     return PlainTextResponse(
