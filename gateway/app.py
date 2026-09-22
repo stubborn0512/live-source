@@ -5,7 +5,8 @@ import os
 import subprocess
 import threading
 import time
-from pathlib import Path
+import xml.etree.ElementTree as ET
+from datetime import datetime, timezone, timedelta
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -22,6 +23,10 @@ STATUS_URL = os.getenv(
 CACHE_TTL = int(os.getenv("STATUS_CACHE_TTL", "300"))
 HLS_TIMEOUT = float(os.getenv("HLS_TIMEOUT", "8"))
 HLS_MAP_TTL = int(os.getenv("HLS_MAP_TTL", "30"))
+EPG_URL = os.getenv("EPG_URL", "https://live.fanmingming.com/e.xml")
+EPG_CACHE_TTL = int(os.getenv("EPG_CACHE_TTL", "600"))
+_epg_cache = {"at": 0.0, "data": None}
+_epg_lock = threading.Lock()
 
 _cache = {"at": 0.0, "data": None}
 _cache_lock = threading.Lock()
@@ -44,6 +49,140 @@ def _load_status():
     with _cache_lock:
         _cache.update(at=now, data=data)
     return data
+
+
+
+def _norm_name(value: str) -> str:
+    return "".join(ch.lower() for ch in str(value) if ch.isalnum())
+
+
+def _channel_aliases(channel_id: str, name: str):
+    aliases = {name, channel_id}
+    if channel_id.startswith("cctv"):
+        n = channel_id[4:]
+        aliases.update({f"CCTV{n}", f"CCTV-{n}", f"CCTV-{n} 综合"})
+        if n == "5plus":
+            aliases.update({"CCTV5+", "CCTV-5+", "CCTV-5+ 体育赛事"})
+    return {_norm_name(x) for x in aliases if x}
+
+
+def _parse_epg_xml(content: bytes):
+    root = ET.fromstring(content)
+    programs = {}
+    for item in root.findall(".//programme"):
+        start = item.attrib.get("start", "")
+        stop = item.attrib.get("stop", "")
+        channel = _norm_name(item.attrib.get("channel", ""))
+        title_node = item.find("title")
+        if not channel or title_node is None or not (title_node.text or "").strip():
+            continue
+        try:
+            start_dt = _parse_xmltv_time(start)
+            stop_dt = _parse_xmltv_time(stop) if stop else start_dt
+        except Exception:
+            continue
+        programs.setdefault(channel, []).append({
+            "title": (title_node.text or "").strip(),
+            "start": start_dt,
+            "stop": stop_dt,
+        })
+    for items in programs.values():
+        items.sort(key=lambda x: x["start"])
+    return programs
+
+
+def _parse_xmltv_time(value: str):
+    value = value.strip()
+    if not value:
+        raise ValueError("empty time")
+    # XMLTV usually uses YYYYMMDDHHMMSS +0800.
+    base = value[:14]
+    offset = value[15:20] if len(value) >= 20 and value[14] == " " else "+0000"
+    dt = datetime.strptime(base, "%Y%m%d%H%M%S")
+    sign = 1 if offset[0] == "+" else -1
+    hours = int(offset[1:3])
+    minutes = int(offset[3:5])
+    tz = timezone(sign * timedelta(hours=hours, minutes=minutes))
+    return dt.replace(tzinfo=tz).astimezone(timezone(timedelta(hours=8)))
+
+
+def _load_epg():
+    now = time.time()
+    with _epg_lock:
+        if _epg_cache["data"] is not None and now - _epg_cache["at"] < EPG_CACHE_TTL:
+            return _epg_cache["data"]
+    r = requests.get(
+        EPG_URL,
+        timeout=20,
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    r.raise_for_status()
+    data = _parse_epg_xml(r.content)
+    with _epg_lock:
+        _epg_cache.update(at=now, data=data)
+    return data
+
+
+def _format_time(dt):
+    return dt.strftime("%H:%M")
+
+
+def _epg_for_channel(channel_id: str, name: str, limit: int = 8):
+    try:
+        programs = _load_epg()
+    except Exception:
+        return {"current": None, "next": None, "schedule": [], "available": False}
+    aliases = _channel_aliases(channel_id, name)
+    matched = []
+    for key, items in programs.items():
+        if key in aliases:
+            matched.extend(items)
+    # De-duplicate identical entries from multiple aliases.
+    unique = {}
+    for item in matched:
+        unique[(item["start"], item["stop"], item["title"])] = item
+    matched = sorted(unique.values(), key=lambda x: x["start"])
+    now = datetime.now(timezone(timedelta(hours=8)))
+    current = None
+    future = []
+    for item in matched:
+        if item["start"] <= now < item["stop"]:
+            current = item
+        elif item["start"] > now:
+            future.append(item)
+    schedule = [current] if current else []
+    schedule.extend(future[:limit - len(schedule)])
+    def public(item):
+        if not item:
+            return None
+        total = max(1, int((item["stop"] - item["start"]).total_seconds()))
+        elapsed = max(0, min(total, int((now - item["start"]).total_seconds())))
+        return {
+            "title": item["title"],
+            "start": _format_time(item["start"]),
+            "stop": _format_time(item["stop"]),
+            "start_ts": int(item["start"].timestamp()),
+            "stop_ts": int(item["stop"].timestamp()),
+            "progress": round(elapsed * 100 / total, 1),
+        }
+    return {
+        "current": public(current),
+        "next": public(future[0] if future else None),
+        "schedule": [public(x) for x in schedule if x],
+        "available": bool(matched),
+    }
+
+
+def _all_epg(channels, ids=None):
+    wanted = set(ids or [])
+    result = []
+    for channel in channels:
+        cid = str(channel.get("id", ""))
+        if wanted and cid not in wanted:
+            continue
+        item = _epg_for_channel(cid, str(channel.get("name", "")))
+        result.append({"id": cid, "name": channel.get("name"), **item})
+    return result
 
 
 def _channel(cid):
@@ -332,6 +471,18 @@ def playlist(request: Request):
         )
         lines.append(str(request.base_url).rstrip("/") + "/stream/" + cid)
     return "\n".join(lines) + "\n"
+
+
+@APP.get("/epg.json")
+def epg(ids: str | None = None):
+    data = _load_status()
+    wanted = [x.strip() for x in (ids or "").split(",") if x.strip()]
+    return {
+        "source": "cached XMLTV",
+        "updated_at": int(_epg_cache.get("at", 0)),
+        "channels": _all_epg(data["channels"], wanted),
+    }
+
 
 
 @APP.get("/stream/{channel_id}")
