@@ -23,7 +23,7 @@ STATUS_URL = os.getenv(
 CACHE_TTL = int(os.getenv("STATUS_CACHE_TTL", "300"))
 HLS_TIMEOUT = float(os.getenv("HLS_TIMEOUT", "8"))
 HLS_MAP_TTL = int(os.getenv("HLS_MAP_TTL", "30"))
-EPG_URL = os.getenv("EPG_URL", "https://live.fanmingming.com/e.xml")
+EPG_URL = os.getenv("EPG_URL", "https://raw.githubusercontent.com/fanmingming/live/main/e.xml")
 EPG_CACHE_TTL = int(os.getenv("EPG_CACHE_TTL", "600"))
 _epg_cache = {"at": 0.0, "data": None}
 _epg_lock = threading.Lock()
@@ -66,13 +66,37 @@ def _channel_aliases(channel_id: str, name: str):
     return {_norm_name(x) for x in aliases if x}
 
 
+def _epg_aliases(value: str):
+    raw = str(value or "").strip()
+    normalized = _norm_name(raw)
+    aliases = {normalized} if normalized else set()
+    for suffix in (".cn", ".com", ".tv", "_cn", "-cn"):
+        if raw.lower().endswith(suffix):
+            aliases.add(_norm_name(raw[:-len(suffix)]))
+    return aliases
+
+
 def _parse_epg_xml(content: bytes):
     root = ET.fromstring(content)
+    channel_aliases = {}
+    for node in root.findall(".//channel"):
+        cid = node.attrib.get("id", "")
+        names = [cid]
+        for child in node.findall("display-name"):
+            if child.text:
+                names.append(child.text)
+        aliases = set()
+        for value in names:
+            aliases.update(_epg_aliases(value))
+        for alias in aliases:
+            channel_aliases.setdefault(alias, set()).update(aliases)
+
     programs = {}
     for item in root.findall(".//programme"):
         start = item.attrib.get("start", "")
         stop = item.attrib.get("stop", "")
-        channel = _norm_name(item.attrib.get("channel", ""))
+        raw_channel = item.attrib.get("channel", "")
+        channel = _norm_name(raw_channel)
         title_node = item.find("title")
         if not channel or title_node is None or not (title_node.text or "").strip():
             continue
@@ -81,11 +105,15 @@ def _parse_epg_xml(content: bytes):
             stop_dt = _parse_xmltv_time(stop) if stop else start_dt
         except Exception:
             continue
-        programs.setdefault(channel, []).append({
+        aliases = set(channel_aliases.get(channel, {channel}))
+        aliases.update(_epg_aliases(raw_channel))
+        item_data = {
             "title": (title_node.text or "").strip(),
             "start": start_dt,
             "stop": stop_dt,
-        })
+        }
+        for alias in aliases:
+            programs.setdefault(alias, []).append(item_data)
     for items in programs.values():
         items.sort(key=lambda x: x["start"])
     return programs
