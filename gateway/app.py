@@ -398,14 +398,19 @@ def _rewrite_playlist(cid: str, base_url: str, text: str, source_index: int | No
     return "\n".join(out) + "\n"
 
 
-def _fetch_playlist(cid: str, channel, force_next: bool = False):
+def _fetch_playlist(cid: str, channel, force_next: bool = False, preferred_index: int | None = None):
     urls = _sources(channel)
     if not urls:
         raise HTTPException(502, "no live source")
 
     state = _state(cid)
     with _hls_lock:
-        start = (int(state.get("source_index", 0)) + (1 if force_next and len(urls) > 1 else 0)) % len(urls)
+        if preferred_index is not None and 0 <= int(preferred_index) < len(urls):
+            start = int(preferred_index)
+        else:
+            start = int(state.get("source_index", 0))
+        if force_next and len(urls) > 1:
+            start = (start + 1) % len(urls)
 
     last_error = None
     for offset in range(len(urls)):
@@ -500,23 +505,37 @@ def health():
 @APP.get("/channels.json")
 def channels():
     data = _load_status()
+    source_version = str(data.get("generated_at") or data.get("updated_at") or "")
+    result = []
+    for x in data["channels"]:
+        if not (x.get("id") and x.get("name") and x.get("ok") and x.get("1080p")):
+            continue
+        ranked = _sources(x)
+        metric_map = {
+            str(item.get("url")): float(item.get("response_seconds") or 9999)
+            for item in x.get("sources", [])
+            if item.get("url")
+        }
+        metrics = [metric_map.get(url, 9999.0) for url in ranked]
+        fingerprint = hashlib.sha256("\n".join(ranked).encode("utf-8")).hexdigest()[:20]
+        result.append({
+            "id": x.get("id"),
+            "name": x.get("name"),
+            "group": "CCTV" if str(x.get("id", "")).startswith("cctv") else "卫视",
+            "width": x.get("width"),
+            "height": x.get("height"),
+            "source_count": len(ranked),
+            "preferred_source_index": 0 if ranked else -1,
+            "source_metrics": metrics,
+            "source_fingerprint": fingerprint,
+            "source_version": source_version,
+            "ok": bool(x.get("ok")),
+            "1080p": bool(x.get("1080p")),
+        })
     return {
         "count": int(data.get("count", 0)),
-        "updated_at": data.get("updated_at"),
-        "channels": [
-            {
-                "id": x.get("id"),
-                "name": x.get("name"),
-                "group": "CCTV" if str(x.get("id", "")).startswith("cctv") else "卫视",
-                "width": x.get("width"),
-                "height": x.get("height"),
-                "source_count": x.get("source_count", 0),
-                "ok": bool(x.get("ok")),
-                "1080p": bool(x.get("1080p")),
-            }
-            for x in data["channels"]
-            if x.get("id") and x.get("name") and x.get("ok") and x.get("1080p")
-        ],
+        "source_version": source_version,
+        "channels": result,
     }
 
 
@@ -585,8 +604,13 @@ def switch_hls_source(channel_id: str):
 
 
 @APP.get("/hls/{channel_id}/index.m3u8")
-def hls_playlist(channel_id: str, retry: int = 0):
-    text = _fetch_playlist(channel_id, _channel(channel_id), force_next=retry > 0)
+def hls_playlist(channel_id: str, retry: int = 0, source: int | None = None):
+    text = _fetch_playlist(
+        channel_id,
+        _channel(channel_id),
+        force_next=retry > 0,
+        preferred_index=source,
+    )
     return PlainTextResponse(
         text,
         media_type="application/vnd.apple.mpegurl",
