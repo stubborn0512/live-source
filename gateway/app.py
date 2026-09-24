@@ -146,13 +146,20 @@ def _load_epg():
     with _epg_lock:
         if _epg_cache["data"] is not None and now - _epg_cache["at"] < EPG_CACHE_TTL:
             return _epg_cache["data"]
-    r = requests.get(
-        EPG_URL,
-        timeout=20,
-        headers={"User-Agent": "Mozilla/5.0"},
-    )
-    r.raise_for_status()
-    data = _parse_epg_xml(r.content)
+    last_error = None
+    data = None
+    for url in dict.fromkeys([EPG_URL, "https://live.fanmingming.cn/e.xml"]):
+        try:
+            r = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
+            r.raise_for_status()
+            data = _parse_epg_xml(r.content)
+            if not data["programs"]:
+                raise ValueError("empty XMLTV")
+            break
+        except Exception as exc:
+            last_error = exc
+    if data is None:
+        raise RuntimeError(f"EPG upstream unavailable: {last_error}")
     with _epg_lock:
         _epg_cache.update(at=now, data=data)
     return data
@@ -574,7 +581,7 @@ def switch_hls_source(channel_id: str):
     with _hls_lock:
         state["source_index"] = (int(state.get("source_index", 0)) + 1) % len(urls)
         state["updated_at"] = time.time()
-    return {"switched": True, "source_count": len(urls)}
+    return {"switched": True, "source_count": len(urls), "line": state["source_index"] + 1}
 
 
 @APP.get("/hls/{channel_id}/index.m3u8")
