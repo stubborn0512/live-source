@@ -29,7 +29,7 @@ def _verified_sort_key(item: tuple[str, dict, int]) -> tuple[int, float, int]:
     return (-area, float(result.get("response_seconds") or 9999), candidate_index)
 
 
-def _pick_two_sources(
+def _pick_three_sources(
     candidates: list[str],
     result_by_url: dict[str, dict],
 ) -> list[tuple[str, dict]]:
@@ -38,29 +38,26 @@ def _pick_two_sources(
         result = result_by_url.get(url)
         if result and result.get("ok") and result.get("1080p") and result.get("static") is not True:
             verified.append((url, result, index))
-
     verified.sort(key=_verified_sort_key)
-    if not verified:
-        return []
-
-    # Prefer source diversity: the backup should live on a different host
-    # when the public pool provides one.
-    first = verified[0]
-    selected = [first]
-    first_host = _host(first[0])
-
-    for candidate in verified[1:]:
-        if _host(candidate[0]) != first_host:
+    selected = []
+    used_hosts = set()
+    # Prefer three independent hosts; allow shared hosts if necessary.
+    for candidate in verified:
+        host = _host(candidate[0])
+        if host not in used_hosts:
             selected.append(candidate)
+            used_hosts.add(host)
+        if len(selected) == 3:
             break
-
-    if len(selected) < 2:
-        for candidate in verified[1:]:
-            if candidate[0] != selected[0][0]:
+    if len(selected) < 3:
+        used_urls = {item[0] for item in selected}
+        for candidate in verified:
+            if candidate[0] not in used_urls:
                 selected.append(candidate)
+                used_urls.add(candidate[0])
+            if len(selected) == 3:
                 break
-
-    return [(url, result) for url, result, _ in selected[:2]]
+    return [(url, result) for url, result, _ in selected]
 
 
 def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
@@ -116,7 +113,7 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
 
     result_by_url = {url: result for url, result in results}
 
-    # Phase 2: static-image filtering only on the best four verified 1080p
+    # Phase 2: static-image filtering only on the best six verified 1080p
     # candidates. A timeout/error in this secondary test is non-fatal.
     if static_cfg.get("enabled", False):
         hd_candidates = []
@@ -125,9 +122,9 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             if result and result.get("ok") and result.get("1080p"):
                 hd_candidates.append((url, result, index))
         hd_candidates.sort(key=_verified_sort_key)
-        top_hd = [(url, result) for url, result, _ in hd_candidates[:4]]
+        top_hd = [(url, result) for url, result, _ in hd_candidates[:6]]
         if top_hd:
-            with ThreadPoolExecutor(max_workers=min(len(top_hd), 4)) as pool:
+            with ThreadPoolExecutor(max_workers=min(len(top_hd), 6)) as pool:
                 futures = {
                     pool.submit(
                         check_static,
@@ -157,7 +154,7 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
             if result and result.get("ok") and result.get("1080p") and result.get("static") is not True:
                 hd_for_identity.append((url, result, index))
         hd_for_identity.sort(key=_verified_sort_key)
-        for url, _, _ in hd_for_identity[:4]:
+        for url, _, _ in hd_for_identity[:6]:
             identity = identify_cctv(url, channel_id, timeout=checker["probe_seconds"])
             result_by_url[url]["identity"] = identity.get("identity")
             result_by_url[url]["identity_ocr"] = identity.get("ocr", "")
@@ -165,7 +162,7 @@ def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
                 result_by_url[url]["ok"] = False
                 result_by_url[url]["1080p"] = False
 
-    verified = _pick_two_sources(candidates, result_by_url)
+    verified = _pick_three_sources(candidates, result_by_url)
 
     if verified:
         sources = [
