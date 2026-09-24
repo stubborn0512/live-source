@@ -33,32 +33,66 @@ def _pick_three_sources(
     candidates: list[str],
     result_by_url: dict[str, dict],
 ) -> list[tuple[str, dict]]:
-    verified = []
+    def sort_key(item: tuple[str, dict, int]) -> tuple[int, float, int]:
+        url, result, candidate_index = item
+        width = int(result.get("width") or 0)
+        height = int(result.get("height") or 0)
+        area = width * height
+        return (-area, float(result.get("response_seconds") or 9999), candidate_index)
+
+    hd_verified = []
+    any_verified = []
     for index, url in enumerate(candidates):
         result = result_by_url.get(url)
-        if result and result.get("ok") and result.get("1080p") and result.get("static") is not True:
-            verified.append((url, result, index))
-    verified.sort(key=_verified_sort_key)
+        if not result or not result.get("ok") or result.get("static") is True:
+            continue
+        any_verified.append((url, result, index))
+        if result.get("1080p"):
+            hd_verified.append((url, result, index))
+
+    hd_verified.sort(key=sort_key)
+    any_verified.sort(key=sort_key)
+
     selected = []
     used_hosts = set()
-    # Prefer three independent hosts; allow shared hosts if necessary.
-    for candidate in verified:
+
+    # Keep the best 1080p sources first, preferring independent hosts.
+    for candidate in hd_verified:
         host = _host(candidate[0])
         if host not in used_hosts:
             selected.append(candidate)
             used_hosts.add(host)
         if len(selected) == 3:
             break
+
+    # Guarantee a second usable backup where the candidate pool permits it,
+    # even if that backup is lower resolution.
+    if len(selected) < 2:
+        selected_urls = {item[0] for item in selected}
+        for candidate in any_verified:
+            host = _host(candidate[0])
+            if candidate[0] in selected_urls:
+                continue
+            if host in used_hosts and any(_host(x[0]) != host for x in any_verified):
+                continue
+            selected.append(candidate)
+            selected_urls.add(candidate[0])
+            used_hosts.add(host)
+            if len(selected) >= 2:
+                break
+
+    # Fill the third slot from any verified source.
     if len(selected) < 3:
-        used_urls = {item[0] for item in selected}
-        for candidate in verified:
-            if candidate[0] not in used_urls:
-                selected.append(candidate)
-                used_urls.add(candidate[0])
+        selected_urls = {item[0] for item in selected}
+        for candidate in any_verified:
+            if candidate[0] in selected_urls:
+                continue
+            selected.append(candidate)
+            selected_urls.add(candidate[0])
             if len(selected) == 3:
                 break
-    return [(url, result) for url, result, _ in selected]
 
+    return [(url, result) for url, result, _ in selected]
 
 def process_channel(channel: dict, checker: dict) -> tuple[dict, dict | None]:
     channel_id = channel["id"]
