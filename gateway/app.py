@@ -376,14 +376,14 @@ def _rewrite_playlist(cid: str, base_url: str, text: str, source_index: int | No
     return "\n".join(out) + "\n"
 
 
-def _fetch_playlist(cid: str, channel):
+def _fetch_playlist(cid: str, channel, force_next: bool = False):
     urls = _sources(channel)
     if not urls:
         raise HTTPException(502, "no live source")
 
     state = _state(cid)
     with _hls_lock:
-        start = int(state.get("source_index", 0)) % len(urls)
+        start = (int(state.get("source_index", 0)) + (1 if force_next and len(urls) > 1 else 0)) % len(urls)
 
     last_error = None
     for offset in range(len(urls)):
@@ -550,8 +550,8 @@ def rotate_source(channel_id: str):
 
 
 @APP.get("/hls/{channel_id}/index.m3u8")
-def hls_playlist(channel_id: str):
-    text = _fetch_playlist(channel_id, _channel(channel_id))
+def hls_playlist(channel_id: str, retry: int = 0):
+    text = _fetch_playlist(channel_id, _channel(channel_id), force_next=retry > 0)
     return PlainTextResponse(
         text,
         media_type="application/vnd.apple.mpegurl",
