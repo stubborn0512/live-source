@@ -224,7 +224,15 @@ def _sources(channel):
     urls = [s.get("url") for s in channel.get("sources", []) if s.get("url")]
     if not urls and channel.get("url"):
         urls = [channel["url"]]
-    return list(dict.fromkeys(urls))
+    # Prefer measured low-latency healthy candidates; keep every backup.
+    ranked = sorted(
+        [x for x in channel.get("sources", []) if x.get("url")],
+        key=lambda x: (
+            not bool(x.get("ok", True)),
+            float(x.get("response_seconds") or 999),
+        ),
+    )
+    return list(dict.fromkeys([x["url"] for x in ranked] + urls))
 
 
 def _ffmpeg(url):
