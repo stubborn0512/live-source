@@ -92,6 +92,13 @@ def _parse_epg_xml(content: bytes):
             channel_aliases.setdefault(alias, set()).update(aliases)
 
     programs = {}
+    channel_names = {}
+    for channel in root.findall(".//channel"):
+        cid = _norm_name(channel.attrib.get("id", ""))
+        if cid:
+            for display in channel.findall("display-name"):
+                if display.text:
+                    channel_names.setdefault(cid, set()).add(_norm_name(display.text))
     for item in root.findall(".//programme"):
         start = item.attrib.get("start", "")
         stop = item.attrib.get("stop", "")
@@ -116,7 +123,7 @@ def _parse_epg_xml(content: bytes):
             programs.setdefault(alias, []).append(item_data)
     for items in programs.values():
         items.sort(key=lambda x: x["start"])
-    return programs
+    return {"programs": programs, "names": channel_names}
 
 
 def _parse_xmltv_time(value: str):
@@ -125,7 +132,7 @@ def _parse_xmltv_time(value: str):
         raise ValueError("empty time")
     # XMLTV usually uses YYYYMMDDHHMMSS +0800.
     base = value[:14]
-    offset = value[15:20] if len(value) >= 20 and value[14] == " " else "+0000"
+    offset = value[15:20] if len(value) >= 20 and value[14] == " " else "+0800"
     dt = datetime.strptime(base, "%Y%m%d%H%M%S")
     sign = 1 if offset[0] == "+" else -1
     hours = int(offset[1:3])
@@ -162,8 +169,8 @@ def _epg_for_channel(channel_id: str, name: str, limit: int = 8):
         return {"current": None, "next": None, "schedule": [], "available": False}
     aliases = _channel_aliases(channel_id, name)
     matched = []
-    for key, items in programs.items():
-        if key in aliases:
+    for key, items in programs["programs"].items():
+        if key in aliases or aliases.intersection(programs["names"].get(key, set())):
             matched.extend(items)
     # De-duplicate identical entries from multiple aliases.
     unique = {}
@@ -555,6 +562,19 @@ def rotate_source(channel_id: str):
         state["maps"] = {}
         index = state["source_index"]
     return {"ok": True, "channel_id": channel_id, "source_index": index, "source_count": len(urls)}
+
+
+@APP.post("/hls/{channel_id}/switch")
+def switch_hls_source(channel_id: str):
+    channel = _channel(channel_id)
+    urls = _sources(channel)
+    if len(urls) < 2:
+        return {"switched": False, "source_count": len(urls)}
+    state = _state(channel_id)
+    with _hls_lock:
+        state["source_index"] = (int(state.get("source_index", 0)) + 1) % len(urls)
+        state["updated_at"] = time.time()
+    return {"switched": True, "source_count": len(urls)}
 
 
 @APP.get("/hls/{channel_id}/index.m3u8")
