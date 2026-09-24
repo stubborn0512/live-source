@@ -534,6 +534,21 @@ def stream(channel_id: str):
     )
 
 
+@APP.post("/hls/{channel_id}/rotate")
+def rotate_source(channel_id: str):
+    """Move the next HLS playlist request to the next candidate."""
+    channel = _channel(channel_id)
+    urls = _sources(channel)
+    if not urls:
+        raise HTTPException(502, "no live source")
+    state = _state(channel_id)
+    with _hls_lock:
+        state["source_index"] = (int(state.get("source_index", 0)) + 1) % len(urls)
+        state["maps"] = {}
+        index = state["source_index"]
+    return {"ok": True, "channel_id": channel_id, "source_index": index, "source_count": len(urls)}
+
+
 @APP.get("/hls/{channel_id}/index.m3u8")
 def hls_playlist(channel_id: str):
     text = _fetch_playlist(channel_id, _channel(channel_id))
