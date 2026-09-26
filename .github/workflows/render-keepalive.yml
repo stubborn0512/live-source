@@ -1,0 +1,21 @@
+name: Render gateway keepalive
+
+on:
+  schedule:
+    # Every 10 minutes. GitHub Actions schedules use UTC by default.
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Ping Render gateway
+        run: |
+          set -eu
+          url="https://live-source-gateway.onrender.com/health"
+          code="$(curl -L --silent --show-error --max-time 30 -o /tmp/health.json -w '%{http_code}' "$url")"
+          echo "HTTP status: $code"
+          cat /tmp/health.json
+          test "$code" = "200"
