@@ -54,7 +54,7 @@ https://raw.githubusercontent.com/stubborn0512/live-source/main/output/1080p.m3u
 
 项目长期免费维护、自动检测直播源和维护网关需要持续投入服务器及时间成本。赞赏完全自愿，不影响项目的正常使用。
 
-<p> <a href="assets/donate-code.png">  <img src="assets/donate-code.png" alt="赞赏码" width="360">  </a> 图片已缩小展示，点击图片可查看原图。
+<p> <a href="assets/donate-code.png">  <img src="assets/donate-code.png" alt="赞赏码" width="360">  </a> 
 
 ## 项目结构
 
