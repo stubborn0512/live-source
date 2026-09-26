@@ -1,1 +1,0 @@
-This file triggers the initial scheduled-source workflow. It can be deleted later.
