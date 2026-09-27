@@ -1,98 +1,39 @@
-name: Test failover gateway
+name: Test live source dispatcher
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - "gateway/**"
+      - "output/**"
       - ".github/workflows/test-gateway.yml"
 
 concurrency:
-  group: gateway-smoke
+  group: dispatcher-public-smoke
   cancel-in-progress: true
 
 jobs:
-  smoke-test:
+  smoke:
     runs-on: ubuntu-latest
     steps:
-      - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg jq
-
       - name: Health check
         run: |
           set -eux
-          curl --fail --show-error --max-time 30             https://live-source-gateway.onrender.com/health | tee /tmp/health.json
+          curl --fail --show-error --max-time 30 https://live-source-gateway.onrender.com/health | tee /tmp/health.json
           test "$(jq -r '.ok' /tmp/health.json)" = "true"
-          test "$(jq -r '.channels' /tmp/health.json)" -ge 1
+          test "$(jq -r '.dispatch_mode' /tmp/health.json)" = "direct-source-preferred"
 
-      - name: Playlist check
+      - name: Resolve check
         run: |
           set -eux
-          curl --fail --show-error --max-time 60             https://live-source-gateway.onrender.com/playlist.m3u -o /tmp/playlist.m3u
-          grep -F 'tvg-id="cctv1"' /tmp/playlist.m3u
-          test "$(grep -Fc 'tvg-id="cctv1"' /tmp/playlist.m3u)" -eq 1
-          grep -F 'CCTV-1 综合' /tmp/playlist.m3u
-          echo "CCTV-1 appears exactly once"
+          curl --fail --show-error --max-time 30 https://live-source-gateway.onrender.com/resolve/cctv1 -o /tmp/resolve.json
+          jq -e '.ok == true and .channel_id == "cctv1" and (.sources | length >= 2)' /tmp/resolve.json
+          jq -r '.sources[0].url' /tmp/resolve.json
 
-      - name: Stream smoke test
+      - name: Source pool check
         run: |
           set -eux
-          timeout 60s ffmpeg -hide_banner -loglevel warning             -rw_timeout 15000000             -i https://live-source-gateway.onrender.com/stream/cctv1             -t 15 -map 0:v:0 -f null -
-
-
-      - name: Local HLS remux test
-        run: |
-          set -eux
-          source="$(curl --fail --show-error --max-time 30 https://raw.githubusercontent.com/stubborn0512/live-source/main/output/status.json | jq -r '.channels[] | select(.id=="cctv1") | .sources[0].url')"
-          echo "Upstream playlist URL:"
-          echo "$source"
+          curl --fail --show-error --max-time 30 https://live-source-gateway.onrender.com/resolve/cctv1 -o /tmp/resolve.json
+          source="$(jq -r '.sources[0].url' /tmp/resolve.json)"
           curl --fail --show-error --max-time 30 "$source" -o /tmp/upstream.m3u8
-          echo "Upstream playlist preview:"
-          sed -n '1,25p' /tmp/upstream.m3u8
-          rm -rf /tmp/hls-test && mkdir -p /tmp/hls-test
-          timeout 45s ffmpeg -hide_banner -loglevel warning \
-            -rw_timeout 15000000 -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5 \
-            -i "$source" -map 0:v:0? -map 0:a:0? -c copy \
-            -f hls -hls_time 2 -hls_list_size 4 \
-            -hls_flags delete_segments+append_list+omit_endlist \
-            -hls_segment_filename /tmp/hls-test/seg_%06d.ts /tmp/hls-test/index.m3u8 &
-          pid=$!
-          for i in $(seq 1 30); do
-            if grep -q '#EXTINF:' /tmp/hls-test/index.m3u8 2>/dev/null; then
-              echo "Local HLS remux works"
-              kill "$pid" || true
-              wait "$pid" || true
-              exit 0
-            fi
-            if ! kill -0 "$pid" 2>/dev/null; then
-              echo "ffmpeg exited before producing HLS" >&2
-              exit 1
-            fi
-            sleep 1
-          done
-          echo "Timed out waiting for local HLS output" >&2
-          kill "$pid" || true
-          exit 1
-
-      - name: HLS smoke test
-        run: |
-          set -eux
-          curl --fail --show-error --retry 20 --retry-all-errors --retry-delay 2 --max-time 10 \
-            https://live-source-gateway.onrender.com/hls/cctv1/index.m3u8 \
-            -o /tmp/cctv1.m3u8
-          grep -F '#EXTM3U' /tmp/cctv1.m3u8
-          grep -F '#EXTINF:' /tmp/cctv1.m3u8
-          segment_url="$(grep -v '^#' /tmp/cctv1.m3u8 | head -n 1)"
-          segment_url="https://live-source-gateway.onrender.com${segment_url}"
-          echo "Testing first proxied segment"
-          http_code="$(curl --show-error --max-time 20 "$segment_url" -o /tmp/first-segment.ts -w '%{http_code}')"
-          echo "segment HTTP status: $http_code"
-          echo "segment response preview:"
-          head -c 1000 /tmp/first-segment.ts || true
-          echo
-          test "$http_code" = "200"
-          test -s /tmp/first-segment.ts
-          timeout 75s ffmpeg -hide_banner -loglevel warning \
-            -rw_timeout 15000000 \
-            -i https://live-source-gateway.onrender.com/hls/cctv1/index.m3u8 \
-            -t 15 -map 0:v:0 -f null -
+          grep -F '#EXTM3U' /tmp/upstream.m3u8
+          grep -Eq '#EXTINF:|#EXT-X-STREAM-INF:' /tmp/upstream.m3u8
