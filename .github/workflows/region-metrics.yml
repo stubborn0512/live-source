@@ -35,4 +35,17 @@ jobs:
             exit 0
           fi
           git commit -m "chore: update regional source metrics"
-          git push
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || {
+              git rebase --abort || true
+              git fetch origin main
+              git rebase origin/main
+            }
+            if git push; then
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "Failed to push regional metrics after 3 attempts." >&2
+          exit 1
