@@ -1,0 +1,38 @@
+name: Save regional live-source metrics
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch gateway metrics
+        run: |
+          set -eux
+          curl --fail --show-error --max-time 30 \
+            https://live-source-gateway.onrender.com/metrics/export \
+            -o output.json
+          jq -e '.version == 1 and (.channels | type == "object")' output.json
+
+      - name: Checkout public repo
+        uses: actions/checkout@v4
+
+      - name: Publish
+        run: |
+          set -eu
+          cp ../output.json output/region-metrics.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add output/region-metrics.json
+          if git diff --cached --quiet; then
+            echo "No regional metric changes."
+            exit 0
+          fi
+          git commit -m "chore: update regional source metrics"
+          git push
