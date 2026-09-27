@@ -17,8 +17,8 @@ jobs:
           set -eux
           curl --fail --show-error --max-time 30 \
             https://live-source-gateway.onrender.com/metrics/export \
-            -o output.json
-          jq -e '.version == 1 and (.channels | type == "object")' output.json
+            -o /tmp/region-metrics.json
+          jq -e '.version == 1 and (.channels | type == "object")' /tmp/region-metrics.json
 
       - name: Checkout public repo
         uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
       - name: Publish
         run: |
           set -eu
-          cp ../output.json output/region-metrics.json
+          cp /tmp/region-metrics.json output/region-metrics.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add output/region-metrics.json
