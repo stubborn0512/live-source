@@ -15,6 +15,21 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
+      - name: Wait for dispatcher deployment
+        run: |
+          set -eu
+          for i in $(seq 1 36); do
+            health="$(curl --fail --silent --show-error --max-time 15 https://live-source-gateway.onrender.com/health || true)"
+            echo "$health"
+            mode="$(printf '%s' "$health" | jq -r '.dispatch_mode // empty')"
+            if [ "$mode" = "direct-source-preferred" ]; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Render dispatcher mode is not live yet." >&2
+          exit 1
+
       - name: Health check
         run: |
           set -eux
@@ -27,13 +42,13 @@ jobs:
           set -eux
           curl --fail --show-error --max-time 30 https://live-source-gateway.onrender.com/resolve/cctv1 -o /tmp/resolve.json
           jq -e '.ok == true and .channel_id == "cctv1" and (.sources | length >= 2)' /tmp/resolve.json
-          jq -r '.sources[0].url' /tmp/resolve.json
+          jq -r '.region, .sources[0].url' /tmp/resolve.json
 
-      - name: Source pool check
+      - name: Direct upstream source check
         run: |
           set -eux
-          curl --fail --show-error --max-time 30 https://live-source-gateway.onrender.com/resolve/cctv1 -o /tmp/resolve.json
           source="$(jq -r '.sources[0].url' /tmp/resolve.json)"
+          test -n "$source"
           curl --fail --show-error --max-time 30 "$source" -o /tmp/upstream.m3u8
           grep -F '#EXTM3U' /tmp/upstream.m3u8
           grep -Eq '#EXTINF:|#EXT-X-STREAM-INF:' /tmp/upstream.m3u8
