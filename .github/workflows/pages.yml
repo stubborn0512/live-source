@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - "docs/**"
+      - "output/status.json"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -28,6 +29,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Prepare dashboard data
+        run: |
+          set -eu
+          mkdir -p docs/data
+          cp output/status.json docs/data/status.json
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
