@@ -23,13 +23,18 @@ jobs:
       - name: Checkout public repo
         uses: actions/checkout@v4
 
-      - name: Publish
+      - name: Generate global best playlist
         run: |
           set -eu
           cp /tmp/region-metrics.json output/region-metrics.json
+          python3 tools/build_best_m3u.py
+
+      - name: Publish
+        run: |
+          set -eu
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add output/region-metrics.json
+          git add output/region-metrics.json output/best.m3u
           if git diff --cached --quiet; then
             echo "No regional metric changes."
             exit 0
