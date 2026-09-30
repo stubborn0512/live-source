@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<header class="topbar"><div><div class="eyebrow">GUOMU · LIVE SOURCE</div><h1>线路中心</h1><p>清晰度优先，延迟其次，稳定性辅助判断。</p></div><button id="refreshBtn" class="btn primary">刷新数据</button></header>
+<header class="topbar"><div><div class="eyebrow">GUOMU · LIVE SOURCE</div><h1>线路中心</h1><p>清晰度优先，延迟其次，稳定性辅助判断。</p></div><nav class="nav"><a class="nav-link active" href="./index.html">线路检测</a><a class="nav-link" href="./player.html">网页播放</a><button id="refreshBtn" class="btn primary">刷新数据</button></nav></header>
 <main class="container">
-<section class="player-card"><div class="player-head"><div><div class="eyebrow">WEB PLAYER</div><h2 id="playerTitle">选择一个频道播放</h2><div id="playerStatus" class="status">播放通过 HTTPS 网关 HLS 中转，不直接访问上游 HTTP 线路。</div></div><button id="stopBtn" class="btn">停止</button></div><video id="player" class="player" playsinline controls></video></section>
+
 <section class="stats" id="stats"></section>
 <section class="toolbar"><input id="search" class="input" type="search" placeholder="搜索频道，如 CCTV-1 / 湖南卫视"><select id="group" class="input"><option value="">全部分组</option></select><select id="qualityFilter" class="input"><option value="">全部线路</option><option value="1080">仅 1080P</option><option value="720">仅 720P</option><option value="other">其他清晰度</option></select><select id="sortMode" class="input"><option value="quality">按清晰度→延迟排序</option><option value="latency">按延迟排序</option><option value="name">按频道名称</option></select></section>
 <section id="status" class="status">正在读取最新数据…</section><section id="channels" class="channel-grid"></section>
