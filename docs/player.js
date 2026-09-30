@@ -1,4 +1,4 @@
-const DATA_URL="./output/status.json";
+const DATA_URL="./data/status.json";
 const GATEWAY="https://live-source-gateway.onrender.com";
 let channels=[];let hls=null;let currentId="";
 const $=id=>document.getElementById(id);
