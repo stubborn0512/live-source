@@ -1,4 +1,4 @@
-const DATA_URL="https://raw.githubusercontent.com/stubborn0512/live-source/main/output/status.json";
+const DATA_URL="./output/status.json";
 const GATEWAY="https://live-source-gateway.onrender.com";
 let state={channels:[],generatedAt:""};
 let hls=null;
